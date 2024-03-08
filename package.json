@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "classnames": "^2.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -8,8 +9,8 @@
     "eslint-plugin-react": "^7.34.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
-    "prettier": "^3.2.5",
-    "parcel-bundler": "^1.12.5"
+    "parcel-bundler": "^1.12.5",
+    "prettier": "^3.2.5"
   },
   "husky": {
     "hooks": {
@@ -19,12 +20,11 @@
   "lint-staged": {
     "src/**/*.{js,jsx}": [
       "npm run lint"
-      ],
-      "src/**/*.{js,jsx,json,css,scss}": [
+    ],
+    "src/**/*.{js,jsx,json,css,scss}": [
       "prettier --write",
       "git add"
-      ]
-     
+    ]
   },
   "name": "nexuskick",
   "description": "TFC FINAL",
