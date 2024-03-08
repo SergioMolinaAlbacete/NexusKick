@@ -1,8 +1,27 @@
 {
   "dependencies": {
-    "react": "^18.2.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.5"
-  }
+  },
+  "name": "nexuskick",
+  "description": "TFC FINAL",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WhiteCleaverPC/NexusKick.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WhiteCleaverPC/NexusKick/issues"
+  },
+  "homepage": "https://github.com/WhiteCleaverPC/NexusKick#readme"
 }
