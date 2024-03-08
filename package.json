@@ -1,13 +1,25 @@
 {
   "dependencies": {
-    "prettier": "^3.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
     "parcel-bundler": "^1.12.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "npm run lint"
+    ]
   },
   "name": "nexuskick",
   "description": "TFC FINAL",
@@ -16,7 +28,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel index.html",
-    "lint": "eslint --fix src/**/*.{js,jsx}"
+    "lint": "eslint --fix src/**/*.{js,jsx}",
+    "format": "prettier --write \"*.{js,jsx,json,css}\""
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "singleQuote": true
   },
   "repository": {
     "type": "git",
