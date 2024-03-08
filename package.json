@@ -19,7 +19,12 @@
   "lint-staged": {
     "src/**/*.{js,jsx}": [
       "npm run lint"
-    ]
+      ],
+      "src/**/*.{js,jsx,json,css,scss}": [
+      "prettier --write",
+      "git add"
+      ]
+     
   },
   "name": "nexuskick",
   "description": "TFC FINAL",
@@ -33,7 +38,8 @@
   },
   "prettier": {
     "trailingComma": "all",
-    "singleQuote": true
+    "singleQuote": true,
+    "semi": true
   },
   "repository": {
     "type": "git",
