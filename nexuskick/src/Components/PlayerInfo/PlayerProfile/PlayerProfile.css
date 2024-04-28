@@ -1,0 +1,27 @@
+/* PlayerProfile.css */
+
+.player-profile {
+    background-color: #4CAF50; /* Asume un verde oscuro como fondo */
+    color: white;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+  }
+  
+  .player-image {
+    width: 150px; /* Tamaño de la imagen, ajusta según necesites */
+    height: 150px; /* Mantener la imagen cuadrada */
+    border-radius: 50%; /* Hacer la imagen redonda */
+    margin-right: 20px;
+  }
+  
+  .personal-info h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.5em;
+  }
+  
+  .personal-info p {
+    margin: 0.5em 0;
+  }
+  

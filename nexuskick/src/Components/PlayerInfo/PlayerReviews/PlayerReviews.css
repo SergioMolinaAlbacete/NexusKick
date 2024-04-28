@@ -1,0 +1,15 @@
+/* PlayerReviews.css */
+
+.player-reviews {
+    background-color: #66BB6A; /* Un verde medio para el fondo */
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .player-reviews h2 {
+    margin-top: 0;
+  }
+  
+  /* Añadir estilos para las estrellas de calificación y los comentarios */
+  

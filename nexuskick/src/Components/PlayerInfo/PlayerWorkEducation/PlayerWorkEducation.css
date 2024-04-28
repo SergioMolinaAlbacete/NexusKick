@@ -1,0 +1,12 @@
+/* PlayerWorkEducation.css */
+
+.player-work-education {
+    background-color: #A5D6A7; /* Otro tono de verde */
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  
+  /* Añadir estilos para los detalles de educación y trabajo, como horarios, lugar, etc. */
+  

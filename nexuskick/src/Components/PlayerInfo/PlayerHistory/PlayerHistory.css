@@ -1,0 +1,12 @@
+/* PlayerHistory.css */
+
+.player-history {
+    background-color: #81C784; /* Un verde más claro para el fondo */
+    padding: 1em;
+  }
+  
+  .player-history h2 {
+    margin-top: 0;
+  }
+  /* Estilos para las tarjetas de historial o la lista */
+  

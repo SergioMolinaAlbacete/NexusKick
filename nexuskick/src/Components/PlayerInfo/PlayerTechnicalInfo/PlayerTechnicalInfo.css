@@ -1,0 +1,11 @@
+/* PlayerTechnicalInfo.css */
+
+.player-technical-info {
+    background-color: #C8E6C9; /* Un verde más claro para el fondo */
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Puedes necesitar estilos adicionales aquí para alinear elementos como el diagrama de campo */
+  

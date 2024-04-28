@@ -1,0 +1,39 @@
+.player-info-container {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+  
+  .player-info-header {
+    background-color: #004d40;
+    color: white;
+    /* Resto de los estilos para la cabecera */
+  }
+  
+  .player-profile {
+    display: flex;
+    align-items: center;
+    /* Resto de los estilos para el perfil del jugador */
+  }
+  
+  .player-profile img {
+    width: 100px; /* Ajusta el tamaño como necesites */
+    border-radius: 50%; /* Para hacer la imagen redonda */
+    margin-right: 20px;
+  }
+  
+  .player-history {
+    /* Estilos para el historial del jugador */
+  }
+  
+  .player-technical-info {
+    /* Estilos para la ficha técnica */
+  }
+  
+  .player-work-education {
+    /* Estilos para la situación laboral/educativa */
+  }
+  
+  .player-reviews {
+    /* Estilos para las reseñas */
+  }
+  
