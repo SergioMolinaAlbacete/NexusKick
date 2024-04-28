@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Asumiendo que usas react-router para la navegación
 import './Navbar.css'; // Archivo CSS para los estilos de la Navbar
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 
 const Navbar = () => {
+
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    // Aquí manejarías la búsqueda, p. ej. redireccionando al usuario o filtrando resultados
+    console.log(searchTerm);
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -26,12 +42,26 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
+        <form className="search-form" onSubmit={handleSearchSubmit}>
+          <input
+            type="text"
+            className="search-input"
+            placeholder="Buscar..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
+          <button type="submit" className="search-button">
+            {/* Aquí puedes añadir un ícono de búsqueda si lo deseas */}
+            Buscar
+          </button>
+        </form>
         <div className="nav-icon">
           <Link to="/notificaciones">
-            {/* Icono de notificación, puedes usar un SVG o una librería como FontAwesome */}
+            <NotificationsIcon style={{ marginRight: '20px', cursor: 'pointer' }} />
+
           </Link>
           <Link to="/perfil">
-            {/* Icono de perfil, también puede ser un SVG o un ícono de alguna librería */}
+            <AccountCircleIcon style={{ cursor: 'pointer' }} />
           </Link>
         </div>
       </div>
