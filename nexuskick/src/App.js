@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navbar from './Components/Navbar.jsx';
+import Navbar from './components/Navbar/Navbar';
 import './App.css'; // Asegúrate de que exista y esté en la misma carpeta que App.jsx
 
 function App() {
