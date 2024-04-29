@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Asumiendo que usas react-router para la navegación
-import './Navbar.css'; // Archivo CSS para los estilos de la Navbar
+import './navbar.css'; // Archivo CSS para los estilos de la Navbar
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 

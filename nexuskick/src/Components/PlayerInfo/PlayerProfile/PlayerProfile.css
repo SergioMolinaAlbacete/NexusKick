@@ -1,27 +1,70 @@
 /* PlayerProfile.css */
 
 .player-profile {
-    background-color: #4CAF50; /* Asume un verde oscuro como fondo */
-    color: white;
-    padding: 1em;
-    display: flex;
-    align-items: center;
+  background-color: white;
+  color: black;
+  display: flex;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  align-items: flex-start; /* Alinea los elementos al principio del contenedor */
+}
+
+.player-profile-column {
+  flex: 1; /* Ajusta la flexibilidad de la columna */
+  max-width: calc(50% - 20px); /* Ajusta el ancho máximo restando el padding */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px; /* Añade padding alrededor de la imagen y el apodo */
+}
+
+.player-image {
+  width: 100%; /* Ajusta el ancho de la imagen al contenedor */
+  max-height: 600px; /* Mantiene la relación de aspecto de la imagen */
+  margin-bottom: 10px; /* Reduce el espacio entre la imagen y el apodo */
+}
+
+.player-nickname {
+  font-size: 1.2em; /* Ajusta el tamaño del apodo */
+  margin-bottom: 10px; /* Reduce el espacio debajo del apodo */
+}
+
+.player-info {
+  flex: 3; /* Ajusta la flexibilidad de la columna de información */
+  padding: 20px; /* Añade padding alrededor de la información */
+  max-width: 50%; /* Asegúrate de que la información no sea más ancha que la mitad del perfil */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.info-item {
+  display: flex; /* Usa flexbox para alinear etiqueta y valor */
+  align-items: center; /* Centra los elementos verticalmente */
+  margin: 4px 0; /* Reduce el margen entre elementos de información */
+}
+
+.info-label {
+  font-weight: bold;
+  margin-right: 5px; /* Añade un pequeño margen entre la etiqueta y el valor */
+}
+
+/* Ajustes responsivos para vistas móviles */
+@media (max-width: 768px) {
+  .player-profile {
+    flex-direction: column;
+    align-items: center; /* Centra los elementos en dispositivos móviles */
   }
-  
+
+  .player-profile-column,
+  .player-info {
+    max-width: 100%; /* Los elementos ocupan el ancho completo en dispositivos móviles */
+    padding: 20px;
+  }
+
   .player-image {
-    width: 150px; /* Tamaño de la imagen, ajusta según necesites */
-    height: 150px; /* Mantener la imagen cuadrada */
-    border-radius: 50%; /* Hacer la imagen redonda */
-    margin-right: 20px;
+    max-width: 80%; /* Ajusta el ancho de la imagen en dispositivos móviles */
   }
-  
-  .personal-info h1 {
-    margin: 0;
-    padding: 0;
-    font-size: 1.5em;
-  }
-  
-  .personal-info p {
-    margin: 0.5em 0;
-  }
-  
+}

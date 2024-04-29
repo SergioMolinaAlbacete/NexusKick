@@ -1,13 +1,12 @@
 import React from 'react';
-import PlayerProfile from './PlayerProfile';
-import PlayerHistory from './PlayerHistory';
-import PlayerTechnicalInfo from './PlayerTechnicalInfo';
-import PlayerWorkEducation from './PlayerWorkEducation';
-import PlayerReviews from './PlayerReviews';
-import './PlayerView.css'; // Asume que este archivo contiene los estilos específicos para la vista
+import PlayerProfile from '../Components/PlayerInfo/PlayerProfile/PlayerProfile';
+import PlayerHistory from '../Components/PlayerInfo/PlayerHistory/PlayerHistory';
+import PlayerTechnicalInfo from '../Components/PlayerInfo/PlayerTechnicalInfo/PlayerTechnicalInfo';
+import PlayerWorkEducation from '../Components/PlayerInfo/PlayerWorkEducation/PlayerWorkEducation';
+import PlayerReviews from '../Components/PlayerInfo/PlayerReviews/PlayerReviews';
 
 // La información del jugador puede provenir de props, estado local, contexto, o incluso de una llamada a una API.
-const PlayerView = ({ playerData }) => {
+const PlayerProfileView = ({ playerData }) => {
   return (
     <div className="player-view">
       <PlayerProfile player={playerData.profile} />
@@ -19,4 +18,4 @@ const PlayerView = ({ playerData }) => {
   );
 };
 
-export default PlayerView;
+export default PlayerProfileView;

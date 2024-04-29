@@ -1,12 +1,45 @@
 /* PlayerHistory.css */
 
 .player-history {
-    background-color: #81C784; /* Un verde más claro para el fondo */
-    padding: 1em;
-  }
-  
-  .player-history h2 {
-    margin-top: 0;
-  }
-  /* Estilos para las tarjetas de historial o la lista */
-  
+  background-color: #4CAF50; /* Verde oscuro de la imagen */
+  padding: 20px;
+  text-align: center; /* Centrar el título y las flechas */
+  color: white; /* Texto en blanco */
+}
+
+.history-slider {
+  display: flex;
+  align-items: center;
+  overflow: hidden; /* Esconde las tarjetas que excedan el ancho */
+}
+
+.history-card {
+  margin: 0 10px; /* Añade espacio entre las tarjetas */
+  background-color: #81C784; /* Verde claro para las tarjetas */
+  border-radius: 10px; /* Bordes redondeados de las tarjetas */
+  padding: 10px;
+  width: 200px; /* Ancho de las tarjetas */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra suave para profundidad */
+}
+
+.team-shield {
+  width: 50px; /* Tamaño del escudo */
+  height: auto;
+  margin-bottom: 10px; /* Espacio entre el escudo y el texto */
+}
+
+.slide-arrow {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.left-arrow, .right-arrow {
+  padding: 0 20px;
+}
+
+.left-arrow img, .right-arrow img {
+  width: 25px; /* Tamaño de las flechas */
+  height: auto;
+}
+
