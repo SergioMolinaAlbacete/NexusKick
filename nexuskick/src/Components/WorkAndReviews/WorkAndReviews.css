@@ -1,0 +1,21 @@
+.work-and-reviews-container {
+    display: flex;
+    background-color: #004400; /* Fondo verde oscuro */
+    color: white; /* Texto blanco */
+  }
+  
+  .work-info, .reviews {
+    flex: 1;  /* Asigna el mismo espacio a cada subcomponente */
+    padding: 20px; /* Espacio interno */
+  }
+  
+  table {
+    width: 100%; /* Asegura que la tabla use todo el espacio disponible en la columna */
+    border-collapse: collapse; /* Elimina los espacios entre bordes de celdas */
+  }
+  
+  td {
+    padding: 8px; /* Espaciado dentro de las celdas */
+    border: 1px solid white; /* Bordes blancos para las celdas */
+  }
+  

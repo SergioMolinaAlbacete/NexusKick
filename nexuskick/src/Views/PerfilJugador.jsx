@@ -4,6 +4,7 @@ import PlayerHistory from '../Components/PlayerInfo/PlayerHistory/PlayerHistory'
 import PlayerTechnicalInfo from '../Components/PlayerInfo/PlayerTechnicalInfo/PlayerTechnicalInfo';
 import PlayerWorkEducation from '../Components/PlayerInfo/PlayerWorkEducation/PlayerWorkEducation';
 import PlayerReviews from '../Components/PlayerInfo/PlayerReviews/PlayerReviews';
+import WorkAndReviews from '../Components/WorkAndReviews/WorkAndReviews';
 
 // La información del jugador puede provenir de props, estado local, contexto, o incluso de una llamada a una API.
 const PerfilJugador = () => {
@@ -12,8 +13,7 @@ const PerfilJugador = () => {
       <PlayerProfile />
       <PlayerHistory />
       <PlayerTechnicalInfo />
-      <PlayerWorkEducation />
-      <PlayerReviews />
+      <WorkAndReviews />
     </div>
   );
 };

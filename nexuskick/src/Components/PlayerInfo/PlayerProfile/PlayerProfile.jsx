@@ -24,6 +24,7 @@ const PlayerProfile = ({ player = {
         <h1 className="player-nickname">{player.nombre}</h1> {/* Apodo del jugador */}
       </div>
       <div className="player-info">
+        <h2>Información Personal</h2>
         <p><span className="info-label">Nombre Completo:</span> {player.nombreCompleto}</p>
         <p><span className="info-label">País:</span> {player.país}</p>
         <p><span className="info-label">Lugar de Nacimiento:</span> {player.lugarNacimiento}</p>

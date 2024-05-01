@@ -1,11 +1,25 @@
-/* PlayerTechnicalInfo.css */
-
 .player-technical-info {
-    background-color: #C8E6C9; /* Un verde más claro para el fondo */
-    padding: 1em;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  /* Puedes necesitar estilos adicionales aquí para alinear elementos como el diagrama de campo */
-  
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  padding: 20px;
+  background: #f4f4f4;
+  border-radius: 8px;
+}
+
+.technical-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.column {
+  flex: 1;  /* Asigna el mismo espacio a cada columna */
+  padding: 20px;
+}
+
+.skills p {
+  margin: 5px 0; /* Espaciado vertical para los elementos de habilidades */
+}
+
+h2{
+  text-align: center;
+}

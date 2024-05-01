@@ -7,7 +7,9 @@ import escudo from '../../../Multimedia/real-madrid-escudo.webp';
 const historyData = [
   // Datos de ejemplo, reemplázalos con los reales
   { equipo: 'Real Madrid FC', temporada: '17/18', resultado: '3º Puesto', escudo: 'path-to-shield1.png' },
-  // ... más datos
+  { equipo: 'Hispania', temporada: '18/19', resultado: '2º Puesto', escudo: 'path-to-shield1.png' },
+  { equipo: 'Real Madrid FC', temporada: '20/21', resultado: '1º Puesto', escudo: 'path-to-shield1.png' },
+
 ];
 
 const PlayerHistory = () => {
