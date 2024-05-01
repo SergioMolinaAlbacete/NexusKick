@@ -1,1 +1,23 @@
-/* hol */
+/* Footer.css */
+.footer {
+    background: #198754;;
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    clear: both;
+    height: 60px;
+  }
+  
+  .footer-content {
+    margin: 0 auto;
+    padding: 10px;
+    max-width: 960px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
