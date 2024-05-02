@@ -1,0 +1,36 @@
+.anuncio-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+  }
+  
+  .perfil-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .perfil-imagen {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .info-texto h2, .info-texto p {
+    margin: 0;
+    padding-left: 10px;
+  }
+  
+  .anuncio-detalle h3, .anuncio-detalle p {
+    margin: 10px 0;
+  }
+  
+  .anuncio-botones button {
+    margin-right: 10px;
+  }
+
+  .anuncio-card {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Opcional: añade sombra para mejor estética */
+    border-radius: 5px; /* Opcional: bordes redondeados */
+    overflow: hidden; /* Asegura que todo el contenido se quede dentro de los bordes */
+  }

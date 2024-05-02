@@ -1,11 +1,10 @@
 import React from 'react';
 import './PlayerProfile.css'; // Asume que crearás un archivo CSS para cada subcomponente
-import playerImage from '../../../Multimedia/cr7.png';
 
 const PlayerProfile = ({ player = {
   nombreCompleto: 'Cristiano Ronaldo dos Santos Aveiro',
   nombre: 'Cristiano Ronaldo',
-  imagen: '', // Deberías proporcionar una URL de imagen aquí
+  imagen: '../Multimedia/cr7.png', // Deberías proporcionar una URL de imagen aquí
   país: 'Portugal',
   lugarNacimiento: 'Funchal, Madeira',
   fechaNacimiento: '1985-02-05', // Formato YYYY-MM-DD
@@ -14,13 +13,13 @@ const PlayerProfile = ({ player = {
   peso: '83 kg',
   piernaBuena: 'Derecha',
   tallaRopa: 'L',
-  tallaCalzado: 42, // Suponiendo que la talla es Europea
+  tallaCalzado: 42, 
   númeroPreferido: 7
 } }) => {
   return (
     <div className="player-profile">
       <div className="player-profile-column">
-        <img src={player.imagen || playerImage} alt={`${player.nombre}`} className="player-image" />
+        <img src={player.imagen} alt={`${player.nombre}`} className="player-image" />
         <h1 className="player-nickname">{player.nombre}</h1> {/* Apodo del jugador */}
       </div>
       <div className="player-info">

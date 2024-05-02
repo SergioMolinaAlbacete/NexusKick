@@ -2,7 +2,6 @@ import React from 'react';
 import './PlayerHistory.css'; // Asume que este archivo contiene tus estilos
 // import leftArrow from '../../../Multimedia/left-arrow.png'; // Asegúrate de tener estas imágenes
 // import rightArrow from '../../../Multimedia/right-arrow.png';
-import escudo from '../../../Multimedia/real-madrid-escudo.webp';
 
 const historyData = [
   // Datos de ejemplo, reemplázalos con los reales
@@ -22,7 +21,7 @@ const PlayerHistory = () => {
         </button> */}
         {historyData.map((item, index) => (
           <div className="history-card" key={index}>
-            <img src={escudo} alt="Escudo del equipo" className="team-shield" />
+            <img src="../Multimedia/real-madrid-escudo.webp" alt="Escudo del equipo" className="team-shield" />
             <h3>{item.equipo}</h3>
             <p>Temporada: {item.temporada}</p>
             <p>Resultado: {item.resultado}</p>
