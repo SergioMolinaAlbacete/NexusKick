@@ -89,7 +89,7 @@ function Jugadores() {
 
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-      <h1>Busqueda de Jugadores</h1>
+      <h1>Búsqueda de Jugadores</h1>
       <TablonAnuncios anuncios={anunciosJugadores} />
     </div>
   );

@@ -16,8 +16,11 @@ const Anuncio = ({ anuncio }) => {
         <p>{anuncio.descripcion}</p>
       </div>
       <div className="anuncio-botones">
-        <button>Contactar</button>
-        <button>Ver Perfil</button>
+        <div class="button-borders">
+          <button class="primary-button"> Contactar
+          </button>
+          <button class="primary-button"> Ver Perfil </button>
+        </div>
       </div>
     </div>
   );

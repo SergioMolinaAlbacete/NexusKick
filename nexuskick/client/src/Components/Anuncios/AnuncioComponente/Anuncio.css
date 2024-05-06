@@ -34,3 +34,41 @@
     border-radius: 5px; /* Opcional: bordes redondeados */
     overflow: hidden; /* Asegura que todo el contenido se quede dentro de los bordes */
   }
+
+  
+  .button-container {
+    display: flex;
+    justify-content: center; /* Centra los botones horizontalmente */
+    align-items: center;     /* Centra los botones verticalmente */
+}
+
+.primary-button {
+    font-family: 'Ropa Sans', sans-serif;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;            /* Tamaño de fuente más pequeño */
+    font-weight: bold;
+    letter-spacing: 0.05rem;
+    border: 1px solid #0E1822;
+    padding: 0.5rem 1rem;       /* Padding más pequeño */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 531.28 200'%3E%3Cdefs%3E%3Cstyle%3E .cls-1 %7B fill: %23198754; %7D %3C/style%3E%3C/defs%3E%3Cpolygon class='cls-1' points='415.81 200 0 200 115.47 0 531.28 0 415.81 200' /%3E%3C/svg%3E");
+    background-color: #0E1822;
+    background-size: 200%;
+    background-position: 200%;
+    background-repeat: no-repeat;
+    transition: 0.3s ease-in-out;
+    transition-property: background-position, border, color;
+    position: relative;
+    z-index: 1;
+    margin-right: 1rem;          /* Añade margen a la derecha del botón */
+}
+
+.primary-button:last-child {
+    margin-right: 0;             /* Elimina el margen derecho para el último botón */
+}
+
+.primary-button:hover {
+    border: 1px solid black;
+    color: white;
+    background-position: 40%;
+}
