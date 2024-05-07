@@ -8,14 +8,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar</title>
-    <link rel="stylesheet" href="./navbar.css"> <!-- Asegúrate de que la ruta al archivo CSS es correcta -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Para íconos, en caso de que necesites -->
+    <link rel="stylesheet" href="../../css/header.css"> <!-- Asegúrate de que la ruta al archivo CSS es correcta -->
 </head>
 <body>
     <nav class="navbar">
       <div class="navbar-container">
-        <a href="/" class="navbar-logo">
-          <img src="/Multimedia/LogitipoParaTFC2.png" alt="Logo">
+        <a href="/inicio" class="navbar-logo">
+          <img src="../../img/LogitipoParaTFC2.png" alt="Logo">
         </a>
         <ul class="nav-menu">
           <li class="nav-item">
