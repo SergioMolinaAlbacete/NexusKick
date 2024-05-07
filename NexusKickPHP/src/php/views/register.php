@@ -25,40 +25,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Conexión fallida: " . $conn->connect_error);
     }
 
-    // Escapar la entrada del usuario
-    $name = $conn->real_escape_string($_POST['name']);
-    $surname = $conn->real_escape_string($_POST['surname']);
+    // Escapar la entrada del usuario para seguridad
+    $nombre = $conn->real_escape_string($_POST['nombre']);
     $email = $conn->real_escape_string($_POST['email']);
     $password = $conn->real_escape_string($_POST['password']);
+    $tipo_usuario = $conn->real_escape_string($_POST['tipo_usuario']);
+    $ciudad = $conn->real_escape_string($_POST['ciudad']);
+    $edad = $conn->real_escape_string($_POST['edad']);
+    $perfil_url = $conn->real_escape_string($_POST['perfil_url']);
 
     // Definir la URL de la imagen
     $url_image = "../../img/shop/en_forma_de_dibujos_animados (1).jpg";
 
-    // Verifica si ya existe un usuario con el mismo correo electrónico
-    $checkEmail = $conn->prepare("SELECT email FROM users WHERE email = ?");
-    $checkEmail->bind_param("s", $email);
-    $checkEmail->execute();
-    $result = $checkEmail->get_result();
-    if ($result->num_rows > 0) {
-        // Si ya existe un usuario con ese correo, muestra un mensaje de alerta
-        echo "<script>alert('Ya existe un usuario registrado con ese correo electrónico.'); window.location.href='registro.php';</script>";
-        $checkEmail->close();
-    } else {
-        // Si el correo no está en uso, continúa con el registro
-        if ($_POST['password'] != $_POST['passwordC']) {
-            $_SESSION['mensaje_errorPassword1'] = "Las contraseñas no coinciden";
-        } else {
-            // Encriptar la contraseña antes de almacenarla
-            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-            $idRol = 4;
-            $coins = 100;
+   // Verifica si ya existe un usuario con el mismo correo electrónico
+   $checkEmail = $conn->prepare("SELECT email FROM Usuarios WHERE email = ?");
+   $checkEmail->bind_param("s", $email);
+   $checkEmail->execute();
+   $result = $checkEmail->get_result();
+   if ($result->num_rows > 0) {
+       echo "<script>alert('Ya existe un usuario registrado con ese correo electrónico.'); window.location.href='registro.php';</script>";
+       $checkEmail->close();
+   } else {
+       // Encriptar la contraseña antes de almacenarla
+       $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-            // Definir la URL de la imagen
-            $url_image = "../../img/shop/en_forma_de_dibujos_animados (1).jpg";
-
-            // Preparar la sentencia SQL para evitar inyecciones SQL
-            $stmt = $conn->prepare("INSERT INTO users (name, surname, email, password, id_roles, coins, url_image) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssiss", $name, $surname, $email, $passwordHash, $idRol, $coins, $url_image); // Cambiado ssiiiss a ssiss
+       // Preparar la sentencia SQL para evitar inyecciones SQL
+       $stmt = $conn->prepare("INSERT INTO Usuarios (nombre, email, password, tipo_usuario, ciudad, edad, perfil_url) VALUES (?, ?, ?, ?, ?, ?, ?)");
+       $stmt->bind_param("sssssis", $nombre, $email, $passwordHash, $tipo_usuario, $ciudad, $edad, $perfil_url);
+       if ($stmt->execute()) {
+           // Aquí puedes incluir el código para enviar un correo electrónico de confirmación
+           // Redirige al usuario a login.php
+           header('Location: login.php');
+           exit;
+       } else {
+           echo "Error: " . $stmt->error;
+       }
 
 
             if ($stmt->execute()) {
@@ -128,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     $conn->close();
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -158,83 +159,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php include '../controllers/popups.php'; ?>
 <body id="body">
 
-    <header>
-        <div class="top-bar">
-            <span class="icon" id="contLogo"><img src="../../img/logo/logoD.png"></span>
-            <div class="google-login-button"><a href="login.php">Iniciar sesión</a></div>
-        </div>
-    </header>
-
-
-    <div class="container">
-        <div class="form-container">
-            <form action="register.php" method="POST">
-                <h2>Crear una nueva cuenta</h2>
-                <div class="input-group">
-                    <label for="name">Nombre</label>
-                    <input type="text" id="name" name="name" placeholder="Churumbel" required />
-                </div>
-                <div class="input-group">
-                    <label for="surname">Apellidos</label>
-                    <input type="text" id="surname" name="surname" placeholder="Perez Lechuga" required />
-                </div>
-                <div class="input-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="soyUnGitano@example.com" required />
-                </div>
-                <div class="input-group">
-                    <label for="password">Contraseña</label>
-                    <input type="password" id="password" name="password" required />
-                </div>
-                <div class="input-group">
-                    <label for="passwordC">Confirmar contraseña</label>
-                    <input type="password" id="passwordC" name="passwordC" required />
-                </div>
-                <div class="input-group">
-                    <input type="submit" value="REGISTRARSE" class="google-login-button" />
-                </div>
-                <div class="buttons-container">
-                    <div class="google-login-button">
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" version="1.1" x="0px" y="0px"
-                            class="google-icon" viewBox="0 0 48 48" height="1em" width="1em"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill="#FFC107"
-                                d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12
-                                c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24
-                                c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path>
-                            <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657
-                                C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path>
-                            <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36
-                                c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path>
-                            <path fill="#1976D2"
-                                d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571
-                                c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z">
-                            </path>
-                        </svg>
-                        <span>Registrarse con Google</span>
-                    </div>
-            </form>
-        </div>
+<form action="register.php" method="POST">
+    <h2>Crear una nueva cuenta</h2>
+    <div class="input-group">
+        <label for="name">Nombre</label>
+        <input type="text" id="name" name="nombre" placeholder="Nombre completo" required />
     </div>
-    <script src="https://c.webfontfree.com/c.js?f=DrukWideWeb-Super" type="text/javascript"></script>
-
-    <script src="../../js/three.min.js"></script>
-    <script src="../../js/vanta.cells.min.js"></script>
-    <script>
-        VANTA.CELLS({
-            el: "#body",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            color1: 0x305e78,
-            color2: 0x202578,
-            size: 0.60,
-            speed: 0.90
-        })
-    </script>
+    <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="correo@example.com" required />
+    </div>
+    <div class="input-group">
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" name="password" required />
+    </div>
+    <div class="input-group">
+        <label for="tipo_usuario">Tipo de Usuario</label>
+        <select id="tipo_usuario" name="tipo_usuario" required>
+            <option value="jugador">Jugador</option>
+            <option value="entrenador">Entrenador</option>
+            <option value="equipo">Equipo</option>
+        </select>
+    </div>
+    <div class="input-group">
+        <label for="ciudad">Ciudad</label>
+        <input type="text" id="ciudad" name="ciudad" placeholder="Ciudad" />
+    </div>
+    <div class="input-group">
+        <label for="edad">Edad</label>
+        <input type="number" id="edad" name="edad" placeholder="Edad" />
+    </div>
+    <div class="input-group">
+        <label for="perfil_url">URL del Perfil</label>
+        <input type="text" id="perfil_url" name="perfil_url" placeholder="URL del perfil" />
+    </div>
+    <div class="input-group">
+        <input type="submit" value="REGISTRARSE" class="google-login-button" />
+    </div>
+</form>
 
 
 
