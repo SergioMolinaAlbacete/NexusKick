@@ -1,36 +1,52 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 function Login() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const history = useHistory();
+  const [inputs, setInputs] = useState({
+    username: '',
+    password: ''
+  });
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:3000/login', { username, password });
-            alert('Login exitoso');
-            history.push('/'); // Cambia a la ruta que desees después del login
-        } catch (error) {
-            alert('Error en el login: ' + error.response.data);
-        }
-    };
+  const handleChange = e => {
+    setInputs({ ...inputs, [e.target.name]: e.target.value });
+  };
 
-    return (
-        <form onSubmit={handleLogin}>
-            <label>
-                Usuario:
-                <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-            </label>
-            <label>
-                Contraseña:
-                <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-            </label>
-            <button type="submit">Iniciar Sesión</button>
-        </form>
-    );
+  const handleSubmit = async e => {
+    e.preventDefault();
+    try {
+      const res = await axios.post('http://localhost:5000/login', inputs);
+      alert('Login exitoso: ' + res.data);
+      // Aquí podrías establecer el estado de usuario o redirigir al usuario a la página principal
+    } catch (err) {
+      alert('Error en el login: ' + err.response.data);
+    }
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Usuario:
+          <input
+            type="text"
+            name="username"
+            value={inputs.username}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Contraseña:
+          <input
+            type="password"
+            name="password"
+            value={inputs.password}
+            onChange={handleChange}
+          />
+        </label>
+        <button type="submit">Iniciar Sesión</button>
+      </form>
+    </div>
+  );
 }
 
 export default Login;
