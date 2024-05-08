@@ -2,15 +2,7 @@
 // Aquí puedes incluir lógicas PHP si es necesario, como verificaciones de sesión
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar</title>
-    <link rel="stylesheet" href="../../css/header.css"> <!-- Asegúrate de que la ruta al archivo CSS es correcta -->
-</head>
-<body>
+
     <nav class="navbar">
       <div class="navbar-container">
         <a href="./inicio.php" class="navbar-logo">
@@ -60,5 +52,4 @@
         // window.location.href = '/buscar?term=' + encodeURIComponent(searchTerm);
       }
     </script>
-</body>
-</html>
+

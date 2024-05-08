@@ -1,5 +1,4 @@
 <?php
-include 'header.php';
 include '../config/db.php';
 
 $sql = "SELECT Anuncios.titulo, Anuncios.descripcion, Anuncios.fecha_publicacion, Usuarios.nombre, Usuarios.edad, Usuarios.ciudad, Usuarios.perfil_url 
@@ -25,10 +24,15 @@ if ($result->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <title>anuncios</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Asegúrate de enlazar a tu CSS -->
+    <link rel="stylesheet" href="../../css/Anuncio.css">
+    <link rel="stylesheet" href="../../css/header.css">
+
 </head>
 
 <body>
+<?php
+    include 'header.php';
+    ?>
     <?php foreach ($anuncios as $anuncio): ?>
         <div class="anuncio-card">
             <div class="perfil-info">

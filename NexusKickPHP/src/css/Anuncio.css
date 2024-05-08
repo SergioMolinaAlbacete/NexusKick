@@ -4,6 +4,8 @@
   gap: 20px; /* Espacio entre columnas y filas */
   padding: 20px; /* Padding alrededor de los elementos del grid */
   width: 100%; /* Asegura que el contenedor use todo el ancho disponible */
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 
