@@ -4,4 +4,6 @@
     <link rel="stylesheet" href="./../../css/general.css">
     <link rel="stylesheet" href="./../../css/Anuncio.css">
     <link rel="stylesheet" href="./../../css/header.css">
+    <link rel="stylesheet" href="./../../css/perfil.css">
+
 </head>
