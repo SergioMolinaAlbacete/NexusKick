@@ -1,1 +1,3 @@
-<!-- hacer -->
+<?php
+include 'header.php';
+?>

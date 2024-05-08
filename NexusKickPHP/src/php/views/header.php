@@ -13,18 +13,18 @@
 <body>
     <nav class="navbar">
       <div class="navbar-container">
-        <a href="/inicio" class="navbar-logo">
+        <a href="./inicio.php" class="navbar-logo">
           <img src="../../img/LogitipoParaTFC2.png" alt="Logo">
         </a>
         <ul class="nav-menu">
           <li class="nav-item">
-            <a href="/jugadores" class="nav-links">JUGADORES</a>
+            <a href="./busquedaJugadores.php" class="nav-links">JUGADORES</a>
           </li>
           <li class="nav-item">
-            <a href="/entrenadores" class="nav-links">ENTRENADORES</a>
+            <a href="./busquedaEntrenadores.php" class="nav-links">ENTRENADORES</a>
           </li>
           <li class="nav-item">
-            <a href="/equipos" class="nav-links">EQUIPOS</a>
+            <a href="./busquedaEquipos.php" class="nav-links">EQUIPOS</a>
           </li>
         </ul>
         <form class="search-form" onsubmit="handleSearchSubmit(event)">
