@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio - NexusKick</title>
-    <link rel="stylesheet" href="../../css/header.css">
-</head>
+<?php
+include './componentes/headGeneral.php';
+?>
 
 <body>
-    <?php
-    include 'header.php';
+<?php
+    include './componentes/header.php';
     ?>
     <h1>Inicio</h1>
 </body>

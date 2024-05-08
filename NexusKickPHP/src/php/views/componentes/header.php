@@ -1,8 +1,3 @@
-<?php
-// Aquí puedes incluir lógicas PHP si es necesario, como verificaciones de sesión
-?>
-
-
     <nav class="navbar">
       <div class="navbar-container">
         <a href="./inicio.php" class="navbar-logo">
@@ -34,9 +29,8 @@
             <!-- Añadir icono de notificaciones (FontAwesome usado como ejemplo) -->
             <i class="fas fa-bell"></i>
           </a>
-          <a href="/perfil" style="cursor: pointer;">
-            <!-- Añadir icono de perfil de usuario -->
-            <i class="fas fa-user-circle"></i>
+          <a href="./perfilJugador.php" style="cursor: pointer;">
+            Perfil
           </a>
         </div>
       </div>
