@@ -2,7 +2,7 @@
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include '../config/db.php'; // Asegúrate de que este path sea correcto
+    include '../config/db.php';
 
     $email = $conn->real_escape_string($_POST['email']);
     $contraseña = $_POST['password'];
