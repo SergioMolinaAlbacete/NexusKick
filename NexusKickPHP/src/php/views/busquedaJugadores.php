@@ -33,27 +33,29 @@ if ($result->num_rows > 0) {
     include 'header.php';
     ?>
     <div class='tablon'>
-        <?php foreach ($anuncios as $anuncio): ?>
-            <div class="anuncio-card">
-                <div class="perfil-info">
-                    <img src="<?= htmlspecialchars($anuncio['perfil_url']) ?>" alt="perfil" class="perfil-imagen">
-                    <div class="info-texto">
-                        <h2><?= $anuncio['nombre'] ?></h2>
-                        <p><?= $anuncio['edad'] ?> años - <?= $anuncio['ciudad'] ?></p>
+        <div class="card-container">
+            <?php foreach ($anuncios as $anuncio): ?>
+                <div class="anuncio-card">
+                    <div class="perfil-info">
+                        <img src="<?= htmlspecialchars($anuncio['perfil_url']) ?>" alt="perfil" class="perfil-imagen">
+                        <div class="info-texto">
+                            <h2><?= $anuncio['nombre'] ?></h2>
+                            <p><?= $anuncio['edad'] ?> años - <?= $anuncio['ciudad'] ?></p>
+                        </div>
+                    </div>
+                    <div class="anuncio-detalle">
+                        <h3><?= $anuncio['titulo'] ?></h3>
+                        <p><?= $anuncio['descripcion'] ?></p>
+                    </div>
+                    <div class="anuncio-botones">
+                        <div class="button-borders">
+                            <button class="primary-button">Contactar</button>
+                            <button class="primary-button">Ver Perfil</button>
+                        </div>
                     </div>
                 </div>
-                <div class="anuncio-detalle">
-                    <h3><?= $anuncio['titulo'] ?></h3>
-                    <p><?= $anuncio['descripcion'] ?></p>
-                </div>
-                <div class="anuncio-botones">
-                    <div class="button-borders">
-                        <button class="primary-button">Contactar</button>
-                        <button class="primary-button">Ver Perfil</button>
-                    </div>
-                </div>
-            </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        </div>
     </div>
 </body>
 
