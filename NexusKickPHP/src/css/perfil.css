@@ -1,94 +1,166 @@
-/* Estilos generales del cuerpo y de la página */
-body {
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
 
-.container {
-  width: 90%;
-  max-width: 960px;
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  margin-top: 20px;
-}
-
-h1, h2, h3 {
-  color: #333;
-}
-
-/* Flex container para alinear elementos lado a lado */
-.flex-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-/* Columnas para flex-row */
-.flex-column {
-  flex: 1; /* Cada columna toma igual espacio */
-  margin: 10px;
-}
-
-/* Estilos específicos para el perfil de jugador */
 .player-profile {
-  display: flex;
-  margin-bottom: 20px;
-}
+    background-color: white;
+    color: black;
+    display: flex;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    align-items: flex-start; /* Alinea los elementos al principio del contenedor */
+  }
+  
+  .player-profile-column {
+    flex: 1; /* Ajusta la flexibilidad de la columna */
+    max-width: calc(50% - 20px); /* Ajusta el ancho máximo restando el padding */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px; /* Añade padding alrededor de la imagen y el apodo */
+  }
+  
+  .player-image {
+    width: 100%; /* Ajusta el ancho de la imagen al contenedor */
+    max-height: 600px; /* Mantiene la relación de aspecto de la imagen */
+    margin-bottom: 10px; /* Reduce el espacio entre la imagen y el apodo */
+  }
+  
+  .player-nickname {
+    font-size: 1.2em; /* Ajusta el tamaño del apodo */
+    margin-bottom: 10px; /* Reduce el espacio debajo del apodo */
+  }
+  
+  .player-info {
+    flex: 3; /* Ajusta la flexibilidad de la columna de información */
+    padding: 20px; /* Añade padding alrededor de la información */
+    max-width: 50%; /* Asegúrate de que la información no sea más ancha que la mitad del perfil */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .info-item {
+    display: flex; /* Usa flexbox para alinear etiqueta y valor */
+    align-items: center; /* Centra los elementos verticalmente */
+    margin: 4px 0; /* Reduce el margen entre elementos de información */
+  }
+  
+  .info-label {
+    font-weight: bold;
+    margin-right: 5px; /* Añade un pequeño margen entre la etiqueta y el valor */
+  }
+  
+  /* Ajustes responsivos para vistas móviles */
+  @media (max-width: 768px) {
+    .player-profile {
+      flex-direction: column;
+      align-items: center; /* Centra los elementos en dispositivos móviles */
+    }
+  
+    .player-profile-column,
+    .player-info {
+      max-width: 100%; /* Los elementos ocupan el ancho completo en dispositivos móviles */
+      padding: 20px;
+    }
+  
+    .player-image {
+      max-width: 80%; /* Ajusta el ancho de la imagen en dispositivos móviles */
+    }
+  }
+  
 
-.player-profile-column {
-  flex: 1;
-  text-align: center; /* Centrar la imagen y el apodo */
-}
 
-.player-profile-column img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 50%; /* Hace la imagen redonda */
-  margin-bottom: 10px;
-}
 
-.player-info {
-  flex: 2; /* Dos veces el ancho de la columna de imagen */
-  padding-left: 20px;
-}
 
-.info-label {
-  font-weight: bold;
-}
 
-/* Historial del jugador */
-.player-history, .player-technical-info, .work-info, .reviews {
-  width: 100%;
-  margin-bottom: 20px;
-}
 
-.history-slider, .technical-details {
-  display: flex;
-  overflow-x: auto;
-  padding: 10px;
-}
 
-.history-card, .column {
-  flex: none; /* No crecen ni se encogen */
-  margin-right: 10px;
-}
+  /* PlayerHistory.css */
 
-/* Estilo para el bloque de Situación Laboral y Reseñas */
-.work-info, .reviews {
-  display: flex;
-}
+.player-history {
+    background-color: #198754; /* Verde oscuro de la imagen */
+    padding: 20px;
+    text-align: center; /* Centrar el título y las flechas */
+    color: white; /* Texto en blanco */
+  }
+  
+  .history-slider {
+    display: flex;
+    align-items: center;
+    overflow: hidden; /* Esconde las tarjetas que excedan el ancho */
+  }
+  
+  .history-card {
+    margin: 0 10px; /* Añade espacio entre las tarjetas */
+    background-color: #81C784; /* Verde claro para las tarjetas */
+    border-radius: 10px; /* Bordes redondeados de las tarjetas */
+    padding: 10px;
+    width: 200px; /* Ancho de las tarjetas */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra suave para profundidad */
+  }
+  
+  .team-shield {
+    width: 50px; /* Tamaño del escudo */
+    height: auto;
+    margin-bottom: 10px; /* Espacio entre el escudo y el texto */
+  }
+  
+  .slide-arrow {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .left-arrow, .right-arrow {
+    padding: 0 20px;
+  }
+  
+  .left-arrow img, .right-arrow img {
+    width: 25px; /* Tamaño de las flechas */
+    height: auto;
+  }
+  
 
-.work-info table, .reviews {
-  flex: 1;
-  margin-right: 20px;
-  padding: 10px;
-}
+
+  .player-technical-info {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 8px;
+  }
+  
+  .technical-details {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .column {
+    flex: 1;  /* Asigna el mismo espacio a cada columna */
+    padding: 20px;
+  }
+  
+  .skills p {
+    margin: 5px 0; /* Espaciado vertical para los elementos de habilidades */
+  }
+  
+  h2{
+    text-align: center;
+  }
+
+
+
+
+  
+  /* PlayerWorkEducation.css */
+
+.player-work-education {
+    background-color: #A5D6A7 ; /* Otro tono de verde */
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  
+  /* Añadir estilos para los detalles de educación y trabajo, como horarios, lugar, etc. */
+  

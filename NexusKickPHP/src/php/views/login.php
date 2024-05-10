@@ -52,13 +52,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inicio de Sesión</title>
     <link rel="stylesheet" href="./../../css/login.css">
 </head>
-<body>
+
+<body id="body">
+
     <header>
         <!-- Tu código de cabecera aquí -->
     </header>
@@ -77,8 +80,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="input-group">
                     <input type="submit" value="ENTRAR" class="google-login-button" />
                 </div>
+                <div class="input-group">
+                    <p>Si no tienes una cuenta <a href="login.php" class="google-login-button">REGISTRATE </a></p>
+                </div>
             </form>
         </div>
     </div>
+
+    <script src="../../css/three.min.js"></script>
+    <script src="../../css/vanta.waves.min.js"></script>
+    <script>
+        VANTA.WAVES({
+            el: "#body",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x198754,
+            shininess: 0.00,
+            waveHeight: 23.50,
+            waveSpeed: 0.65,
+            zoom: 0.91
+        })
+    </script>
+
 </body>
+
 </html>
