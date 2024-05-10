@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inicio de Sesión</title>
-    <!-- Incluir tus estilos CSS y otros recursos necesarios -->
+    <link rel="stylesheet" href="./../../css/login.css">
 </head>
 <body>
     <header>
@@ -80,6 +80,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </form>
         </div>
     </div>
-    <!-- Otros scripts y cierre de tags como body y html -->
 </body>
 </html>

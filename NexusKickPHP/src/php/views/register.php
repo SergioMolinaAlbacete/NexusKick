@@ -30,58 +30,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $conn->real_escape_string($_POST['email']);
     $password = $conn->real_escape_string($_POST['password']);
     $tipo_usuario = $conn->real_escape_string($_POST['tipo_usuario']);
-    $ciudad = $conn->real_escape_string($_POST['ciudad']);
     $edad = $conn->real_escape_string($_POST['edad']);
-    $perfil_url = $conn->real_escape_string($_POST['perfil_url']);
 
     // Definir la URL de la imagen
     $url_image = "../../img/shop/en_forma_de_dibujos_animados (1).jpg";
 
-   // Verifica si ya existe un usuario con el mismo correo electrónico
-   $checkEmail = $conn->prepare("SELECT email FROM Usuarios WHERE email = ?");
-   $checkEmail->bind_param("s", $email);
-   $checkEmail->execute();
-   $result = $checkEmail->get_result();
-   if ($result->num_rows > 0) {
-       echo "<script>alert('Ya existe un usuario registrado con ese correo electrónico.'); window.location.href='registro.php';</script>";
-       $checkEmail->close();
-   } else {
-       // Encriptar la contraseña antes de almacenarla
-       $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+    // Verifica si ya existe un usuario con el mismo correo electrónico
+    $checkEmail = $conn->prepare("SELECT email FROM Usuarios WHERE email = ?");
+    $checkEmail->bind_param("s", $email);
+    $checkEmail->execute();
+    $result = $checkEmail->get_result();
+    if ($result->num_rows > 0) {
+        echo "<script>alert('Ya existe un usuario registrado con ese correo electrónico.'); window.location.href='registro.php';</script>";
+        $checkEmail->close();
+    } else {
+        // Encriptar la contraseña antes de almacenarla
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-       // Preparar la sentencia SQL para evitar inyecciones SQL
-       $stmt = $conn->prepare("INSERT INTO Usuarios (nombre, email, password, tipo_usuario, ciudad, edad, perfil_url) VALUES (?, ?, ?, ?, ?, ?, ?)");
-       $stmt->bind_param("sssssis", $nombre, $email, $passwordHash, $tipo_usuario, $ciudad, $edad, $perfil_url);
-       if ($stmt->execute()) {
-           // Aquí puedes incluir el código para enviar un correo electrónico de confirmación
-           // Redirige al usuario a login.php
-           header('Location: login.php');
-           exit;
-       } else {
-           echo "Error: " . $stmt->error;
-       }
+        // Preparar la sentencia SQL para evitar inyecciones SQL
+        $stmt = $conn->prepare("INSERT INTO Usuarios (nombre, email, password, tipo_usuario, edad) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssis", $nombre, $email, $passwordHash, $tipo_usuario, $edad);
+        if ($stmt->execute()) {
+            // Aquí puedes incluir el código para enviar un correo electrónico de confirmación
+            // Redirige al usuario a login.php
+            header('Location: login.php');
+            exit;
+        } else {
+            echo "Error: " . $stmt->error;
+        }
 
 
-            if ($stmt->execute()) {
-                $mail = new PHPMailer(true); // Pasar `true` habilita excepciones
-                try {
-                    // Configuración del servidor
-                    $mail->isSMTP(); // Usar SMTP
-                    $mail->Host = 'smtp.gmail.com'; // Servidores SMTP
-                    $mail->SMTPAuth = true; // Habilitar autenticación SMTP
-                    $mail->Username = 'draftyeig@gmail.com'; // SMTP usuario
-                    $mail->Password = 'jrulwscfviupaxby'; // SMTP contraseña
-                    $mail->SMTPSecure = 'ssl'; // Habilitar TLS o SSL
-                    $mail->Port = 465; // Puerto TCP para conectarse
+        if ($stmt->execute()) {
+            $mail = new PHPMailer(true); // Pasar `true` habilita excepciones
+            try {
+                // Configuración del servidor
+                $mail->isSMTP(); // Usar SMTP
+                $mail->Host = 'smtp.gmail.com'; // Servidores SMTP
+                $mail->SMTPAuth = true; // Habilitar autenticación SMTP
+                $mail->Username = 'draftyeig@gmail.com'; // SMTP usuario
+                $mail->Password = 'jrulwscfviupaxby'; // SMTP contraseña
+                $mail->SMTPSecure = 'ssl'; // Habilitar TLS o SSL
+                $mail->Port = 465; // Puerto TCP para conectarse
 
-                    // Destinatarios
-                    $mail->setFrom('draftyeig@gmail.com', 'Drafty');
-                    $mail->addAddress($email, $name); // Agregar un destinatario, el correo del usuario registrado
+                // Destinatarios
+                $mail->setFrom('draftyeig@gmail.com', 'Drafty');
+                $mail->addAddress($email, $name); // Agregar un destinatario, el correo del usuario registrado
 
-                    // Contenido
-                    $mail->isHTML(true); // Establecer formato de correo electrónico a HTML
-                    $mail->Subject = 'Bienvenido a Nuestro Sitio Web';
-                    $mail->Body = '
+                // Contenido
+                $mail->isHTML(true); // Establecer formato de correo electrónico a HTML
+                $mail->Subject = 'Bienvenido a Nuestro Sitio Web';
+                $mail->Body = '
                             <html>
                             <head>
                                 <style>
@@ -112,23 +110,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 </html>
                         ';
 
-                    $mail->send();
-                    //echo 'El mensaje ha sido enviado';
-                } catch (Exception $e) {
-                    // Si quieres manejar el error de envío, puedes hacerlo aquí
-                    echo 'El mensaje no pudo ser enviado. Error de Mailer: ', $mail->ErrorInfo;
-                }
-                // Redirige al usuario a login.php
-                header('Location: login.php');
-                exit; // Asegúrate de salir del script después de la redirección
-            } else {
-                echo "Error: " . $stmt->error;
+                $mail->send();
+                //echo 'El mensaje ha sido enviado';
+            } catch (Exception $e) {
+                // Si quieres manejar el error de envío, puedes hacerlo aquí
+                echo 'El mensaje no pudo ser enviado. Error de Mailer: ', $mail->ErrorInfo;
             }
-
-            $stmt->close();
+            // Redirige al usuario a login.php
+            header('Location: login.php');
+            exit; // Asegúrate de salir del script después de la redirección
+        } else {
+            echo "Error: " . $stmt->error;
         }
+
+        $stmt->close();
     }
-    $conn->close();
+}
+$conn->close();
 
 ?>
 
@@ -138,65 +136,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Registro</title>
-    <link rel="stylesheet" href="../../css/LoginRegister.css">
-    <link rel="stylesheet" href="../../css/popup.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon/favicon-16x16.png">
-    <link rel="manifest" href="../../favicon/site.webmanifest">
-    <link rel="mask-icon" href="../../favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Oswald:wght@500&family=Poppins&display=swap"
-        rel="stylesheet">
-
+    <title>Registro | NexusKick</title>
+    <link rel="stylesheet" href="./../../css/register.css">
 
 </head>
-<?php include '../controllers/popups.php'; ?>
-<body id="body">
 
-<form action="register.php" method="POST">
-    <h2>Crear una nueva cuenta</h2>
-    <div class="input-group">
-        <label for="name">Nombre</label>
-        <input type="text" id="name" name="nombre" placeholder="Nombre completo" required />
-    </div>
-    <div class="input-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="correo@example.com" required />
-    </div>
-    <div class="input-group">
-        <label for="password">Contraseña</label>
-        <input type="password" id="password" name="password" required />
-    </div>
-    <div class="input-group">
-        <label for="tipo_usuario">Tipo de Usuario</label>
-        <select id="tipo_usuario" name="tipo_usuario" required>
-            <option value="jugador">Jugador</option>
-            <option value="entrenador">Entrenador</option>
-            <option value="equipo">Equipo</option>
-        </select>
-    </div>
-    <div class="input-group">
-        <label for="ciudad">Ciudad</label>
-        <input type="text" id="ciudad" name="ciudad" placeholder="Ciudad" />
-    </div>
-    <div class="input-group">
-        <label for="edad">Edad</label>
-        <input type="number" id="edad" name="edad" placeholder="Edad" />
-    </div>
-    <div class="input-group">
-        <label for="perfil_url">URL del Perfil</label>
-        <input type="text" id="perfil_url" name="perfil_url" placeholder="URL del perfil" />
-    </div>
-    <div class="input-group">
-        <input type="submit" value="REGISTRARSE" class="google-login-button" />
-    </div>
-</form>
+<body>
+
+    <form action="register.php" method="POST">
+        <h2>Crear una nueva cuenta</h2>
+        <div class="input-group">
+            <label for="name">Nombre</label>
+            <input type="text" id="name" name="nombre" placeholder="Nombre completo" required />
+        </div>
+        <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="correo@example.com" required />
+        </div>
+        <div class="input-group">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" name="password" required />
+        </div>
+        <div class="input-group">
+            <label for="tipo_usuario">Tipo de Usuario</label>
+            <select id="tipo_usuario" name="tipo_usuario" required>
+                <option value="jugador">Jugador</option>
+                <option value="entrenador">Entrenador</option>
+                <option value="equipo">Equipo</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="edad">Edad</label>
+            <input type="number" id="edad" name="edad" placeholder="Edad" />
+        </div>
+
+        <div class="input-group">
+            <input type="submit" value="REGISTRARSE" class="google-login-button" />
+        </div>
+    </form>
 
 
 

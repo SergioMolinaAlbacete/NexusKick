@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php
-include './componentes/headGeneral.php';
-?>
+<head>
+    <meta charset="UTF-8">
+    <title>anuncios</title>
+    <link rel="stylesheet" href="./../../css/general.css">
+    <link rel="stylesheet" href="./../../css/header.css">
+    <link rel="stylesheet" href="./../../css/perfil.css">
+
+</head>
 
 <body>
     <?php
@@ -12,58 +17,58 @@ include './componentes/headGeneral.php';
     <h1>Perfil </h1>
 
     <!-- Bloque informacion personal -->
-    <div className="player-profile">
-        <div className="player-profile-column">
-            <img src={player.imagen} alt={`${player.nombre}`} className="player-image" />
-            <h1 className="player-nickname">{player.nombre}</h1> {/* Apodo del jugador */}
+    <div class="player-profile">
+        <div class="player-profile-column">
+            <img src="" alt="" class="player-image" />
+            <h1 class="player-nickname">{player.nombre}</h1> {/* Apodo del jugador */}
         </div>
-        <div className="player-info">
+        <div class="player-info">
             <h2>Información Personal</h2>
-            <p><span className="info-label">Nombre Completo:</span> {player.nombreCompleto}</p>
-            <p><span className="info-label">País:</span> {player.país}</p>
-            <p><span className="info-label">Lugar de Nacimiento:</span> {player.lugarNacimiento}</p>
-            <p><span className="info-label">Fecha de Nacimiento:</span> {player.fechaNacimiento}</p>
-            <p><span className="info-label">Edad:</span> {player.edad}</p>
-            <p><span className="info-label">Altura:</span> {player.altura}</p>
-            <p><span className="info-label">Peso:</span> {player.peso}</p>
-            <p><span className="info-label">Pierna Buena:</span> {player.piernaBuena}</p>
-            <p><span className="info-label">Talla de Ropa:</span> {player.tallaRopa}</p>
-            <p><span className="info-label">Talla de Calzado:</span> {player.tallaCalzado}</p>
-            <p><span className="info-label">Número Preferido:</span> {player.númeroPreferido}</p>
+            <p><span class="info-label">Nombre Completo:</span> {player.nombreCompleto}</p>
+            <p><span class="info-label">País:</span> {player.país}</p>
+            <p><span class="info-label">Lugar de Nacimiento:</span> {player.lugarNacimiento}</p>
+            <p><span class="info-label">Fecha de Nacimiento:</span> {player.fechaNacimiento}</p>
+            <p><span class="info-label">Edad:</span> {player.edad}</p>
+            <p><span class="info-label">Altura:</span> {player.altura}</p>
+            <p><span class="info-label">Peso:</span> {player.peso}</p>
+            <p><span class="info-label">Pierna Buena:</span> {player.piernaBuena}</p>
+            <p><span class="info-label">Talla de Ropa:</span> {player.tallaRopa}</p>
+            <p><span class="info-label">Talla de Calzado:</span> {player.tallaCalzado}</p>
+            <p><span class="info-label">Número Preferido:</span> {player.númeroPreferido}</p>
         </div>
     </div>
 
     <!-- Bloque Historial -->
-    <div className="player-history">
+    <div class="player-history">
         <h2>Historial del jugador</h2>
-        <div className="history-slider">
-            {/* <button className="slide-arrow left-arrow">
-                <img src={leftArrow} alt="Anterior" />
-            </button> */}
-            {historyData.map((item, index) => (
-            <div className="history-card" key={index}>
-                <img src="../Multimedia/real-madrid-escudo.webp" alt="Escudo del equipo" className="team-shield" />
+        <div class="history-slider">
+         <button class="slide-arrow left-arrow">
+                <img src="" alt="Anterior" />
+            </button>
+
+            <div class="history-card" key={index}>
+                <img src="" alt="Escudo del equipo" class="team-shield" />
                 <h3>{item.equipo}</h3>
                 <p>Temporada: {item.temporada}</p>
                 <p>Resultado: {item.resultado}</p>
             </div>
-            ))}
-            {/* <button className="slide-arrow right-arrow">
-                <img src={rightArrow} alt="Siguiente" />
-            </button> */}
+
+            <button class="slide-arrow right-arrow">
+                <img src=""alt="Siguiente" />
+            </button>
         </div>
     </div>
 
     <!-- Bloque Ficha Tecnica -->
-    <div className="player-technical-info">
+    <div class="player-technical-info">
         <h2>Ficha Técnica</h2>
-        <div className="technical-details">
-            <div className="column">
+        <div class="technical-details">
+            <div class="column">
                 <p>Posición Habitual: {technicalInfo.position.primary} (Secundaria: {technicalInfo.position.secondary})</p>
                 <p>Estilo de Juego: {technicalInfo.playStyle}</p>
             </div>
-            <div className="column">
-                <div className="skills">
+            <div class="column">
+                <div class="skills">
                     <h3>Habilidades Técnicas</h3>
                     <p>Pases: {technicalInfo.skills.passing}</p>
                     <p>Tiros: {technicalInfo.skills.shooting}</p>
@@ -77,7 +82,7 @@ include './componentes/headGeneral.php';
     </div>
 
     <!-- Bloque Situacion -->
-    <div className="work-info">
+    <div class="work-info">
         <h2>Situación Laboral y/o Estudio</h2>
         <table>
             <tbody>
@@ -100,7 +105,7 @@ include './componentes/headGeneral.php';
 
 
     <!-- Bloque Reseñas -->
-    <div className="reviews">
+    <div class="reviews">
         <h2>Reseñas</h2>
         <p>El mejor de la Historia⭐⭐⭐⭐⭐</p>
         <p>⭐⭐⭐⭐</p>
