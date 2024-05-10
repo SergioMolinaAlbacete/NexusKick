@@ -1,7 +1,7 @@
 <?php
 include '../config/db.php';
 
-$sql = "SELECT Anuncios.titulo, Anuncios.descripcion, Anuncios.fecha_publicacion, Usuarios.nombre, Usuarios.edad, Usuarios.ciudad, Usuarios.perfil_url 
+$sql = "SELECT * 
 FROM Anuncios 
 JOIN Usuarios ON Anuncios.usuario_id = Usuarios.id
 WHERE Usuarios.tipo_usuario = 'jugador';
@@ -16,18 +16,58 @@ if ($result->num_rows > 0) {
 }
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="es">
 
-<?php
-include './componentes/headGeneral.php';
-?>
+<head>
+    <meta charset="UTF-8">
+    <title>Anuncios Jugadores | NexusKick</title>
+    <link rel="stylesheet" href="./../../css/general.css">
+    <link rel="stylesheet" href="./../../css/Anuncio.css">
+    <link rel="stylesheet" href="./../../css/header.css">
+
+</head>
 
 <body>
     <?php
     include './componentes/header.php';
     ?>
     <h1>Búsqueda Jugadores</h1>
+    <div class="filtro-container">
+        <form action="" method="GET" id="filtro-form">
+            <label for="edad">Rango de edad:</label>
+            <input type="range" id="edad" name="edad" min="10" max="100" value="10" oninput="this.nextElementSibling.value = this.value">
+            <output>10</output> años
+
+            <label for="pais">País:</label>
+            <select id="pais" name="pais">
+                <option value="">Seleccionar país</option>
+                <!-- Añade aquí más opciones según los países disponibles -->
+            </select>
+
+            <label for="ciudad">Ciudad:</label>
+            <input type="text" id="ciudad" name="ciudad">
+
+            <label for="altura">Altura (cm):</label>
+            <input type="number" id="altura" name="altura" min="100" max="250">
+
+            <label for="peso">Peso (kg):</label>
+            <input type="number" id="peso" name="peso" min="30" max="150">
+
+            <label for="pierna_buena">Pierna buena:</label>
+            <select id="pierna_buena" name="pierna_buena">
+                <option value="">Seleccionar</option>
+                <option value="derecha">Derecha</option>
+                <option value="izquierda">Izquierda</option>
+                <option value="izquierda">Ambas</option>
+            </select>
+
+            <button type="submit" class="primary-button">Filtrar</button>
+        </form>
+    </div>
+
     <div class='tablon'>
         <div class="card-container">
             <?php foreach ($anuncios as $anuncio) : ?>
@@ -35,7 +75,7 @@ include './componentes/headGeneral.php';
                     <div class="perfil-info">
                         <img src="<?= htmlspecialchars($anuncio['perfil_url']) ?>" alt="perfil" class="perfil-imagen">
                         <div class="info-texto">
-                            <h2><?= $anuncio['nombre'] ?></h2>
+                            <h2><?= $anuncio['nombre'] ?> <?= $anuncio['apellidos'] ?></h2>
                             <p><?= $anuncio['edad'] ?> años - <?= $anuncio['ciudad'] ?></p>
                         </div>
                     </div>
@@ -53,6 +93,10 @@ include './componentes/headGeneral.php';
             <?php endforeach; ?>
         </div>
     </div>
+
+
+
+    
 </body>
 
 </html>

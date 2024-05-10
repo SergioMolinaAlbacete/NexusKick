@@ -23,7 +23,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  max-width: 960px; /* Ajusta este valor basado en el tamaño deseado de las tarjetas */
+  max-width: 1920px; /* Ajusta este valor basado en el tamaño deseado de las tarjetas */
 }
 
 .anuncio-card {
@@ -32,9 +32,10 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  max-width: 300px; /* Ancho máximo de cada tarjeta */
+  max-width: 500px; /* Ancho máximo de cada tarjeta */
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   overflow: hidden;
+  background-color: #198754;
 }
 
   
@@ -100,3 +101,32 @@
     color: white;
     background-position: 40%;
 }
+
+
+.filtro-container {
+  background-color: #f4f4f4;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.filtro-container form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.filtro-container label {
+  margin-right: 10px;
+}
+
+.filtro-container input,
+.filtro-container select {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+
