@@ -35,7 +35,7 @@
     <div class="player-profile">
         <div class="player-profile-column">
             <img src="<?= $player['perfil_url'] ?>" alt="<?= $player['nombre'] ?>" class="player-image" />
-            <h1 class="player-nickname"><?= $player['nombre'] ?></h1>
+            <h1 class="player-nickname"><?= $player['apodo'] ?></h1>
         </div>
         <div class="player-info">
             <h2>Información Personal</h2>
@@ -96,27 +96,44 @@
 
 
 
-    <!-- Bloque Ficha Tecnica -->
+
+
+
+
+
+    <?php
+    // Consulta para obtener la ficha técnica del jugador
+    $sqlFichaTecnica = "SELECT * FROM ficha_tecnica WHERE usuario_id = ?";
+    $stmtFichaTecnica = $conn->prepare($sqlFichaTecnica);
+    $stmtFichaTecnica->bind_param("i", $usuario_id);
+    $stmtFichaTecnica->execute();
+    $resultadoFichaTecnica = $stmtFichaTecnica->get_result();
+    $fichaTecnica = $resultadoFichaTecnica->fetch_assoc();
+
+    ?>
+
+    <!-- Bloque Ficha Técnica -->
     <div class="player-technical-info">
         <h2>Ficha Técnica</h2>
         <div class="technical-details">
             <div class="column">
-                <p>Posición Habitual: {technicalInfo.position.primary} (Secundaria: {technicalInfo.position.secondary})</p>
-                <p>Estilo de Juego: {technicalInfo.playStyle}</p>
+                <p>Posición Habitual: <?= htmlspecialchars($fichaTecnica['posicion_habitual']) ?> (Secundaria: <?= htmlspecialchars($fichaTecnica['posicion_secundaria']) ?>)</p>
+                <p>Estilo de Juego: <?= htmlspecialchars($fichaTecnica['estilo_de_juego']) ?></p>
             </div>
             <div class="column">
                 <div class="skills">
                     <h3>Habilidades Técnicas</h3>
-                    <p>Pases: {technicalInfo.skills.passing}</p>
-                    <p>Tiros: {technicalInfo.skills.shooting}</p>
-                    <p>Velocidad: {technicalInfo.skills.pace}</p>
-                    <p>Regate: {technicalInfo.skills.dribbling}</p>
-                    <p>Defensa: {technicalInfo.skills.defending}</p>
+                    <p>Pases: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:40px; height:40px;">', $fichaTecnica['pases']) ?></p>
+                    <p>Tiros: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:40px; height:40px;">', $fichaTecnica['tiros']) ?></p>
+                    <p>Velocidad: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:40px; height:40px;">', $fichaTecnica['velocidad']) ?></p>
+                    <p>Regate: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:40px; height:40px;">', $fichaTecnica['regate']) ?></p>
+                    <p>Defensa: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:40px; height:40px;">', $fichaTecnica['defensa']) ?></p>
                 </div>
-                <p>Notas Adicionales: {technicalInfo.additionalNotes}</p>
+                <p>Notas Adicionales: <?= htmlspecialchars($fichaTecnica['notas_adicionales']) ?></p>
             </div>
         </div>
     </div>
+
 
     <!-- Bloque Situacion -->
     <div class="work-info">
