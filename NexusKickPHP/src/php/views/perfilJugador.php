@@ -13,51 +13,88 @@
 <body>
     <?php
     include './componentes/header.php';
+    include '../config/db.php'; // Asegúrate de que la ruta es correcta
+
+    // Suponemos que recibimos el ID del usuario de alguna forma, aquí lo definimos manualmente
+    $usuario_id = 1; // Deberías obtener este ID dinámicamente, por ejemplo a través de $_GET['id'] o una sesión
+
+    // Consulta para obtener la información del jugador
+    $sql = "SELECT * FROM usuarios WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $usuario_id);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+    $player = $resultado->fetch_assoc();
     ?>
+
+
+
     <h1>Perfil </h1>
 
-    <!-- Bloque informacion personal -->
+    <!-- Bloque información personal -->
     <div class="player-profile">
         <div class="player-profile-column">
-            <img src="" alt="" class="player-image" />
-            <h1 class="player-nickname">{player.nombre}</h1> {/* Apodo del jugador */}
+            <img src="<?= $player['perfil_url'] ?>" alt="<?= $player['nombre'] ?>" class="player-image" />
+            <h1 class="player-nickname"><?= $player['nombre'] ?></h1>
         </div>
         <div class="player-info">
             <h2>Información Personal</h2>
-            <p><span class="info-label">Nombre Completo:</span> {player.nombreCompleto}</p>
-            <p><span class="info-label">País:</span> {player.país}</p>
-            <p><span class="info-label">Lugar de Nacimiento:</span> {player.lugarNacimiento}</p>
-            <p><span class="info-label">Fecha de Nacimiento:</span> {player.fechaNacimiento}</p>
-            <p><span class="info-label">Edad:</span> {player.edad}</p>
-            <p><span class="info-label">Altura:</span> {player.altura}</p>
-            <p><span class="info-label">Peso:</span> {player.peso}</p>
-            <p><span class="info-label">Pierna Buena:</span> {player.piernaBuena}</p>
-            <p><span class="info-label">Talla de Ropa:</span> {player.tallaRopa}</p>
-            <p><span class="info-label">Talla de Calzado:</span> {player.tallaCalzado}</p>
-            <p><span class="info-label">Número Preferido:</span> {player.númeroPreferido}</p>
+            <p><span class="info-label">Nombre Completo:</span> <?= $player['nombre'] ?></p>
+            <p><span class="info-label">País de Nacimiento:</span> <?= $player['pais'] ?></p>
+            <p><span class="info-label">Lugar de Nacimiento:</span> <?= $player['ciudad'] ?></p>
+            <p><span class="info-label">Fecha de Nacimiento:</span> <?= $player['fnacimiento'] ?></p>
+            <p><span class="info-label">Edad:</span> <?= $player['edad'] ?></p>
+            <p><span class="info-label">Altura:</span> <?= $player['altura'] ?></p>
+            <p><span class="info-label">Peso:</span> <?= $player['peso'] ?></p>
+            <p><span class="info-label">Pierna Buena:</span> <?= $player['piernaBuena'] ?></p>
+            <p><span class="info-label">Talla de Ropa:</span> <?= $player['tallaRopa'] ?></p>
+            <p><span class="info-label">Talla de Calzado:</span> <?= $player['tallaCalzado'] ?></p>
+            <p><span class="info-label">Número Preferido:</span> <?= $player['numeroPreferido'] ?></p>
         </div>
     </div>
+
+
+
+
+
+    <?php
+    // Consulta para obtener el historial deportivo del usuario
+    $sqlHistorial = "SELECT * FROM historial_deportivo WHERE usuario_id = ?";
+    $stmtHistorial = $conn->prepare($sqlHistorial);
+    $stmtHistorial->bind_param("i", $usuario_id);
+    $stmtHistorial->execute();
+    $resultadoHistorial = $stmtHistorial->get_result();
+    $historiales = [];
+    while ($fila = $resultadoHistorial->fetch_assoc()) {
+        $historiales[] = $fila;
+    }
+
+    ?>
 
     <!-- Bloque Historial -->
     <div class="player-history">
         <h2>Historial del jugador</h2>
         <div class="history-slider">
-         <button class="slide-arrow left-arrow">
-                <img src="" alt="Anterior" />
+            <button class="slide-arrow left-arrow">
+                <img src="path_to_previous_icon" alt="Anterior" />
             </button>
 
-            <div class="history-card" key={index}>
-                <img src="" alt="Escudo del equipo" class="team-shield" />
-                <h3>{item.equipo}</h3>
-                <p>Temporada: {item.temporada}</p>
-                <p>Resultado: {item.resultado}</p>
-            </div>
+            <?php foreach ($historiales as $item) : ?>
+                <div class="history-card">
+                    <img src="<?= htmlspecialchars($item['imagenEscudo']) ?>" alt="Escudo del equipo <?= htmlspecialchars($item['equipo']) ?>" class="team-shield" />
+                    <h3><?= htmlspecialchars($item['equipo']) ?></h3>
+                    <p>Temporada: <?= htmlspecialchars($item['temporada']) ?></p>
+                    <p>Resultado: <?= htmlspecialchars($item['resultado']) ?></p>
+                </div>
+            <?php endforeach; ?>
 
             <button class="slide-arrow right-arrow">
-                <img src=""alt="Siguiente" />
+                <img src="path_to_next_icon" alt="Siguiente" />
             </button>
         </div>
     </div>
+
+
 
     <!-- Bloque Ficha Tecnica -->
     <div class="player-technical-info">
