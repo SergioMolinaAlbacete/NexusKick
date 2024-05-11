@@ -1,13 +1,17 @@
 h1 {
   text-align: center;
+  color: #90ff17;
+}
+h2{
+  color: #0E1822;
 }
 
 .player-profile {
-  background-color: white;
+  background: linear-gradient(to right, #002e34, #00c16c);
+  /* Gradiente desde azul oscuro a verde */
   color: black;
   display: flex;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
   overflow: hidden;
   align-items: flex-start;
   /* Alinea los elementos al principio del contenedor */
@@ -31,7 +35,7 @@ h1 {
   height: auto;
   margin-bottom: 10px;
   /* Reduce el espacio entre la imagen y el apodo */
-  border: #198754 solid 5px;
+  border: #002e34 solid 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
 }
@@ -41,6 +45,7 @@ h1 {
   /* Ajusta el tamaño del apodo */
   margin-bottom: 10px;
   /* Reduce el espacio debajo del apodo */
+  color: #90ff17;
 }
 
 .player-info {
@@ -87,16 +92,9 @@ h1 {
 }
 
 
-
-
-
-
-
-
 /* PlayerHistory.css */
 
 .player-history {
-  background-color: #198754;
   /* Verde oscuro de la imagen */
   padding: 20px;
   text-align: center;
@@ -115,7 +113,7 @@ h1 {
 .history-card {
   margin: 0 10px;
   /* Añade espacio entre las tarjetas */
-  background-color: #81C784;
+  background-color: #002e34;
   /* Verde claro para las tarjetas */
   border-radius: 10px;
   /* Bordes redondeados de las tarjetas */
@@ -155,10 +153,12 @@ h1 {
 
 
 .player-technical-info {
+  background: linear-gradient(to top, #A5D6A7, #00755c);
+  /* Gradiente de verde claro a verde oscuro */
+
   font-family: Arial, sans-serif;
   margin: 20px;
   padding: 20px;
-  background: #f4f4f4;
   border-radius: 8px;
 }
 
@@ -198,3 +198,52 @@ h2 {
 }
 
 /* Añadir estilos para los detalles de educación y trabajo, como horarios, lugar, etc. */
+
+/* Contenedor principal para situar ambos bloques en la misma fila */
+.work-reviews-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+/* Estilos para los bloques individuales */
+.work-info,
+.reviews {
+  flex: 1;
+  /* Asigna el mismo espacio a cada columna */
+  padding: 20px;
+  margin: 10px;
+  background: linear-gradient(to bottom, #A5D6A7, #00755c);
+  /* Gradiente como en el diseño anterior */
+  color: white;
+  border-radius: 10px;
+}
+
+/* Estilos para las tablas dentro de work-info */
+.work-info table {
+  width: 100%;
+  /* Asegura que la tabla utilice todo el ancho disponible */
+  border-collapse: collapse;
+  /* Elimina el espacio entre bordes de celdas */
+}
+
+.work-info td {
+  padding: 8px;
+  /* Añade un poco de padding a las celdas para mejor legibilidad */
+  border-bottom: 1px solid #ffffff;
+  /* Añade una línea entre filas */
+}
+
+/* Ajustes responsivos para vistas móviles */
+@media (max-width: 768px) {
+  .work-reviews-container {
+    flex-direction: column;
+    /* Cambia a disposición vertical en dispositivos móviles */
+  }
+
+  .work-info,
+  .reviews {
+    margin: 10px 0;
+    /* Ajusta márgenes para el layout vertical */
+  }
+}

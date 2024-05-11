@@ -35,7 +35,7 @@
     <div class="player-profile">
         <div class="player-profile-column">
             <img src="<?= $player['perfil_url'] ?>" alt="<?= $player['nombre'] ?>" class="player-image" />
-            <h1 class="player-nickname"><?= $player['apodo'] ?></h1>
+            <h2 class="player-nickname"><?= $player['apodo'] ?></h2>
         </div>
         <div class="player-info">
             <h2>Información Personal</h2>
@@ -76,7 +76,7 @@
         <h2>Historial del jugador</h2>
         <div class="history-slider">
             <button class="slide-arrow left-arrow">
-                <img src="path_to_previous_icon" alt="Anterior" />
+                <img src="../../img/flechaIzquierda.png" alt="Anterior" />
             </button>
 
             <?php foreach ($historiales as $item) : ?>
@@ -89,7 +89,7 @@
             <?php endforeach; ?>
 
             <button class="slide-arrow right-arrow">
-                <img src="path_to_next_icon" alt="Siguiente" />
+                <img src="../../img/flechaDerecha.png" alt="Siguiente" />
             </button>
         </div>
     </div>
@@ -136,35 +136,36 @@
 
 
     <!-- Bloque Situacion -->
-    <div class="work-info">
-        <h2>Situación Laboral y/o Estudio</h2>
-        <table>
-            <tbody>
-                <tr>
-                    <td>Actividad</td>
-                    <td>Ciclo superior DAW</td>
-                </tr>
-                <tr>
-                    <td>Lugar</td>
-                    <td>EIG Business School</td>
-                </tr>
-                <tr>
-                    <td>Horario</td>
-                    <td>08:15 - 14:45</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="work-reviews-container">
+        <div class="work-info">
+            <h2>Situación Laboral y/o Estudio</h2>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Actividad</td>
+                        <td>Ciclo superior DAW</td>
+                    </tr>
+                    <tr>
+                        <td>Lugar</td>
+                        <td>EIG Business School</td>
+                    </tr>
+                    <tr>
+                        <td>Horario</td>
+                        <td>08:15 - 14:45</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Bloque Reseñas -->
+        <div class="reviews">
+            <h2>Reseñas</h2>
+            <p>El mejor de la Historia⭐⭐⭐⭐⭐</p>
+            <p>⭐⭐⭐⭐</p>
+            <!-- Añade más reseñas según sea necesario -->
+        </div>
     </div>
 
-
-
-    <!-- Bloque Reseñas -->
-    <div class="reviews">
-        <h2>Reseñas</h2>
-        <p>El mejor de la Historia⭐⭐⭐⭐⭐</p>
-        <p>⭐⭐⭐⭐</p>
-        {/* Añade más reseñas según sea necesario */}
-    </div>
 </body>
 
 </html>
