@@ -2,7 +2,8 @@ h1 {
   text-align: center;
   color: #90ff17;
 }
-h2{
+
+h2 {
   color: #0E1822;
 }
 
@@ -107,6 +108,7 @@ h2{
   display: flex;
   align-items: center;
   overflow: hidden;
+  justify-content: center;
   /* Esconde las tarjetas que excedan el ancho */
 }
 
@@ -145,10 +147,19 @@ h2{
 
 .left-arrow img,
 .right-arrow img {
-  width: 25px;
+  width: 50px;
   /* Tamaño de las flechas */
   height: auto;
 }
+
+.right-arrow {
+  display: flex;
+  /* Utiliza flexbox para facilitar la alineación */
+  justify-content: flex-end;
+  /* Alinea los elementos hijos (img) al final del contenedor, que es la derecha */
+}
+
+
 
 
 
@@ -232,6 +243,7 @@ h2 {
   /* Añade un poco de padding a las celdas para mejor legibilidad */
   border-bottom: 1px solid #ffffff;
   /* Añade una línea entre filas */
+  text-align: center;
 }
 
 /* Ajustes responsivos para vistas móviles */

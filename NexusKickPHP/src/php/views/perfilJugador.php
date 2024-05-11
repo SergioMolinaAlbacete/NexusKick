@@ -123,11 +123,11 @@
             <div class="column">
                 <div class="skills">
                     <h3>Habilidades Técnicas</h3>
-                    <p>Pases: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:40px; height:40px;">', $fichaTecnica['pases']) ?></p>
-                    <p>Tiros: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:40px; height:40px;">', $fichaTecnica['tiros']) ?></p>
-                    <p>Velocidad: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:40px; height:40px;">', $fichaTecnica['velocidad']) ?></p>
-                    <p>Regate: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:40px; height:40px;">', $fichaTecnica['regate']) ?></p>
-                    <p>Defensa: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:40px; height:40px;">', $fichaTecnica['defensa']) ?></p>
+                    <p>Pases: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['pases']) ?></p>
+                    <p>Tiros: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['tiros']) ?></p>
+                    <p>Velocidad: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['velocidad']) ?></p>
+                    <p>Regate: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['regate']) ?></p>
+                    <p>Defensa: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['defensa']) ?></p>
                 </div>
                 <p>Notas Adicionales: <?= htmlspecialchars($fichaTecnica['notas_adicionales']) ?></p>
             </div>
@@ -135,36 +135,78 @@
     </div>
 
 
+
+
+    <?php
+    // Consulta para obtener la situación académica o laboral del usuario
+    $sqlSituacion = "SELECT actividad, lugar, horario FROM situacion_academica_laboral WHERE usuario_id = ?";
+    $stmtSituacion = $conn->prepare($sqlSituacion);
+    $stmtSituacion->bind_param("i", $usuario_id); // Asegúrate de que $usuario_id está definido y corresponde al usuario en sesión
+    $stmtSituacion->execute();
+    $resultadoSituacion = $stmtSituacion->get_result();
+    $situaciones = [];
+    while ($fila = $resultadoSituacion->fetch_assoc()) {
+        $situaciones[] = $fila;
+    }
+    ?>
+
     <!-- Bloque Situacion -->
     <div class="work-reviews-container">
         <div class="work-info">
             <h2>Situación Laboral y/o Estudio</h2>
             <table>
+                <thead>
+                    <tr>
+                        <th>Actividad</th>
+                        <th>Lugar</th>
+                        <th>Horario</th>
+                    </tr>
+                </thead>
                 <tbody>
-                    <tr>
-                        <td>Actividad</td>
-                        <td>Ciclo superior DAW</td>
-                    </tr>
-                    <tr>
-                        <td>Lugar</td>
-                        <td>EIG Business School</td>
-                    </tr>
-                    <tr>
-                        <td>Horario</td>
-                        <td>08:15 - 14:45</td>
-                    </tr>
+                    <?php foreach ($situaciones as $situacion) : ?>
+                        <tr>
+                            <td><?= htmlspecialchars($situacion['actividad']) ?></td>
+                            <td><?= htmlspecialchars($situacion['lugar']) ?></td>
+                            <td><?= htmlspecialchars($situacion['horario']) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
 
+
+
+        <?php
+        // Consulta para obtener las reseñas y las fotos de perfil de los usuarios que las escribieron
+        $sqlReseñas = "SELECT r.reseña, r.puntuacion, r.fecha, u.perfil_url
+                   FROM reseñas r
+                   JOIN usuarios u ON r.de_usuario_id = u.id
+                   WHERE r.para_usuario_id = ?";
+        $stmtReseñas = $conn->prepare($sqlReseñas);
+        $stmtReseñas->bind_param("i", $usuario_id);
+        $stmtReseñas->execute();
+        $resultadoReseñas = $stmtReseñas->get_result();
+        $reseñas = [];
+        while ($fila = $resultadoReseñas->fetch_assoc()) {
+            $reseñas[] = $fila;
+        }
+        ?>
+
+
         <!-- Bloque Reseñas -->
         <div class="reviews">
             <h2>Reseñas</h2>
-            <p>El mejor de la Historia⭐⭐⭐⭐⭐</p>
-            <p>⭐⭐⭐⭐</p>
-            <!-- Añade más reseñas según sea necesario -->
+            <?php foreach ($reseñas as $reseña) : ?>
+                <div class="review">
+                    <!-- Mostrar la foto de perfil si está disponible, de lo contrario mostrar una imagen por defecto -->
+                    <img src="<?= $reseña['perfil_url'] ?: '../img/imagenPerfilPredeterminada.jpg' ?>" alt="Foto de perfil" style="width: 50px; height: 50px; border-radius: 50%;">
+                    <p><?= htmlspecialchars($reseña['reseña']) ?></p>
+                    <p><?= str_repeat("⭐", intval($reseña['puntuacion'])) ?></p>
+                    <small><?= date("d/m/Y", strtotime($reseña['fecha'])) ?></small>
+                </div>
+            <?php endforeach; ?>
         </div>
-    </div>
+
 
 </body>
 

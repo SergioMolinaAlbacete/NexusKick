@@ -48,8 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
         // Preparar la sentencia SQL para evitar inyecciones SQL
-        $stmt = $conn->prepare("INSERT INTO Usuarios (nombre, email, password, tipo_usuario, edad) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssis", $nombre, $email, $passwordHash, $tipo_usuario, $edad);
+        $stmt = $conn->prepare("INSERT INTO usuarios (nombre, email, password, tipo_usuario, edad) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssi", $nombre, $email, $passwordHash, $tipo_usuario, $edad);
         if ($stmt->execute()) {
             // Aquí puedes incluir el código para enviar un correo electrónico de confirmación
             // Redirige al usuario a login.php
@@ -58,6 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "Error: " . $stmt->error;
         }
+
 
 
         if ($stmt->execute()) {
@@ -174,8 +175,8 @@ $conn->close();
             <input type="submit" value="REGISTRARSE" class="google-login-button" />
         </div>
         <div class="input-group">
-            <p>Si ya tienes una cuenta <a href="login.php"  class="google-login-button">INICIAR SESIÓN </a></p>
-            
+            <p>Si ya tienes una cuenta <a href="login.php" class="google-login-button">INICIAR SESIÓN </a></p>
+
         </div>
     </form>
 
