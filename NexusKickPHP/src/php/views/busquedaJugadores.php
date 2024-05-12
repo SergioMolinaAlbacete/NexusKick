@@ -34,13 +34,18 @@ if ($result->num_rows > 0) {
     <?php
     include './componentes/header.php';
     ?>
-    <h1>Búsqueda Jugadores</h1>
+    <div class="titulo-container">
+        <h1>Búsqueda Jugadores</h1><button>Crear Anuncio</button>
+    </div>
     <div class="filtro-container">
         <form action="" method="GET" id="filtro-form">
-            <label for="edad">Rango de edad:</label>
-            <input type="range" id="edad" name="edad" min="10" max="100" value="10" oninput="this.nextElementSibling.value = this.value">
-            <output>10</output> años
-
+            <!-- <label for="edad">Rango de edad:</label>
+            <div class="slider">
+                <input type="range" id="edad1" name="edad" min="10" max="70" value="10" oninput="updateValue(this)">
+                <output for="edad1" id="output1">10</output>
+                <input type="range" id="edad2" name="edad" min="10" max="70" value="70" oninput="updateValue(this)">
+                <output for="edad2" id="output2">70</output>
+            </div> -->
             <label for="pais">País:</label>
             <select id="pais" name="pais">
                 <option value="">Seleccionar país</option>
@@ -50,11 +55,8 @@ if ($result->num_rows > 0) {
             <label for="ciudad">Ciudad:</label>
             <input type="text" id="ciudad" name="ciudad">
 
-            <label for="altura">Altura (cm):</label>
+            <label for="altura">Altura mínima(cm):</label>
             <input type="number" id="altura" name="altura" min="100" max="250">
-
-            <label for="peso">Peso (kg):</label>
-            <input type="number" id="peso" name="peso" min="30" max="150">
 
             <label for="pierna_buena">Pierna buena:</label>
             <select id="pierna_buena" name="pierna_buena">
@@ -94,9 +96,40 @@ if ($result->num_rows > 0) {
         </div>
     </div>
 
+    <!-- Juntar Sliders -->
+    <script>
+        function updateValue(slider) {
+  const output = slider.nextElementSibling;
+  const sliderRect = slider.getBoundingClientRect();
+  const min = parseInt(slider.min, 10);
+  const max = parseInt(slider.max, 10);
+  const relativeValue = (slider.value - min) / (max - min);
+  const thumbOffset = relativeValue * (sliderRect.width - 20); // 20 px para el thumb
 
+  if (slider.id === 'edad1') {
+    output.style.left = `${thumbOffset}px`;
+  } else {
+    output.style.left = `${thumbOffset}px`;
+  }
+  output.textContent = slider.value;
+  adjustSliders();
+}
 
-    
+function adjustSliders() {
+  if (parseInt(edad1.value, 10) > parseInt(edad2.value, 10)) {
+    const temp = edad2.value;
+    edad2.value = edad1.value;
+    edad1.value = temp;
+  }
+  updateValue(edad1);
+  updateValue(edad2);
+}
+
+document.getElementById('edad1').addEventListener('input', function() { updateValue(this); });
+document.getElementById('edad2').addEventListener('input', function() { updateValue(this); });
+
+    </script>
+
 </body>
 
 </html>

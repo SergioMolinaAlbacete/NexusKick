@@ -29,8 +29,9 @@
 
 
 
-    <h1>Perfil </h1>
-
+    <div class="titulo-container">
+        <h1>Perfil de <?= $player['nombre'] ?> <?= $player['apellidos'] ?></h1><button>Editar Perfil</button>
+    </div>
     <!-- Bloque información personal -->
     <div class="player-profile">
         <div class="player-profile-column">
@@ -39,7 +40,7 @@
         </div>
         <div class="player-info">
             <h2>Información Personal</h2>
-            <p><span class="info-label">Nombre Completo:</span> <?= $player['nombre'] ?></p>
+            <p><span class="info-label">Nombre Completo:</span> <?= $player['nombre'] ?> <?= $player['apellidos'] ?></p>
             <p><span class="info-label">País de Nacimiento:</span> <?= $player['pais'] ?></p>
             <p><span class="info-label">Lugar de Nacimiento:</span> <?= $player['ciudad'] ?></p>
             <p><span class="info-label">Fecha de Nacimiento:</span> <?= $player['fnacimiento'] ?></p>
@@ -207,6 +208,73 @@
             <?php endforeach; ?>
         </div>
 
+
+
+
+
+
+        <!-- Modal para editar perfil -->
+        <div id="modalEditarPerfil" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form action="../controllers/guardar_cambios_perfil.php" method="POST">
+                    <h2>Editar Perfil</h2>
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($player['nombre']) ?>" required>
+                    <label for="apellidos">Apellidos:</label>
+                    <input type="text" id="apellidos" name="apellidos" value="<?= htmlspecialchars($player['apellidos']) ?>" required>
+                    <!-- Añade más campos según necesites -->
+                    <input type="submit" value="Guardar Cambios">
+                </form>
+
+                <!-- Sección para Historial Deportivo -->
+                <h2>Historial Deportivo</h2>
+                <?php foreach ($historiales as $item) : ?>
+                    <div class="historial-item">
+                        <form action="../controllers/editar_historial.php" method="POST">
+                            <input type="hidden" name="historial_id" value="<?= $item['id'] ?>">
+                            <label>Equipo:</label>
+                            <input type="text" name="equipo" value="<?= htmlspecialchars($item['equipo']) ?>">
+                            <label>Temporada:</label>
+                            <input type="text" name="temporada" value="<?= htmlspecialchars($item['temporada']) ?>">
+                            <label>Resultado:</label>
+                            <input type="text" name="resultado" value="<?= htmlspecialchars($item['resultado']) ?>">
+                            <button type="submit" name="action" value="update">Actualizar</button>
+                            <button type="submit" name="action" value="delete">Eliminar</button>
+                        </form>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+
+        <script>
+            // Obtener el modal
+            var modal = document.getElementById("modalEditarPerfil");
+
+            // Obtener el botón que abre el modal
+            var btn = document.querySelector(".titulo-container button");
+
+            // Obtener el elemento que cierra el modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // Cuando el usuario hace clic en el botón, abre el modal 
+            btn.onclick = function() {
+                modal.style.display = "block";
+            }
+
+            // Cuando el usuario hace clic en <span> (x), cierra el modal
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            // Cuando el usuario hace clic fuera del modal, cierra el modal
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
 
 </body>
 

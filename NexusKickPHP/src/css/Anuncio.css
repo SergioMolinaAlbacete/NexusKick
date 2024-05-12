@@ -1,3 +1,58 @@
+
+
+
+
+/* Estilos específicos para el slider de rango de edades */
+.slider {
+  position: relative;
+  width: 100%; /* Ajustado al ancho del contenedor */
+  max-width: 300px; /* O cualquier otro ancho según tus necesidades */
+  margin: 20px auto; /* Centrado y con margen */
+}
+
+.slider input[type="range"] {
+  position: absolute;
+  width: 100%;
+  pointer-events: none; /* Esto asegura que ambos sliders sean igualmente accesibles */
+}
+
+.slider input[type="range"]::-webkit-slider-thumb {
+  pointer-events: all;
+}
+
+.slider output {
+  position: absolute;
+  background-color: white;
+  color: black;
+  padding: 2px 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  width: 40px;
+}
+
+.output1 {
+  left: 0; /* Ajustado a la izquierda para el primer slider */
+  transform: translate(-50%, -30px);
+}
+
+.output2 {
+  right: 0; /* Ajustado a la derecha para el segundo slider */
+  transform: translate(50%, -30px);
+}
+
+/* Ajustes para evitar que los estilos de otros elementos interfieran con el slider */
+.slider input[type="range"] {
+  z-index: 2;
+}
+
+
+
+
+
+
+
+
 .tablon {
   display: flex;
   justify-content: center; /* Centra el contenedor de tarjetas */
