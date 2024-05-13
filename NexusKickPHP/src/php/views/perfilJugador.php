@@ -234,15 +234,15 @@
                     <input type="text" id="apodo" name="apodo" value="<?= htmlspecialchars($player['apodo']) ?>">
                     <label for="perfil_url">Foto de Perfil:</label>
                     <input type="text" id="perfil_url" name="perfil_url" value="<?= htmlspecialchars($player['perfil_url']) ?>">
-                    <label for="">Pais de Nacimiento:</label>
+                    <label for="pais">Pais de Nacimiento:</label>
                     <input type="text" id="pais" name="pais" value="<?= htmlspecialchars($player['pais']) ?>">
                     <label for="ciudad">Ciudad de Nacimiento:</label>
                     <input type="text" id="ciudad" name="ciudad" value="<?= htmlspecialchars($player['ciudad']) ?>">
                     <label for="edad">Edad:</label>
                     <input type="number" id="edad" name="edad" value="<?= htmlspecialchars($player['edad']) ?>">
-                    <label for="">Altura (cm):</label>
+                    <label for="altura">Altura (cm):</label>
                     <input type="number" id="altura" name="altura" value="<?= htmlspecialchars($player['altura']) ?>">
-                    <label for="">Peso (kg):</label>
+                    <label for="peso">Peso (kg):</label>
                     <input type="text" id="peso" name="peso" value="<?= htmlspecialchars($player['peso']) ?>">
                     <label for="piernaBuena">Pierna buena:</label>
                     <select id="piernaBuena" name="piernaBuena">
@@ -312,31 +312,53 @@
 
 
 
-        <!-- Modal para editar perfil datos personales-->
+        <!-- Modal para editar/añadir historial deportivo -->
         <div id="modalEditarHistorial" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
+                <h2>Gestionar Historial Deportivo</h2>
+                <!-- Formulario para añadir nuevo historial -->
+                <h3>Añadir nuevo historial</h3>
                 <form action="../controllers/editar_historial.php" method="POST">
-                    <h2>Editar Historial</h2>
-                    <!-- Sección para Historial Deportivo -->
-                    <h2>Historial Deportivo</h2>
-                    <?php foreach ($historiales as $item) : ?>
-                        <div class="historial-item">
-                            <form action="../controllers/editar_historial.php" method="POST">
-                                <input type="hidden" name="historial_id" value="<?= $item['id'] ?>">
-                                <label>Equipo:</label>
-                                <input type="text" name="equipo" value="<?= htmlspecialchars($item['equipo']) ?>">
-                                <label>Temporada:</label>
-                                <input type="text" name="temporada" value="<?= htmlspecialchars($item['temporada']) ?>">
-                                <label>Resultado:</label>
-                                <input type="text" name="resultado" value="<?= htmlspecialchars($item['resultado']) ?>">
-                                <button type="submit" name="action" value="update">Actualizar</button>
-                                <button type="submit" name="action" value="delete">Eliminar</button>
-                            </form>
-                        </div>
-                    <?php endforeach; ?>
+                    <input type="hidden" name="action" value="create">
+                    <label>Equipo:</label>
+                    <input type="text" name="equipo" placeholder="Nombre del equipo">
+                    <label>Temporada:</label>
+                    <input type="text" name="temporada" placeholder="Temporada">
+                    <label>Resultado:</label>
+                    <input type="text" name="resultado" placeholder="Resultado">
+                    <label>Escudo del equipo (URL):</label>
+                    <input type="text" name="imagenEscudo" placeholder="Imagen escudo">
+                    <button type="submit">Añadir al Historial</button>
+                </form>
+                <hr>
+                <!-- Listado de historiales existentes para editar o eliminar -->
+                <h3>Editar o eliminar historial existente</h3>
+                <?php foreach ($historiales as $item) : ?>
+                    <div class="historial-item">
+                        <form action="../controllers/editar_historial.php" method="POST">
+                            <input type="hidden" name="historial_id" value="<?= $item['id'] ?>">
+                            <input type="hidden" name="action" value="update">
+                            <label>Equipo:</label>
+                            <input type="text" name="equipo" value="<?= htmlspecialchars($item['equipo']) ?>">
+                            <label>Temporada:</label>
+                            <input type="text" name="temporada" value="<?= htmlspecialchars($item['temporada']) ?>">
+                            <label>Resultado:</label>
+                            <input type="text" name="resultado" value="<?= htmlspecialchars($item['resultado']) ?>">
+                            <label>Escudo del Equipo:</label>
+                            <input type="text" name="escudo" value="<?= htmlspecialchars($item['imagenEscudo']) ?>">
+                            <button type="submit">Actualizar</button>
+                        </form>
+                        <form action="../controllers/editar_historial.php" method="POST">
+                            <input type="hidden" name="historial_id" value="<?= $item['id'] ?>">
+                            <input type="hidden" name="action" value="delete">
+                            <button type="submit">Eliminar</button>
+                        </form>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
+
         <script>
             // Modal para Historial Deportivo
             var modalHistorial = document.getElementById("modalEditarHistorial");
