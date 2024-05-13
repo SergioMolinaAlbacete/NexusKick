@@ -346,7 +346,7 @@
                             <label>Resultado:</label>
                             <input type="text" name="resultado" value="<?= htmlspecialchars($item['resultado']) ?>">
                             <label>Escudo del Equipo:</label>
-                            <input type="text" name="escudo" value="<?= htmlspecialchars($item['imagenEscudo']) ?>">
+                            <input type="text" name="imagenEscudo" value="<?= htmlspecialchars($item['imagenEscudo']) ?>">
                             <button type="submit">Actualizar</button>
                         </form>
                         <form action="../controllers/editar_historial.php" method="POST">
