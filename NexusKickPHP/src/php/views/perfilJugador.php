@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>anuncios</title>
+    <title>Mi Perfil | NexusKick</title>
     <link rel="stylesheet" href="./../../css/general.css">
     <link rel="stylesheet" href="./../../css/header.css">
     <link rel="stylesheet" href="./../../css/perfil.css">
@@ -37,7 +37,7 @@
 
 
     <div class="titulo-container">
-        <h1>Perfil de <?= $player['nombre'] ?> <?= $player['apellidos'] ?></h1><button>Editar Perfil</button>
+        <h1>Perfil de <?= $player['nombre'] ?> <?= $player['apellidos'] ?></h1>
     </div>
     <!-- Bloque información personal -->
     <div class="player-profile">
@@ -46,14 +46,14 @@
             <h2 class="player-nickname"><?= $player['apodo'] ?></h2>
         </div>
         <div class="player-info">
-            <h2>Información Personal</h2>
+            <h2>Información Personal<button id="editarInfoPersonal">Editar</button></h2>
             <p><span class="info-label">Nombre Completo:</span> <?= $player['nombre'] ?> <?= $player['apellidos'] ?></p>
             <p><span class="info-label">País de Nacimiento:</span> <?= $player['pais'] ?></p>
             <p><span class="info-label">Lugar de Nacimiento:</span> <?= $player['ciudad'] ?></p>
             <p><span class="info-label">Fecha de Nacimiento:</span> <?= $player['fnacimiento'] ?></p>
-            <p><span class="info-label">Edad:</span> <?= $player['edad'] ?></p>
-            <p><span class="info-label">Altura:</span> <?= $player['altura'] ?></p>
-            <p><span class="info-label">Peso:</span> <?= $player['peso'] ?></p>
+            <p><span class="info-label">Edad:</span> <?= $player['edad'] ?> años</p>
+            <p><span class="info-label">Altura:</span> <?= $player['altura'] ?> cm</p>
+            <p><span class="info-label">Peso:</span> <?= $player['peso'] ?> Kg</p>
             <p><span class="info-label">Pierna Buena:</span> <?= $player['piernaBuena'] ?></p>
             <p><span class="info-label">Talla de Ropa:</span> <?= $player['tallaRopa'] ?></p>
             <p><span class="info-label">Talla de Calzado:</span> <?= $player['tallaCalzado'] ?></p>
@@ -81,7 +81,7 @@
 
     <!-- Bloque Historial -->
     <div class="player-history">
-        <h2>Historial del jugador</h2>
+        <h2>Historial del jugador<button id="editarHistorial">Editar</button></h2>
         <div class="history-slider">
             <button class="slide-arrow left-arrow">
                 <img src="../../img/flechaIzquierda.png" alt="Anterior" />
@@ -220,11 +220,11 @@
 
 
 
-        <!-- Modal para editar perfil -->
+        <!-- Modal para editar perfil datos personales-->
         <div id="modalEditarPerfil" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <form action="../controllers/guardar_cambios_perfil.php" method="POST">
+                <form action="../controllers/guardar_cambios_infoPersonal_jugador.php" method="POST">
                     <h2>Editar Perfil</h2>
                     <label for="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($player['nombre']) ?>">
@@ -232,6 +232,8 @@
                     <input type="text" id="apellidos" name="apellidos" value="<?= htmlspecialchars($player['apellidos']) ?>">
                     <label for="apodo">Apodo Futbolístico:</label>
                     <input type="text" id="apodo" name="apodo" value="<?= htmlspecialchars($player['apodo']) ?>">
+                    <label for="perfil_url">Foto de Perfil:</label>
+                    <input type="text" id="perfil_url" name="perfil_url" value="<?= htmlspecialchars($player['perfil_url']) ?>">
                     <label for="">Pais de Nacimiento:</label>
                     <input type="text" id="pais" name="pais" value="<?= htmlspecialchars($player['pais']) ?>">
                     <label for="ciudad">Ciudad de Nacimiento:</label>
@@ -268,23 +270,6 @@
 
                 </form>
 
-                <!-- Sección para Historial Deportivo -->
-                <h2>Historial Deportivo</h2>
-                <?php foreach ($historiales as $item) : ?>
-                    <div class="historial-item">
-                        <form action="../controllers/editar_historial.php" method="POST">
-                            <input type="hidden" name="historial_id" value="<?= $item['id'] ?>">
-                            <label>Equipo:</label>
-                            <input type="text" name="equipo" value="<?= htmlspecialchars($item['equipo']) ?>">
-                            <label>Temporada:</label>
-                            <input type="text" name="temporada" value="<?= htmlspecialchars($item['temporada']) ?>">
-                            <label>Resultado:</label>
-                            <input type="text" name="resultado" value="<?= htmlspecialchars($item['resultado']) ?>">
-                            <button type="submit" name="action" value="update">Actualizar</button>
-                            <button type="submit" name="action" value="delete">Eliminar</button>
-                        </form>
-                    </div>
-                <?php endforeach; ?>
             </div>
         </div>
 
@@ -294,7 +279,7 @@
             var modal = document.getElementById("modalEditarPerfil");
 
             // Obtener el botón que abre el modal
-            var btn = document.querySelector(".titulo-container button");
+            var btn = document.getElementById("editarInfoPersonal");
 
             // Obtener el elemento que cierra el modal
             var span = document.getElementsByClassName("close")[0];
@@ -316,6 +301,80 @@
                 }
             }
         </script>
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Modal para editar perfil datos personales-->
+        <div id="modalEditarHistorial" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form action="../controllers/editar_historial.php" method="POST">
+                    <h2>Editar Historial</h2>
+                    <!-- Sección para Historial Deportivo -->
+                    <h2>Historial Deportivo</h2>
+                    <?php foreach ($historiales as $item) : ?>
+                        <div class="historial-item">
+                            <form action="../controllers/editar_historial.php" method="POST">
+                                <input type="hidden" name="historial_id" value="<?= $item['id'] ?>">
+                                <label>Equipo:</label>
+                                <input type="text" name="equipo" value="<?= htmlspecialchars($item['equipo']) ?>">
+                                <label>Temporada:</label>
+                                <input type="text" name="temporada" value="<?= htmlspecialchars($item['temporada']) ?>">
+                                <label>Resultado:</label>
+                                <input type="text" name="resultado" value="<?= htmlspecialchars($item['resultado']) ?>">
+                                <button type="submit" name="action" value="update">Actualizar</button>
+                                <button type="submit" name="action" value="delete">Eliminar</button>
+                            </form>
+                        </div>
+                    <?php endforeach; ?>
+            </div>
+        </div>
+        <script>
+            // Modal para Historial Deportivo
+            var modalHistorial = document.getElementById("modalEditarHistorial");
+
+            // Botón que abre el modal de Historial Deportivo
+            var btnHistorial = document.getElementById("editarHistorial");
+
+            // Botón de cierre en el modal de Historial Deportivo
+            // Asumiendo que cada modal tiene su propio botón de cierre y no comparten el primer índice
+            var spanHistorial = document.querySelector("#modalEditarHistorial .close");
+
+            btnHistorial.onclick = function() {
+                modalHistorial.style.display = "block";
+            }
+
+            spanHistorial.onclick = function() {
+                modalHistorial.style.display = "none";
+            }
+
+            // Evento para cerrar el modal si el usuario hace clic fuera de él
+            window.onclick = function(event) {
+                if (event.target == modalHistorial) {
+                    modalHistorial.style.display = "none";
+                }
+            }
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 

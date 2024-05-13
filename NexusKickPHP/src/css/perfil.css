@@ -7,6 +7,17 @@ h2 {
   color: #0E1822;
 }
 
+h2{
+  display: flex;
+  justify-content: center;
+}
+h2 button{
+  
+  margin-left: 20px;
+
+  max-height: 50px;
+}
+
 .player-profile {
   background: linear-gradient(to right, #002e34, #00c16c);
   /* Gradiente desde azul oscuro a verde */

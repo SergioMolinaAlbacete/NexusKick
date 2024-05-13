@@ -16,11 +16,13 @@ $piernaBuena = $conn->real_escape_string($_POST['piernaBuena']);
 $tallaRopa = $conn->real_escape_string($_POST['tallaRopa']);
 $tallaCalzado = $conn->real_escape_string($_POST['tallaCalzado']);
 $numeroPreferido = $conn->real_escape_string($_POST['numeroPreferido']);
+$perfil_url = $conn->real_escape_string($_POST['perfil_url']);
+
 
 // Consulta SQL para actualizar los datos
-$sql = "UPDATE usuarios SET nombre = ?, apellidos = ?, apodo = ?, pais = ?, ciudad = ?, edad = ?, altura = ?, peso = ?, piernaBuena = ?, tallaRopa = ?, tallaCalzado = ?, numeroPreferido = ? WHERE id = ?";
+$sql = "UPDATE usuarios SET nombre = ?, apellidos = ?, apodo = ?, pais = ?, ciudad = ?, edad = ?, altura = ?, peso = ?, piernaBuena = ?, tallaRopa = ?, tallaCalzado = ?, numeroPreferido = ?, perfil_url = ? WHERE id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("sssssissssssi", $nombre, $apellidos, $apodo, $pais, $ciudad, $edad, $altura, $peso, $piernaBuena, $tallaRopa, $tallaCalzado, $numeroPreferido, $usuario_id);
+$stmt->bind_param("sssssisssssssi", $nombre, $apellidos, $apodo, $pais, $ciudad, $edad, $altura, $peso, $piernaBuena, $tallaRopa, $tallaCalzado, $numeroPreferido, $perfil_url, $usuario_id);
 $stmt->execute();
 
 if ($stmt->affected_rows > 0) {
