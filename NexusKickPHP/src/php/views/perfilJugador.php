@@ -12,11 +12,18 @@
 
 <body>
     <?php
+    session_start();
     include './componentes/header.php';
     include '../config/db.php'; // Asegúrate de que la ruta es correcta
 
-    // Suponemos que recibimos el ID del usuario de alguna forma, aquí lo definimos manualmente
-    $usuario_id = 1; // Deberías obtener este ID dinámicamente, por ejemplo a través de $_GET['id'] o una sesión
+    //Comprobar si el usuario ha iniciado sesión
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+        header('Location: login.php');
+        exit;
+    }
+
+    $usuario_id = $_SESSION['id_usuario'];  // Aquí accedes al ID del usuario desde la sesión
+
 
     // Consulta para obtener la información del jugador
     $sql = "SELECT * FROM usuarios WHERE id = ?";
@@ -35,7 +42,7 @@
     <!-- Bloque información personal -->
     <div class="player-profile">
         <div class="player-profile-column">
-            <img src="<?= $player['perfil_url'] ?>" alt="<?= $player['nombre'] ?>" class="player-image" />
+            <img src="<?= !empty($player['perfil_url']) ? $player['perfil_url'] : '../../img/imagenPerfilPredeterminada.jpg' ?>" alt="<?= htmlspecialchars($player['nombre']) ?>" class="player-image" />
             <h2 class="player-nickname"><?= $player['apodo'] ?></h2>
         </div>
         <div class="player-info">
@@ -220,11 +227,45 @@
                 <form action="../controllers/guardar_cambios_perfil.php" method="POST">
                     <h2>Editar Perfil</h2>
                     <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($player['nombre']) ?>" required>
+                    <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($player['nombre']) ?>">
                     <label for="apellidos">Apellidos:</label>
-                    <input type="text" id="apellidos" name="apellidos" value="<?= htmlspecialchars($player['apellidos']) ?>" required>
-                    <!-- Añade más campos según necesites -->
+                    <input type="text" id="apellidos" name="apellidos" value="<?= htmlspecialchars($player['apellidos']) ?>">
+                    <label for="apodo">Apodo Futbolístico:</label>
+                    <input type="text" id="apodo" name="apodo" value="<?= htmlspecialchars($player['apodo']) ?>">
+                    <label for="">Pais de Nacimiento:</label>
+                    <input type="text" id="pais" name="pais" value="<?= htmlspecialchars($player['pais']) ?>">
+                    <label for="ciudad">Ciudad de Nacimiento:</label>
+                    <input type="text" id="ciudad" name="ciudad" value="<?= htmlspecialchars($player['ciudad']) ?>">
+                    <label for="edad">Edad:</label>
+                    <input type="number" id="edad" name="edad" value="<?= htmlspecialchars($player['edad']) ?>">
+                    <label for="">Altura (cm):</label>
+                    <input type="number" id="altura" name="altura" value="<?= htmlspecialchars($player['altura']) ?>">
+                    <label for="">Peso (kg):</label>
+                    <input type="text" id="peso" name="peso" value="<?= htmlspecialchars($player['peso']) ?>">
+                    <label for="piernaBuena">Pierna buena:</label>
+                    <select id="piernaBuena" name="piernaBuena">
+                        <option value="">Seleccionar</option>
+                        <option value="Derecha" <?= $player['piernaBuena'] === 'Derecha' ? 'selected' : '' ?>>Derecha</option>
+                        <option value="Izquierda" <?= $player['piernaBuena'] === 'Izquierda' ? 'selected' : '' ?>>Izquierda</option>
+                        <option value="Ambas" <?= $player['piernaBuena'] === 'Ambas' ? 'selected' : '' ?>>Ambas</option>
+                    </select>
+                    <label for="tallaRopa">Talla de Ropa:</label>
+                    <select id="tallaRopa" name="tallaRopa">
+                        <option value="">Seleccionar</option>
+                        <option value="XS" <?= $player['tallaRopa'] === 'XS' ? 'selected' : '' ?>>XS</option>
+                        <option value="S" <?= $player['tallaRopa'] === 'S' ? 'selected' : '' ?>>S</option>
+                        <option value="M" <?= $player['tallaRopa'] === 'M' ? 'selected' : '' ?>>M</option>
+                        <option value="L" <?= $player['tallaRopa'] === 'L' ? 'selected' : '' ?>>L</option>
+                        <option value="XL" <?= $player['tallaRopa'] === 'XL' ? 'selected' : '' ?>>XL</option>
+                        <option value="XXL" <?= $player['tallaRopa'] === 'XXL' ? 'selected' : '' ?>>XXL</option>
+                    </select>
+                    <label for="tallaCalzado">Talla de Calzado:</label>
+                    <input type="number" id="tallaCalzado" name="tallaCalzado" value="<?= htmlspecialchars($player['tallaCalzado']) ?>">
+                    <label for="numeroPreferido">Número preferido:</label>
+                    <input type="number" min="1" max="99" id="numeroPreferido" name="numeroPreferido" value="<?= htmlspecialchars($player['numeroPreferido']) ?>">
+
                     <input type="submit" value="Guardar Cambios">
+
                 </form>
 
                 <!-- Sección para Historial Deportivo -->
