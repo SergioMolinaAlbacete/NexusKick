@@ -87,8 +87,8 @@ if ($result->num_rows > 0) {
                     </div>
                     <div class="anuncio-botones">
                         <div class="button-borders">
-                            <button class="primary-button">Contactar</button>
-                            <button class="primary-button">Ver Perfil</button>
+                            <a class="primary-button">Contactar</a>
+                            <a href="./verPerfilJugador.php?id=<?= $anuncio['usuario_id'] ?>" class="primary-button">Ver Perfil</a>
                         </div>
                     </div>
                 </div>
@@ -99,35 +99,38 @@ if ($result->num_rows > 0) {
     <!-- Juntar Sliders -->
     <script>
         function updateValue(slider) {
-  const output = slider.nextElementSibling;
-  const sliderRect = slider.getBoundingClientRect();
-  const min = parseInt(slider.min, 10);
-  const max = parseInt(slider.max, 10);
-  const relativeValue = (slider.value - min) / (max - min);
-  const thumbOffset = relativeValue * (sliderRect.width - 20); // 20 px para el thumb
+            const output = slider.nextElementSibling;
+            const sliderRect = slider.getBoundingClientRect();
+            const min = parseInt(slider.min, 10);
+            const max = parseInt(slider.max, 10);
+            const relativeValue = (slider.value - min) / (max - min);
+            const thumbOffset = relativeValue * (sliderRect.width - 20); // 20 px para el thumb
 
-  if (slider.id === 'edad1') {
-    output.style.left = `${thumbOffset}px`;
-  } else {
-    output.style.left = `${thumbOffset}px`;
-  }
-  output.textContent = slider.value;
-  adjustSliders();
-}
+            if (slider.id === 'edad1') {
+                output.style.left = `${thumbOffset}px`;
+            } else {
+                output.style.left = `${thumbOffset}px`;
+            }
+            output.textContent = slider.value;
+            adjustSliders();
+        }
 
-function adjustSliders() {
-  if (parseInt(edad1.value, 10) > parseInt(edad2.value, 10)) {
-    const temp = edad2.value;
-    edad2.value = edad1.value;
-    edad1.value = temp;
-  }
-  updateValue(edad1);
-  updateValue(edad2);
-}
+        function adjustSliders() {
+            if (parseInt(edad1.value, 10) > parseInt(edad2.value, 10)) {
+                const temp = edad2.value;
+                edad2.value = edad1.value;
+                edad1.value = temp;
+            }
+            updateValue(edad1);
+            updateValue(edad2);
+        }
 
-document.getElementById('edad1').addEventListener('input', function() { updateValue(this); });
-document.getElementById('edad2').addEventListener('input', function() { updateValue(this); });
-
+        document.getElementById('edad1').addEventListener('input', function() {
+            updateValue(this);
+        });
+        document.getElementById('edad2').addEventListener('input', function() {
+            updateValue(this);
+        });
     </script>
 
 </body>

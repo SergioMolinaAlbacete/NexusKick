@@ -16,13 +16,12 @@
     include './componentes/header.php';
     include '../config/db.php'; // Asegúrate de que la ruta es correcta
 
-    //Comprobar si el usuario ha iniciado sesión
-    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-        header('Location: login.php');
+    $usuario_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+    if ($usuario_id == 0) {
+        echo "Usuario no válido";
         exit;
     }
 
-    $usuario_id = $_SESSION['id_usuario'];  // Aquí accedes al ID del usuario desde la sesión
 
 
     // Consulta para obtener la información del jugador
@@ -46,7 +45,7 @@
             <h2 class="player-nickname"><?= $player['apodo'] ?></h2>
         </div>
         <div class="player-info">
-            <h2>Información Personal<button id="editarInfoPersonal">Editar</button></h2>
+            <h2>Información Personal</h2>
             <p><span class="info-label">Nombre Completo:</span> <?= $player['nombre'] ?> <?= $player['apellidos'] ?></p>
             <p><span class="info-label">País de Nacimiento:</span> <?= $player['pais'] ?></p>
             <p><span class="info-label">Lugar de Nacimiento:</span> <?= $player['ciudad'] ?></p>
@@ -81,7 +80,7 @@
 
     <!-- Bloque Historial -->
     <div class="player-history">
-        <h2>Historial del jugador<button id="editarHistorial">Editar/Añadir</button></h2>
+        <h2>Historial del jugador</h2>
         <div class="history-slider">
             <button class="slide-arrow left-arrow">
                 <img src="../../img/flechaIzquierda.png" alt="Anterior" />
@@ -122,7 +121,7 @@
 
     <!-- Bloque Ficha Técnica -->
     <div class="player-technical-info">
-        <h2>Ficha Técnica<button id="editarFichaTecnica">Editar</button></h2>
+        <h2>Ficha Técnica</h2>
         <div class="technical-details">
             <div class="column">
                 <p>Posición Habitual: <?= htmlspecialchars($fichaTecnica['posicion_habitual']) ?> | Posición Secundaria: <?= htmlspecialchars($fichaTecnica['posicion_secundaria']) ?>)</p>

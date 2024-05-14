@@ -44,12 +44,13 @@ h2 button{
 .player-image {
   max-width: 50%;
   /* Ajusta el ancho de la imagen al contenedor */
-  height: auto;
+  max-height: 400px;
   margin-bottom: 10px;
   /* Reduce el espacio entre la imagen y el apodo */
   border: #002e34 solid 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
+  background-color: white;
 }
 
 .player-nickname {
