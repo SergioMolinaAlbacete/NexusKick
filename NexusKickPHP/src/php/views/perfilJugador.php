@@ -81,7 +81,7 @@
 
     <!-- Bloque Historial -->
     <div class="player-history">
-        <h2>Historial del jugador<button id="editarHistorial">Editar</button></h2>
+        <h2>Historial del jugador<button id="editarHistorial">Editar/Añadir</button></h2>
         <div class="history-slider">
             <button class="slide-arrow left-arrow">
                 <img src="../../img/flechaIzquierda.png" alt="Anterior" />
@@ -122,10 +122,10 @@
 
     <!-- Bloque Ficha Técnica -->
     <div class="player-technical-info">
-        <h2>Ficha Técnica</h2>
+        <h2>Ficha Técnica<button id="editarFichaTecnica">Editar</button></h2>
         <div class="technical-details">
             <div class="column">
-                <p>Posición Habitual: <?= htmlspecialchars($fichaTecnica['posicion_habitual']) ?> (Secundaria: <?= htmlspecialchars($fichaTecnica['posicion_secundaria']) ?>)</p>
+                <p>Posición Habitual: <?= htmlspecialchars($fichaTecnica['posicion_habitual']) ?> | Posición Secundaria: <?= htmlspecialchars($fichaTecnica['posicion_secundaria']) ?>)</p>
                 <p>Estilo de Juego: <?= htmlspecialchars($fichaTecnica['estilo_de_juego']) ?></p>
             </div>
             <div class="column">
@@ -385,7 +385,110 @@
 
 
 
+        <!-- Modal para editar ficha técnica del jugador -->
+        <div id="modalEditarFichaTecnica" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form action="../controllers/guardar_cambios_fichaTecnica.php" method="POST">
+                    <h2>Editar Ficha Técnica</h2>
+                    <label for="posicionHabitual">Posición Habitual:</label>
+                    <select id="posicionHabitual" name="posicion_habitual">
+                        <!-- Lista de opciones basadas en las posibles posiciones -->
+                        <?php
+                        $positions = [
+                            'Portero', 'Lateral Derecho', 'Lateral Izquierdo', 'Central Derecho',
+                            'Central Izquierdo', 'Pivote Defensivo', 'Centrocampista Derecho',
+                            'Centrocampista Izquierdo', 'Centrocampista Central', 'Mediapunta',
+                            'Extremo Derecho', 'Extremo Izquierdo', 'Delantero Centro', 'Segundo Delantero'
+                        ];
 
+                        $ratings = ['1', '2', '3', '4', '5']; // Posibles calificaciones para habilidades
+                        $estilos = ['Defensivo', 'Equilibrado', 'Ofensivo']; // Estilos de juego
+
+                        // Asegura que todos los campos existan en el arreglo $player con valores por defecto de ser necesario
+                        $player = array_merge([
+                            'posicion_habitual' => '',
+                            'posicion_secundaria' => '',
+                            'estilo_de_juego' => '',
+                            'pases' => '',
+                            'tiros' => '',
+                            'velocidad' => '',
+                            'regate' => '',
+                            'defensa' => '',
+                            'notas_adicionales' => ''
+                        ], $player ?? []);
+
+                        ?>
+
+                        <!-- Formulario HTML -->
+                        <form action="ruta_a_tu_script_de_procesamiento.php" method="POST">
+                            <label for="posicionHabitual">Posición Habitual:</label>
+                            <select id="posicionHabitual" name="posicion_habitual">
+                                <?php foreach ($positions as $position) : ?>
+                                    <option value="<?= $position ?>" <?= $position === $player['posicion_habitual'] ? ' selected' : '' ?>><?= $position ?></option>
+                                <?php endforeach; ?>
+                            </select>
+
+                            <label for="posicionSecundaria">Posición Secundaria:</label>
+                            <select id="posicionSecundaria" name="posicion_secundaria">
+                                <?php foreach ($positions as $position) : ?>
+                                    <option value="<?= $position ?>" <?= $position === $player['posicion_secundaria'] ? ' selected' : '' ?>><?= $position ?></option>
+                                <?php endforeach; ?>
+                            </select>
+
+                            <label for="estiloDeJuego">Estilo de Juego:</label>
+                            <select id="estiloDeJuego" name="estilo_de_juego">
+                                <?php foreach ($estilos as $estilo) : ?>
+                                    <option value="<?= $estilo ?>" <?= $estilo === $player['estilo_de_juego'] ? ' selected' : '' ?>><?= $estilo ?></option>
+                                <?php endforeach; ?>
+                            </select>
+
+                            <!-- Campos de habilidades -->
+                            <?php foreach (['pases', 'tiros', 'velocidad', 'regate', 'defensa'] as $habilidad) : ?>
+                                <label for="<?= $habilidad ?>"><?= ucfirst($habilidad) ?>:</label>
+                                <select id="<?= $habilidad ?>" name="<?= $habilidad ?>">
+                                    <?php foreach ($ratings as $rating) : ?>
+                                        <option value="<?= $rating ?>" <?= $rating === $player[$habilidad] ? ' selected' : '' ?>><?= $rating ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            <?php endforeach; ?>
+
+                            <label for="notasAdicionales">Notas Adicionales:</label>
+                            <textarea id="notasAdicionales" name="notas_adicionales"><?= htmlspecialchars($player['notas_adicionales']) ?></textarea>
+
+                            <input type="submit" value="Guardar Cambios">
+                        </form>
+
+            </div>
+        </div>
+
+        <script>
+            // Obtener el modal
+            var modalFT = document.getElementById("modalEditarFichaTecnica");
+
+            // Obtener el botón que abre el modal
+            var btnFT = document.getElementById("editarFichaTecnica");
+
+            // Obtener el elemento que cierra el modal
+            var spanFT = document.getElementsByClassName("close")[0];
+
+            // Cuando el usuario hace clic en el botón, abre el modal 
+            btnFT.onclick = function() {
+                modalFT.style.display = "block";
+            }
+
+            // Cuando el usuario hace clic en <span> (x), cierra el modal
+            spanFT.onclick = function() {
+                modalFT.style.display = "none";
+            }
+
+            // Cuando el usuario hace clic fuera del modal, cierra el modal
+            window.onclick = function(event) {
+                if (event.target == modalFT) {
+                    modalFT.style.display = "none";
+                }
+            }
+        </script>
 
 
 
