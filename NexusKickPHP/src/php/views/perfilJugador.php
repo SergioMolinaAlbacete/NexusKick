@@ -137,7 +137,7 @@
                     <p>Regate: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['regate']) ?></p>
                     <p>Defensa: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['defensa']) ?></p>
                 </div>
-                <p>Notas Adicionales: <?= htmlspecialchars($fichaTecnica['notas_adicionales']) ?></p>
+                <p>Describe tu estilo de juego: <?= htmlspecialchars($fichaTecnica['notas_adicionales']) ?></p>
             </div>
         </div>
     </div>
@@ -301,13 +301,6 @@
                 }
             }
         </script>
-
-
-
-
-
-
-
 
 
 

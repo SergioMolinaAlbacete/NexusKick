@@ -53,6 +53,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($stmt->execute()) {
             // Aquí puedes incluir el código para enviar un correo electrónico de confirmación
             // Redirige al usuario a login.php
+
+            //Para crear la ficha tecnica en caso que sea jugador
+            if ($tipo_usuario == 'jugador') {
+                $last_id = $conn->insert_id; // ID del último usuario insertado
+                $stmt_ficha = $conn->prepare("INSERT INTO ficha_tecnica (usuario_id) VALUES (?)");
+                $stmt_ficha->bind_param("i", $last_id);
+                $stmt_ficha->execute();
+                $stmt_ficha->close();
+            }
             header('Location: login.php');
             exit;
         } else {
