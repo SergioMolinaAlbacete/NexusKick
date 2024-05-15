@@ -2,10 +2,10 @@
 include '../config/db.php';
 
 $sql = "SELECT * 
-FROM Anuncios 
-JOIN Usuarios ON Anuncios.usuario_id = Usuarios.id
-WHERE Usuarios.tipo_usuario = 'jugador';
-";
+        FROM anuncios 
+        JOIN usuarios ON anuncios.usuario_id = usuarios.id
+        WHERE usuarios.tipo_usuario = 'jugador'
+        ORDER BY anuncios.fecha_publicacion DESC";
 $result = $conn->query($sql);
 
 $anuncios = [];
@@ -91,6 +91,7 @@ if ($result->num_rows > 0) {
                             <a href="./verPerfilJugador.php?id=<?= $anuncio['usuario_id'] ?>" class="primary-button">Ver Perfil</a>
                         </div>
                     </div>
+                    <p><?= $anuncio['fecha_publicacion'] ?></p>
                 </div>
             <?php endforeach; ?>
         </div>

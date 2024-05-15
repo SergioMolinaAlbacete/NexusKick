@@ -176,7 +176,7 @@ $conn->close();
             </select>
         </div>
         <div class="input-group">
-            <label for="edad">Edad</label>
+            <label for="edad">Edad / Antiguedad del club</label>
             <input type="number" id="edad" name="edad" placeholder="Edad" />
         </div>
 

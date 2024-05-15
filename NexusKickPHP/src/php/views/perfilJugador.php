@@ -161,7 +161,7 @@
     <!-- Bloque Situacion -->
     <div class="work-reviews-container">
         <div class="work-info">
-            <h2>Situación Laboral y/o Estudio<button id="editarSituacion">Editar</button></h2>
+            <h2>Situación Laboral y/o Estudio<button id="editarSituacion">Editar/Añadir</button></h2>
             <table>
                 <thead>
                     <tr>
