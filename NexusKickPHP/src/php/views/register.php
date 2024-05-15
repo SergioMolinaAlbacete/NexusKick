@@ -156,7 +156,7 @@ $conn->close();
     <form action="register.php" method="POST">
         <h2>Crear una nueva cuenta</h2>
         <div class="input-group">
-            <label for="name">Nombre</label>
+            <label for="name">Nombre / Nombre del Club</label>
             <input type="text" id="name" name="nombre" placeholder="Nombre completo" required />
         </div>
         <div class="input-group">

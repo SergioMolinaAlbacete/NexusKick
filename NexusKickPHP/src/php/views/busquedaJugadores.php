@@ -75,7 +75,7 @@ if ($result->num_rows > 0) {
             <?php foreach ($anuncios as $anuncio) : ?>
                 <div class="anuncio-card">
                     <div class="perfil-info">
-                        <img src="<?= htmlspecialchars($anuncio['perfil_url']) ?>" alt="perfil" class="perfil-imagen">
+                        <img src="<?= !empty($anuncio['perfil_url']) ? $anuncio['perfil_url'] : '../../img/imagenPerfilPredeterminada.jpg' ?>" alt="perfil" class="perfil-imagen">
                         <div class="info-texto">
                             <h2><?= $anuncio['nombre'] ?> <?= $anuncio['apellidos'] ?></h2>
                             <p><?= $anuncio['edad'] ?> años - <?= $anuncio['ciudad'] ?></p>

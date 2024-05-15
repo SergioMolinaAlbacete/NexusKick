@@ -76,7 +76,7 @@
 
     <!-- Bloque Historial -->
     <div class="player-history">
-        <h2>Historial del jugador<button id="editarHistorial">Editar/Añadir</button></h2>
+        <h2>Historial del Club<button id="editarHistorial">Editar/Añadir</button></h2>
         <div class="history-slider">
             <button class="slide-arrow left-arrow">
                 <img src="../../img/flechaIzquierda.png" alt="Anterior" />
@@ -125,11 +125,11 @@
     <!-- Bloque Situacion -->
     <div class="work-reviews-container">
         <div class="work-info">
-            <h2>Situación Laboral y/o Estudio<button id="editarSituacion">Editar/Añadir</button></h2>
+            <h2>Horarios de entrenamiento<button id="editarSituacion">Editar/Añadir</button></h2>
             <table>
                 <thead>
                     <tr>
-                        <th>Actividad</th>
+                        <th>Categoria</th>
                         <th>Lugar</th>
                         <th>Horario</th>
                     </tr>
