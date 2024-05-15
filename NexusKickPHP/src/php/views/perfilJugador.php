@@ -147,7 +147,7 @@
 
     <?php
     // Consulta para obtener la situación académica o laboral del usuario
-    $sqlSituacion = "SELECT actividad, lugar, horario FROM situacion_academica_laboral WHERE usuario_id = ?";
+    $sqlSituacion = "SELECT id,actividad, lugar, horario FROM situacion_academica_laboral WHERE usuario_id = ?";
     $stmtSituacion = $conn->prepare($sqlSituacion);
     $stmtSituacion->bind_param("i", $usuario_id); // Asegúrate de que $usuario_id está definido y corresponde al usuario en sesión
     $stmtSituacion->execute();
@@ -161,7 +161,7 @@
     <!-- Bloque Situacion -->
     <div class="work-reviews-container">
         <div class="work-info">
-            <h2>Situación Laboral y/o Estudio</h2>
+            <h2>Situación Laboral y/o Estudio<button id="editarSituacion">Editar</button></h2>
             <table>
                 <thead>
                     <tr>
@@ -217,8 +217,7 @@
 
 
 
-
-
+        <!-------------------------------------------------------------------------MODALES ----------------------------------------------------------------------------->
 
         <!-- Modal para editar perfil datos personales-->
         <div id="modalEditarPerfil" class="modal">
@@ -481,6 +480,78 @@
         </script>
 
 
+
+
+
+        <!-- Modal para editar/añadir situación -->
+        <div id="modalEditarSituacion" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Editar Situación</h2>
+
+                <!-- Formulario para añadir nueva situación -->
+                <form action="../controllers/guardar_cambios_situacion.php" method="POST">
+                    <input type="hidden" name="action" value="create">
+                    <label>Actividad:</label>
+                    <input type="text" name="actividad" placeholder="Actividad">
+                    <label>Lugar:</label>
+                    <input type="text" name="lugar" placeholder="Lugar">
+                    <label>Horario:</label>
+                    <input type="text" name="horario" placeholder="Horario">
+                    <button type="submit">Añadir Situación</button>
+                </form>
+                <hr>
+                <!-- Formularios para editar o eliminar situaciones existentes -->
+                <?php foreach ($situaciones as $situacion) : ?>
+                    <form action="../controllers/guardar_cambios_situacion.php" method="POST">
+                        <input type="hidden" name="action" value="update">
+                        <input type="hidden" name="situacion_id" value="<?= htmlspecialchars($situacion['id']) ?>">
+                        <label>Actividad:</label>
+                        <input type="text" name="actividad" value="<?= htmlspecialchars($situacion['actividad']) ?>">
+                        <label>Lugar:</label>
+                        <input type="text" name="lugar" value="<?= htmlspecialchars($situacion['lugar']) ?>">
+                        <label>Horario:</label>
+                        <input type="text" name="horario" value="<?= htmlspecialchars($situacion['horario']) ?>">
+                        <button type="submit">Actualizar Situación</button>
+                    </form>
+                    <form action="../controllers/guardar_cambios_situacion.php" method="POST">
+                        <input type="hidden" name="action" value="delete">
+                        <input type="hidden" name="situacion_id" value="<?= htmlspecialchars($situacion['id']) ?>">
+                        <button type="submit">Eliminar Situación</button>
+                    </form>
+                <?php endforeach; ?>
+
+
+            </div>
+        </div>
+
+        <script>
+            // Obtener el modal
+            var modalSituacion = document.getElementById("modalEditarSituacion");
+
+            // Obtener el botón que abre el modal
+            var btnSituacion = document.getElementById("editarSituacion");
+
+            // Obtener el elemento que cierra el modal
+            var spanSituacion = document.querySelector("#modalEditarSituacion .close");
+
+            // Cuando el usuario hace clic en el botón, abre el modal 
+            btnSituacion.onclick = function() {
+                modalSituacion.style.display = "block";
+            }
+
+            // Cuando el usuario hace clic en <span> (x), cierra el modal
+            spanSituacion.onclick = function() {
+                modalSituacion.style.display = "none";
+            }
+
+            // Cuando el usuario hace clic fuera del modal, cierra el modal
+            window.onclick = function(event) {
+                if (event.target == modalSituacion) {
+                    modalSituacion.style.display = "none";
+                }
+            }
+        </script>
 
 
 

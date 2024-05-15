@@ -15,7 +15,7 @@ if (isset($_POST['titulo'], $_POST['descripcion'])) {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("iss", $usuario_id, $titulo, $descripcion);
     if ($stmt->execute()) {
-        echo "Anuncio creado correctamente.";
+        header("Location: ../views/busquedaJugadores.php");
     } else {
         echo "Error: " . $stmt->error;
     }
