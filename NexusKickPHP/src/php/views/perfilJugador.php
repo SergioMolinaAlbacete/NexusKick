@@ -186,7 +186,7 @@
 
         <?php
         // Consulta para obtener las reseñas y las fotos de perfil de los usuarios que las escribieron
-        $sqlReseñas = "SELECT r.reseña, r.puntuacion, r.fecha, u.perfil_url
+        $sqlReseñas = "SELECT *
                    FROM reseñas r
                    JOIN usuarios u ON r.de_usuario_id = u.id
                    WHERE r.para_usuario_id = ?";
@@ -401,7 +401,7 @@
                             'Extremo Derecho', 'Extremo Izquierdo', 'Delantero Centro', 'Segundo Delantero'
                         ];
                         foreach ($positions as $position) {
-                            $selected = ($position === ($player['posicion_habitual'] ?? '')) ? ' selected' : '';
+                            $selected = ($position === ($fichaTecnica['posicion_habitual'] ?? '')) ? ' selected' : '';
                             echo "<option value='$position'$selected>$position</option>";
                         }
                         ?>
@@ -411,7 +411,7 @@
                     <select id="posicionSecundaria" name="posicion_secundaria">
                         <?php
                         foreach ($positions as $position) {
-                            $selected = ($position === ($player['posicion_secundaria'] ?? '')) ? ' selected' : '';
+                            $selected = ($position === ($fichaTecnica['posicion_secundaria'] ?? '')) ? ' selected' : '';
                             echo "<option value='$position'$selected>$position</option>";
                         }
                         ?>
@@ -422,7 +422,7 @@
                         <?php
                         $styles = ['Defensivo', 'Equilibrado', 'Ofensivo'];
                         foreach ($styles as $style) {
-                            $selected = ($style === ($player['estilo_de_juego'] ?? '')) ? ' selected' : '';
+                            $selected = ($style === ($fichaTecnica['estilo_de_juego'] ?? '')) ? ' selected' : '';
                             echo "<option value='$style'$selected>$style</option>";
                         }
                         ?>
@@ -433,7 +433,7 @@
                         <label for="<?= $skill ?>"><?= ucfirst($skill) ?>:</label>
                         <select id="<?= $skill ?>" name="<?= $skill ?>">
                             <?php
-                            $skillValue = $player[$skill] ?? '';
+                            $skillValue = $fichaTecnica[$skill] ?? '';
                             for ($i = 1; $i <= 5; $i++) {
                                 $selected = ($i == $skillValue) ? ' selected' : '';
                                 echo "<option value='$i'$selected>$i</option>";
@@ -443,7 +443,7 @@
                     <?php endforeach; ?>
                     <!-- Notas Adicionales -->
                     <label for="notasAdicionales">Notas Adicionales:</label>
-                    <textarea id="notasAdicionales" name="notas_adicionales"><?= htmlspecialchars($player['notas_adicionales'] ?? '') ?></textarea>
+                    <textarea id="notasAdicionales" name="notas_adicionales"><?= htmlspecialchars($fichaTecnica['notas_adicionales'] ?? '') ?></textarea>
                     <input type="submit" value="Guardar Cambios">
                 </form>
             </div>
