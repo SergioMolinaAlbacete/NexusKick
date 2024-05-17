@@ -1,4 +1,4 @@
-    <option value="">Seleccionar país</option>
+    <option value="">Ninguno</option>
     <option value="albania">Albania</option>
     <option value="alemania">Alemania</option>
     <option value="andorra">Andorra</option>

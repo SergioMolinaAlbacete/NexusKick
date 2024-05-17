@@ -1,19 +1,19 @@
 <?php
 include '../config/db.php';
 
-// Recoger los datos del formulario (para la primera carga de la página)
-$pais = isset($_GET['pais']) ? $_GET['pais'] : '';
-$ciudad = isset($_GET['ciudad']) ? $_GET['ciudad'] : '';
-$altura = isset($_GET['altura']) ? $_GET['altura'] : '';
-$pierna_buena = isset($_GET['pierna_buena']) ? $_GET['pierna_buena'] : '';
-$posicion_habitual = isset($_GET['posicion_habitual']) ? $_GET['posicion_habitual'] : '';
-$posicion_secundaria = isset($_GET['posicion_secundaria']) ? $_GET['posicion_secundaria'] : '';
-$estilo_de_juego = isset($_GET['estilo_de_juego']) ? $_GET['estilo_de_juego'] : '';
-$pases = isset($_GET['pases']) ? $_GET['pases'] : '';
-$tiros = isset($_GET['tiros']) ? $_GET['tiros'] : '';
-$velocidad = isset($_GET['velocidad']) ? $_GET['velocidad'] : '';
-$regate = isset($_GET['regate']) ? $_GET['regate'] : '';
-$defensa = isset($_GET['defensa']) ? $_GET['defensa'] : '';
+// Recoger los datos del formulario
+$pais = isset($_POST['pais']) ? $_POST['pais'] : '';
+$ciudad = isset($_POST['ciudad']) ? $_POST['ciudad'] : '';
+$altura = isset($_POST['altura']) ? $_POST['altura'] : '';
+$pierna_buena = isset($_POST['pierna_buena']) ? $_POST['pierna_buena'] : '';
+$posicion_habitual = isset($_POST['posicion_habitual']) ? $_POST['posicion_habitual'] : '';
+$posicion_secundaria = isset($_POST['posicion_secundaria']) ? $_POST['posicion_secundaria'] : '';
+$estilo_de_juego = isset($_POST['estilo_de_juego']) ? $_POST['estilo_de_juego'] : '';
+$pases = isset($_POST['pases']) ? $_POST['pases'] : '';
+$tiros = isset($_POST['tiros']) ? $_POST['tiros'] : '';
+$velocidad = isset($_POST['velocidad']) ? $_POST['velocidad'] : '';
+$regate = isset($_POST['regate']) ? $_POST['regate'] : '';
+$defensa = isset($_POST['defensa']) ? $_POST['defensa'] : '';
 
 // Construir la consulta SQL básica
 $sql = "SELECT * 
@@ -22,7 +22,7 @@ $sql = "SELECT *
         JOIN ficha_tecnica ON usuarios.id = ficha_tecnica.usuario_id
         WHERE usuarios.tipo_usuario = 'jugador'";
 
-// Añadir filtros si están presentes (para la primera carga de la página)
+// Añadir filtros si están presentes
 if ($pais != '') {
     $sql .= " AND usuarios.pais = '$pais'";
 }
@@ -45,19 +45,19 @@ if ($estilo_de_juego != '') {
     $sql .= " AND ficha_tecnica.estilo_de_juego = '$estilo_de_juego'";
 }
 if ($pases != '') {
-    $sql .= " AND ficha_tecnica.pases = '$pases'";
+    $sql .= " AND ficha_tecnica.pases >= $pases";
 }
 if ($tiros != '') {
-    $sql .= " AND ficha_tecnica.tiros = '$tiros'";
+    $sql .= " AND ficha_tecnica.tiros >= $tiros";
 }
 if ($velocidad != '') {
-    $sql .= " AND ficha_tecnica.velocidad = '$velocidad'";
+    $sql .= " AND ficha_tecnica.velocidad >= $velocidad";
 }
 if ($regate != '') {
-    $sql .= " AND ficha_tecnica.regate = '$regate'";
+    $sql .= " AND ficha_tecnica.regate >= $regate";
 }
 if ($defensa != '') {
-    $sql .= " AND ficha_tecnica.defensa = '$defensa'";
+    $sql .= " AND ficha_tecnica.defensa >= $defensa";
 }
 
 $sql .= " ORDER BY anuncios.fecha_publicacion DESC";
@@ -103,7 +103,7 @@ if ($result->num_rows > 0) {
 
             <label for="pierna_buena">Pierna buena:</label>
             <select id="pierna_buena" name="pierna_buena">
-                <option value="">Seleccionar</option>
+                <option value="">Ninguna</option>
                 <option value="derecha" <?= $pierna_buena === 'derecha' ? 'selected' : '' ?>>Derecha</option>
                 <option value="izquierda" <?= $pierna_buena === 'izquierda' ? 'selected' : '' ?>>Izquierda</option>
                 <option value="ambas" <?= $pierna_buena === 'ambas' ? 'selected' : '' ?>>Ambas</option>
@@ -111,7 +111,7 @@ if ($result->num_rows > 0) {
 
             <label for="posicion_habitual">Posición Habitual:</label>
             <select id="posicion_habitual" name="posicion_habitual">
-                <option value="">Seleccionar</option>
+                <option value="">Ninguna</option>
                 <option value="Portero" <?= $posicion_habitual === 'Portero' ? 'selected' : '' ?>>Portero</option>
                 <option value="Lateral Derecho" <?= $posicion_habitual === 'Lateral Derecho' ? 'selected' : '' ?>>Lateral Derecho</option>
                 <option value="Lateral Izquierdo" <?= $posicion_habitual === 'Lateral Izquierdo' ? 'selected' : '' ?>>Lateral Izquierdo</option>
@@ -130,7 +130,7 @@ if ($result->num_rows > 0) {
 
             <label for="posicion_secundaria">Posición Secundaria:</label>
             <select id="posicion_secundaria" name="posicion_secundaria">
-                <option value="">Seleccionar</option>
+                <option value="">Ninguna</option>
                 <option value="Portero" <?= $posicion_secundaria === 'Portero' ? 'selected' : '' ?>>Portero</option>
                 <option value="Lateral Derecho" <?= $posicion_secundaria === 'Lateral Derecho' ? 'selected' : '' ?>>Lateral Derecho</option>
                 <option value="Lateral Izquierdo" <?= $posicion_secundaria === 'Lateral Izquierdo' ? 'selected' : '' ?>>Lateral Izquierdo</option>
@@ -149,61 +149,31 @@ if ($result->num_rows > 0) {
 
             <label for="estilo_de_juego">Estilo de Juego:</label>
             <select id="estilo_de_juego" name="estilo_de_juego">
-                <option value="">Seleccionar</option>
+                <option value="">Ninguna</option>
                 <option value="Defensivo" <?= $estilo_de_juego === 'Defensivo' ? 'selected' : '' ?>>Defensivo</option>
                 <option value="Equilibrado" <?= $estilo_de_juego === 'Equilibrado' ? 'selected' : '' ?>>Equilibrado</option>
                 <option value="Ofensivo" <?= $estilo_de_juego === 'Ofensivo' ? 'selected' : '' ?>>Ofensivo</option>
             </select>
 
-            <label for="pases">Pases:</label>
-            <select id="pases" name="pases">
-                <option value="">Seleccionar</option>
-                <option value="1" <?= $pases === '1' ? 'selected' : '' ?>>1</option>
-                <option value="2" <?= $pases === '2' ? 'selected' : '' ?>>2</option>
-                <option value="3" <?= $pases === '3' ? 'selected' : '' ?>>3</option>
-                <option value="4" <?= $pases === '4' ? 'selected' : '' ?>>4</option>
-                <option value="5" <?= $pases === '5' ? 'selected' : '' ?>>5</option>
-            </select>
+            <label for="pases">Pases Mínimos:</label>
+            <input type="range" id="pases" name="pases" min="1" max="5" value="<?= htmlspecialchars($pases) ?>">
+            <span id="pases_value"><?= htmlspecialchars($pases) ?></span>
 
-            <label for="tiros">Tiros:</label>
-            <select id="tiros" name="tiros">
-                <option value="">Seleccionar</option>
-                <option value="1" <?= $tiros === '1' ? 'selected' : '' ?>>1</option>
-                <option value="2" <?= $tiros === '2' ? 'selected' : '' ?>>2</option>
-                <option value="3" <?= $tiros === '3' ? 'selected' : '' ?>>3</option>
-                <option value="4" <?= $tiros === '4' ? 'selected' : '' ?>>4</option>
-                <option value="5" <?= $tiros === '5' ? 'selected' : '' ?>>5</option>
-            </select>
+            <label for="tiros">Tiros Mínimos:</label>
+            <input type="range" id="tiros" name="tiros" min="1" max="5" value="<?= htmlspecialchars($tiros) ?>">
+            <span id="tiros_value"><?= htmlspecialchars($tiros) ?></span>
 
-            <label for="velocidad">Velocidad:</label>
-            <select id="velocidad" name="velocidad">
-                <option value="">Seleccionar</option>
-                <option value="1" <?= $velocidad === '1' ? 'selected' : '' ?>>1</option>
-                <option value="2" <?= $velocidad === '2' ? 'selected' : '' ?>>2</option>
-                <option value="3" <?= $velocidad === '3' ? 'selected' : '' ?>>3</option>
-                <option value="4" <?= $velocidad === '4' ? 'selected' : '' ?>>4</option>
-                <option value="5" <?= $velocidad === '5' ? 'selected' : '' ?>>5</option>
-            </select>
+            <label for="velocidad">Velocidad Mínima:</label>
+            <input type="range" id="velocidad" name="velocidad" min="1" max="5" value="<?= htmlspecialchars($velocidad) ?>">
+            <span id="velocidad_value"><?= htmlspecialchars($velocidad) ?></span>
 
-            <label for="regate">Regate:</label>
-            <select id="regate" name="regate">
-                <option value="">Seleccionar</option>
-                <option value="1" <?= $regate === '1' ? 'selected' : '' ?>>1</option>
-                <option value="2" <?= $regate === '2' ? 'selected' : '' ?>>2</option>
-                <option value="3" <?= $regate === '3' ? 'selected' : '' ?>>3</option>
-                <option value="4" <?= $regate === '4' ? 'selected' : '' ?>>4</option>
-                <option value="5" <?= $regate === '5' ? 'selected' : '' ?>>5</option>
-            </select>
+            <label for="regate">Regate Mínimo:</label>
+            <input type="range" id="regate" name="regate" min="1" max="5" value="<?= htmlspecialchars($regate) ?>">
+            <span id="regate_value"><?= htmlspecialchars($regate) ?></span>
 
-            <label for="defensa">Defensa:</label>
-            <select id="defensa" name="defensa">
-                <option value="">Seleccionar</option>
-                <option value="1" <?= $defensa === '1' ? 'selected' : '' ?>>1</option>
-                <option value="2" <?= $defensa === '2' ? 'selected' : '' ?>>2</option>
-                <option value="3" <?= $defensa === '3' ? 'selected' : '' ?>>3</option>
-                <option value="4" <?= $defensa === '4' ? 'selected' : '' ?>>4</option>
-                <option value="5" <?= $defensa === '5' ? 'selected' : '' ?>>5</option>
-            </select>
+            <label for="defensa">Defensa Mínima:</label>
+            <input type="range" id="defensa" name="defensa" min="1" max="5" value="<?= htmlspecialchars($defensa) ?>">
+            <span id="defensa_value"><?= htmlspecialchars($defensa) ?></span>
 
             <button type="submit" class="primary-button">Filtrar</button>
         </form>
@@ -250,6 +220,11 @@ if ($result->num_rows > 0) {
                         $('#result-container').html(response);
                     }
                 });
+            });
+
+            $('input[type="range"]').on('input', function() {
+                const id = $(this).attr('id');
+                $(`#${id}_value`).text($(this).val());
             });
         });
     </script>

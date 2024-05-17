@@ -45,19 +45,19 @@ if ($estilo_de_juego != '') {
     $sql .= " AND ficha_tecnica.estilo_de_juego = '$estilo_de_juego'";
 }
 if ($pases != '') {
-    $sql .= " AND ficha_tecnica.pases = '$pases'";
+    $sql .= " AND ficha_tecnica.pases >= $pases";
 }
 if ($tiros != '') {
-    $sql .= " AND ficha_tecnica.tiros = '$tiros'";
+    $sql .= " AND ficha_tecnica.tiros >= $tiros";
 }
 if ($velocidad != '') {
-    $sql .= " AND ficha_tecnica.velocidad = '$velocidad'";
+    $sql .= " AND ficha_tecnica.velocidad >= $velocidad";
 }
 if ($regate != '') {
-    $sql .= " AND ficha_tecnica.regate = '$regate'";
+    $sql .= " AND ficha_tecnica.regate >= $regate";
 }
 if ($defensa != '') {
-    $sql .= " AND ficha_tecnica.defensa = '$defensa'";
+    $sql .= " AND ficha_tecnica.defensa >= $defensa";
 }
 
 $sql .= " ORDER BY anuncios.fecha_publicacion DESC";
@@ -94,4 +94,3 @@ foreach ($anuncios as $anuncio) {
     echo "</div>";
 }
 ?>
-
