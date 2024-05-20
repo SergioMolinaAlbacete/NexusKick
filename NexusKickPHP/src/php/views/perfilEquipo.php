@@ -41,17 +41,16 @@
     <!-- Bloque información personal -->
     <div class="player-profile">
         <div class="player-profile-column">
-            <img src="<?= !empty($club['perfil_url']) ? $club['perfil_url'] : '../../img/imagenPerfilPredeterminada.jpg' ?>" alt="<?= htmlspecialchars($club['nombre']) ?>" class="player-image" />
+            <img src="<?= !empty($club['perfil_url']) ? $club['perfil_url'] : '../../img/escudoPredeterminado.jpg' ?>" alt="<?= htmlspecialchars($club['nombre']) ?>" class="player-image" />
             <h2 class="player-nickname"><?= $club['nombre'] ?></h2>
         </div>
         <div class="player-info">
             <h2>Información del Club<button id="editarInfoPersonal">Editar</button></h2>
             <p><span class="info-label">País:</span> <?= $club['pais'] ?></p>
             <p><span class="info-label">Localidad:</span> <?= $club['ciudad'] ?></p>
+            <p><span class="info-label">Estadio:</span> <?= $club['estadio'] ?></p>
             <p><span class="info-label">Fecha de Fundación:</span> <?= $club['fnacimiento'] ?></p>
             <p><span class="info-label">Antigüedad:</span> <?= $club['edad'] ?> años</p>
-            <p><span class="info-label">Altura:</span> <?= $club['altura'] ?> cm</p>
-
         </div>
     </div>
 
@@ -182,58 +181,38 @@
 
         <!-------------------------------------------------------------------------MODALES ----------------------------------------------------------------------------->
 
-        <!-- Modal para editar perfil datos personales-->
-        <div id="modalEditarPerfil" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <form action="../controllers/guardar_cambios_infoPersonal_jugador.php" method="POST">
-                    <h2>Editar Perfil</h2>
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($club['nombre']) ?>">
-                    <label for="apellidos">Apellidos:</label>
-                    <input type="text" id="apellidos" name="apellidos" value="<?= htmlspecialchars($club['apellidos']) ?>">
-                    <label for="apodo">Apodo Futbolístico:</label>
-                    <input type="text" id="apodo" name="apodo" value="<?= htmlspecialchars($club['apodo']) ?>">
-                    <label for="perfil_url">Foto de Perfil:</label>
-                    <input type="text" id="perfil_url" name="perfil_url" value="<?= htmlspecialchars($club['perfil_url']) ?>">
-                    <label for="pais">Pais de Nacimiento:</label>
-                    <input type="text" id="pais" name="pais" value="<?= htmlspecialchars($club['pais']) ?>">
-                    <label for="ciudad">Ciudad de Nacimiento:</label>
-                    <input type="text" id="ciudad" name="ciudad" value="<?= htmlspecialchars($club['ciudad']) ?>">
-                    <label for="edad">Edad:</label>
-                    <input type="number" id="edad" name="edad" value="<?= htmlspecialchars($club['edad']) ?>">
-                    <label for="altura">Altura (cm):</label>
-                    <input type="number" id="altura" name="altura" value="<?= htmlspecialchars($club['altura']) ?>">
-                    <label for="peso">Peso (kg):</label>
-                    <input type="text" id="peso" name="peso" value="<?= htmlspecialchars($club['peso']) ?>">
-                    <label for="piernaBuena">Pierna buena:</label>
-                    <select id="piernaBuena" name="piernaBuena">
-                        <option value="">Seleccionar</option>
-                        <option value="Derecha" <?= $club['piernaBuena'] === 'Derecha' ? 'selected' : '' ?>>Derecha</option>
-                        <option value="Izquierda" <?= $club['piernaBuena'] === 'Izquierda' ? 'selected' : '' ?>>Izquierda</option>
-                        <option value="Ambas" <?= $club['piernaBuena'] === 'Ambas' ? 'selected' : '' ?>>Ambas</option>
-                    </select>
-                    <label for="tallaRopa">Talla de Ropa:</label>
-                    <select id="tallaRopa" name="tallaRopa">
-                        <option value="">Seleccionar</option>
-                        <option value="XS" <?= $club['tallaRopa'] === 'XS' ? 'selected' : '' ?>>XS</option>
-                        <option value="S" <?= $club['tallaRopa'] === 'S' ? 'selected' : '' ?>>S</option>
-                        <option value="M" <?= $club['tallaRopa'] === 'M' ? 'selected' : '' ?>>M</option>
-                        <option value="L" <?= $club['tallaRopa'] === 'L' ? 'selected' : '' ?>>L</option>
-                        <option value="XL" <?= $club['tallaRopa'] === 'XL' ? 'selected' : '' ?>>XL</option>
-                        <option value="XXL" <?= $club['tallaRopa'] === 'XXL' ? 'selected' : '' ?>>XXL</option>
-                    </select>
-                    <label for="tallaCalzado">Talla de Calzado:</label>
-                    <input type="number" id="tallaCalzado" name="tallaCalzado" value="<?= htmlspecialchars($club['tallaCalzado']) ?>">
-                    <label for="numeroPreferido">Número preferido:</label>
-                    <input type="number" min="1" max="99" id="numeroPreferido" name="numeroPreferido" value="<?= htmlspecialchars($club['numeroPreferido']) ?>">
+        <!-- Modal para editar perfil del club -->
+<div id="modalEditarPerfil" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form action="../controllers/guardar_cambios_infoPersonal_club.php" method="POST">
+            <h2>Editar Perfil del Club</h2>
+            <label for="nombre">Nombre del Club:</label>
+            <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($club['nombre']) ?>">
 
-                    <input type="submit" value="Guardar Cambios">
+            <label for="perfil_url">Foto de Perfil:</label>
+            <input type="text" id="perfil_url" name="perfil_url" value="<?= htmlspecialchars($club['perfil_url']) ?>">
 
-                </form>
+            <label for="pais">País:</label>
+            <input type="text" id="pais" name="pais" value="<?= htmlspecialchars($club['pais']) ?>">
 
-            </div>
-        </div>
+            <label for="ciudad">Localidad:</label>
+            <input type="text" id="ciudad" name="ciudad" value="<?= htmlspecialchars($club['ciudad']) ?>">
+
+            <label for="estadio">Estadio:</label>
+            <input type="text" id="estadio" name="estadio" value="<?= htmlspecialchars($club['estadio']) ?>">
+
+            <label for="fnacimiento">Fecha de Fundación:</label>
+            <input type="date" id="fnacimiento" name="fnacimiento" value="<?= htmlspecialchars($club['fnacimiento']) ?>">
+
+            <label for="edad">Antigüedad (años):</label>
+            <input type="number" id="edad" name="edad" value="<?= htmlspecialchars($club['edad']) ?>" readonly>
+
+            <input type="submit" value="Guardar Cambios">
+        </form>
+    </div>
+</div>
+
 
 
         <script>

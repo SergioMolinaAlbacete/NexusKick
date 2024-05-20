@@ -33,8 +33,7 @@ p {
     max-height: 50px;
   }
   
-
-  /* Estilos para el modal */
+/* Estilos para el modal */
 .modal {
     display: none; /* Oculto por defecto */
     position: fixed; /* Fijo en la pantalla */
@@ -54,6 +53,9 @@ p {
     padding: 20px;
     border: 1px solid #888;
     width: 80%; /* Ancho del contenido del modal */
+    max-width: 600px; /* Máximo ancho del modal */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Sombra para darle profundidad */
+    border-radius: 8px; /* Bordes redondeados */
 }
 
 .close {
@@ -68,6 +70,49 @@ p {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* Estilos para los elementos dentro del modal */
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-content label {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="number"],
+.modal-content input[type="date"],
+.modal-content input[type="url"],
+.modal-content select,
+.modal-content textarea {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.modal-content input[type="submit"] {
+    background-color: #198754;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.modal-content input[type="submit"]:hover {
+    background-color: #157347;
+}
+
+.modal-content textarea {
+    resize: vertical; /* Permite solo el cambio de tamaño vertical */
 }
 
 
