@@ -9,11 +9,11 @@ $pierna_buena = isset($_POST['pierna_buena']) ? $_POST['pierna_buena'] : '';
 $posicion_habitual = isset($_POST['posicion_habitual']) ? $_POST['posicion_habitual'] : '';
 $posicion_secundaria = isset($_POST['posicion_secundaria']) ? $_POST['posicion_secundaria'] : '';
 $estilo_de_juego = isset($_POST['estilo_de_juego']) ? $_POST['estilo_de_juego'] : '';
-$pases = isset($_POST['pases']) ? $_POST['pases'] : '';
-$tiros = isset($_POST['tiros']) ? $_POST['tiros'] : '';
-$velocidad = isset($_POST['velocidad']) ? $_POST['velocidad'] : '';
-$regate = isset($_POST['regate']) ? $_POST['regate'] : '';
-$defensa = isset($_POST['defensa']) ? $_POST['defensa'] : '';
+$pases = isset($_POST['pases']) ? $_POST['pases'] : '1';
+$tiros = isset($_POST['tiros']) ? $_POST['tiros'] : '1';
+$velocidad = isset($_POST['velocidad']) ? $_POST['velocidad'] : '1';
+$regate = isset($_POST['regate']) ? $_POST['regate'] : '1';
+$defensa = isset($_POST['defensa']) ? $_POST['defensa'] : '1';
 
 // Construir la consulta SQL básica
 $sql = "SELECT * 
@@ -74,6 +74,7 @@ if ($result->num_rows > 0) {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Anuncios Jugadores | NexusKick</title>
@@ -82,6 +83,7 @@ if ($result->num_rows > 0) {
     <link rel="stylesheet" href="./../../css/header.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
     <?php include './componentes/header.php'; ?>
     <div class="titulo-container">
@@ -89,103 +91,127 @@ if ($result->num_rows > 0) {
         <button id="btnCrearAnuncio">Crear Anuncio</button>
     </div>
     <div class="filtro-container">
+        <h2 style="text-align: center;">Filtros</h2>
         <form id="filtro-form">
-            <label for="pais">País:</label>
-            <select id="pais" name="pais">
-                <?php include './componentes/desplegablePaises.php'; ?>
-            </select>
+            <div class="filtro-seccion">
+                <div class="filtro-item">
+                    <label for="pais">País:</label>
+                    <select id="pais" name="pais">
+                        <?php include './componentes/desplegablePaises.php'; ?>
+                    </select>
+                </div>
+                <div class="filtro-item">
+                    <label for="ciudad">Ciudad:</label>
+                    <input type="text" id="ciudad" name="ciudad" value="<?= htmlspecialchars($ciudad) ?>">
+                </div>
+            </div>
 
-            <label for="ciudad">Ciudad:</label>
-            <input type="text" id="ciudad" name="ciudad" value="<?= htmlspecialchars($ciudad) ?>">
+            <div class="filtro-seccion">
+                <div class="filtro-item">
+                    <label for="altura">Altura mínima (cm):</label>
+                    <input type="number" id="altura" name="altura" min="100" max="250" value="<?= htmlspecialchars($altura) ?>">
+                </div>
+                <div class="filtro-item">
+                    <label for="pierna_buena">Pierna buena:</label>
+                    <select id="pierna_buena" name="pierna_buena">
+                        <option value="">Ninguna</option>
+                        <option value="derecha" <?= $pierna_buena === 'derecha' ? 'selected' : '' ?>>Derecha</option>
+                        <option value="izquierda" <?= $pierna_buena === 'izquierda' ? 'selected' : '' ?>>Izquierda</option>
+                        <option value="ambas" <?= $pierna_buena === 'ambas' ? 'selected' : '' ?>>Ambas</option>
+                    </select>
+                </div>
+                <div class="filtro-item">
+                    <label for="posicion_habitual">Posición Habitual:</label>
+                    <select id="posicion_habitual" name="posicion_habitual">
+                        <option value="">Ninguna</option>
+                        <option value="Portero" <?= $posicion_habitual === 'Portero' ? 'selected' : '' ?>>Portero</option>
+                        <option value="Lateral Derecho" <?= $posicion_habitual === 'Lateral Derecho' ? 'selected' : '' ?>>Lateral Derecho</option>
+                        <option value="Lateral Izquierdo" <?= $posicion_habitual === 'Lateral Izquierdo' ? 'selected' : '' ?>>Lateral Izquierdo</option>
+                        <option value="Central Derecho" <?= $posicion_habitual === 'Central Derecho' ? 'selected' : '' ?>>Central Derecho</option>
+                        <option value="Central Izquierdo" <?= $posicion_habitual === 'Central Izquierdo' ? 'selected' : '' ?>>Central Izquierdo</option>
+                        <option value="Pivote Defensivo" <?= $posicion_habitual === 'Pivote Defensivo' ? 'selected' : '' ?>>Pivote Defensivo</option>
+                        <option value="Centrocampista Derecho" <?= $posicion_habitual === 'Centrocampista Derecho' ? 'selected' : '' ?>>Centrocampista Derecho</option>
+                        <option value="Centrocampista Izquierdo" <?= $posicion_habitual === 'Centrocampista Izquierdo' ? 'selected' : '' ?>>Centrocampista Izquierdo</option>
+                        <option value="Centrocampista Central" <?= $posicion_habitual === 'Centrocampista Central' ? 'selected' : '' ?>>Centrocampista Central</option>
+                        <option value="Mediapunta" <?= $posicion_habitual === 'Mediapunta' ? 'selected' : '' ?>>Mediapunta</option>
+                        <option value="Extremo Derecho" <?= $posicion_habitual === 'Extremo Derecho' ? 'selected' : '' ?>>Extremo Derecho</option>
+                        <option value="Extremo Izquierdo" <?= $posicion_habitual === 'Extremo Izquierdo' ? 'selected' : '' ?>>Extremo Izquierdo</option>
+                        <option value="Delantero Centro" <?= $posicion_habitual === 'Delantero Centro' ? 'selected' : '' ?>>Delantero Centro</option>
+                        <option value="Segundo Delantero" <?= $posicion_habitual === 'Segundo Delantero' ? 'selected' : '' ?>>Segundo Delantero</option>
+                    </select>
+                </div>
+                <div class="filtro-item">
+                    <label for="posicion_secundaria">Posición Secundaria:</label>
+                    <select id="posicion_secundaria" name="posicion_secundaria">
+                        <option value="">Ninguna</option>
+                        <option value="Portero" <?= $posicion_secundaria === 'Portero' ? 'selected' : '' ?>>Portero</option>
+                        <option value="Lateral Derecho" <?= $posicion_secundaria === 'Lateral Derecho' ? 'selected' : '' ?>>Lateral Derecho</option>
+                        <option value="Lateral Izquierdo" <?= $posicion_secundaria === 'Lateral Izquierdo' ? 'selected' : '' ?>>Lateral Izquierdo</option>
+                        <option value="Central Derecho" <?= $posicion_secundaria === 'Central Derecho' ? 'selected' : '' ?>>Central Derecho</option>
+                        <option value="Central Izquierdo" <?= $posicion_secundaria === 'Central Izquierdo' ? 'selected' : '' ?>>Central Izquierdo</option>
+                        <option value="Pivote Defensivo" <?= $posicion_secundaria === 'Pivote Defensivo' ? 'selected' : '' ?>>Pivote Defensivo</option>
+                        <option value="Centrocampista Derecho" <?= $posicion_secundaria === 'Centrocampista Derecho' ? 'selected' : '' ?>>Centrocampista Derecho</option>
+                        <option value="Centrocampista Izquierdo" <?= $posicion_secundaria === 'Centrocampista Izquierdo' ? 'selected' : '' ?>>Centrocampista Izquierdo</option>
+                        <option value="Centrocampista Central" <?= $posicion_secundaria === 'Centrocampista Central' ? 'selected' : '' ?>>Centrocampista Central</option>
+                        <option value="Mediapunta" <?= $posicion_secundaria === 'Mediapunta' ? 'selected' : '' ?>>Mediapunta</option>
+                        <option value="Extremo Derecho" <?= $posicion_secundaria === 'Extremo Derecho' ? 'selected' : '' ?>>Extremo Derecho</option>
+                        <option value="Extremo Izquierdo" <?= $posicion_secundaria === 'Extremo Izquierdo' ? 'selected' : '' ?>>Extremo Izquierdo</option>
+                        <option value="Delantero Centro" <?= $posicion_secundaria === 'Delantero Centro' ? 'selected' : '' ?>>Delantero Centro</option>
+                        <option value="Segundo Delantero" <?= $posicion_secundaria === 'Segundo Delantero' ? 'selected' : '' ?>>Segundo Delantero</option>
+                    </select>
+                </div>
+                <div class="filtro-item">
+                    <label for="estilo_de_juego">Estilo de Juego:</label>
+                    <select id="estilo_de_juego" name="estilo_de_juego">
+                        <option value="">Ninguna</option>
+                        <option value="Defensivo" <?= $estilo_de_juego === 'Defensivo' ? 'selected' : '' ?>>Defensivo</option>
+                        <option value="Equilibrado" <?= $estilo_de_juego === 'Equilibrado' ? 'selected' : '' ?>>Equilibrado</option>
+                        <option value="Ofensivo" <?= $estilo_de_juego === 'Ofensivo' ? 'selected' : '' ?>>Ofensivo</option>
+                    </select>
+                </div>
+            </div>
 
-            <label for="altura">Altura mínima (cm):</label>
-            <input type="number" id="altura" name="altura" min="100" max="250" value="<?= htmlspecialchars($altura) ?>">
+            <div class="filtro-seccion">
+                <div class="filtro-item">
+                    <label for="pases">Pases Mínimos:</label>
+                    <input type="range" id="pases" name="pases" min="1" max="5" value="<?= htmlspecialchars($pases) ?>">
+                    <span id="pases_value"><?= htmlspecialchars($pases) ?></span>
+                </div>
+                <div class="filtro-item">
+                    <label for="tiros">Tiros Mínimos:</label>
+                    <input type="range" id="tiros" name="tiros" min="1" max="5" value="<?= htmlspecialchars($tiros) ?>">
+                    <span id="tiros_value"><?= htmlspecialchars($tiros) ?></span>
+                </div>
+                <div class="filtro-item">
+                    <label for="velocidad">Velocidad Mínima:</label>
+                    <input type="range" id="velocidad" name="velocidad" min="1" max="5" value="<?= htmlspecialchars($velocidad) ?>">
+                    <span id="velocidad_value"><?= htmlspecialchars($velocidad) ?></span>
+                </div>
+                <div class="filtro-item">
+                    <label for="regate">Regate Mínimo:</label>
+                    <input type="range" id="regate" name="regate" min="1" max="5" value="<?= htmlspecialchars($regate) ?>">
+                    <span id="regate_value"><?= htmlspecialchars($regate) ?></span>
+                </div>
+                <div class="filtro-item">
+                    <label for="defensa">Defensa Mínima:</label>
+                    <input type="range" id="defensa" name="defensa" min="1" max="5" value="<?= htmlspecialchars($defensa) ?>">
+                    <span id="defensa_value"><?= htmlspecialchars($defensa) ?></span>
+                </div>
+            </div>
 
-            <label for="pierna_buena">Pierna buena:</label>
-            <select id="pierna_buena" name="pierna_buena">
-                <option value="">Ninguna</option>
-                <option value="derecha" <?= $pierna_buena === 'derecha' ? 'selected' : '' ?>>Derecha</option>
-                <option value="izquierda" <?= $pierna_buena === 'izquierda' ? 'selected' : '' ?>>Izquierda</option>
-                <option value="ambas" <?= $pierna_buena === 'ambas' ? 'selected' : '' ?>>Ambas</option>
-            </select>
-
-            <label for="posicion_habitual">Posición Habitual:</label>
-            <select id="posicion_habitual" name="posicion_habitual">
-                <option value="">Ninguna</option>
-                <option value="Portero" <?= $posicion_habitual === 'Portero' ? 'selected' : '' ?>>Portero</option>
-                <option value="Lateral Derecho" <?= $posicion_habitual === 'Lateral Derecho' ? 'selected' : '' ?>>Lateral Derecho</option>
-                <option value="Lateral Izquierdo" <?= $posicion_habitual === 'Lateral Izquierdo' ? 'selected' : '' ?>>Lateral Izquierdo</option>
-                <option value="Central Derecho" <?= $posicion_habitual === 'Central Derecho' ? 'selected' : '' ?>>Central Derecho</option>
-                <option value="Central Izquierdo" <?= $posicion_habitual === 'Central Izquierdo' ? 'selected' : '' ?>>Central Izquierdo</option>
-                <option value="Pivote Defensivo" <?= $posicion_habitual === 'Pivote Defensivo' ? 'selected' : '' ?>>Pivote Defensivo</option>
-                <option value="Centrocampista Derecho" <?= $posicion_habitual === 'Centrocampista Derecho' ? 'selected' : '' ?>>Centrocampista Derecho</option>
-                <option value="Centrocampista Izquierdo" <?= $posicion_habitual === 'Centrocampista Izquierdo' ? 'selected' : '' ?>>Centrocampista Izquierdo</option>
-                <option value="Centrocampista Central" <?= $posicion_habitual === 'Centrocampista Central' ? 'selected' : '' ?>>Centrocampista Central</option>
-                <option value="Mediapunta" <?= $posicion_habitual === 'Mediapunta' ? 'selected' : '' ?>>Mediapunta</option>
-                <option value="Extremo Derecho" <?= $posicion_habitual === 'Extremo Derecho' ? 'selected' : '' ?>>Extremo Derecho</option>
-                <option value="Extremo Izquierdo" <?= $posicion_habitual === 'Extremo Izquierdo' ? 'selected' : '' ?>>Extremo Izquierdo</option>
-                <option value="Delantero Centro" <?= $posicion_habitual === 'Delantero Centro' ? 'selected' : '' ?>>Delantero Centro</option>
-                <option value="Segundo Delantero" <?= $posicion_habitual === 'Segundo Delantero' ? 'selected' : '' ?>>Segundo Delantero</option>
-            </select>
-
-            <label for="posicion_secundaria">Posición Secundaria:</label>
-            <select id="posicion_secundaria" name="posicion_secundaria">
-                <option value="">Ninguna</option>
-                <option value="Portero" <?= $posicion_secundaria === 'Portero' ? 'selected' : '' ?>>Portero</option>
-                <option value="Lateral Derecho" <?= $posicion_secundaria === 'Lateral Derecho' ? 'selected' : '' ?>>Lateral Derecho</option>
-                <option value="Lateral Izquierdo" <?= $posicion_secundaria === 'Lateral Izquierdo' ? 'selected' : '' ?>>Lateral Izquierdo</option>
-                <option value="Central Derecho" <?= $posicion_secundaria === 'Central Derecho' ? 'selected' : '' ?>>Central Derecho</option>
-                <option value="Central Izquierdo" <?= $posicion_secundaria === 'Central Izquierdo' ? 'selected' : '' ?>>Central Izquierdo</option>
-                <option value="Pivote Defensivo" <?= $posicion_secundaria === 'Pivote Defensivo' ? 'selected' : '' ?>>Pivote Defensivo</option>
-                <option value="Centrocampista Derecho" <?= $posicion_secundaria === 'Centrocampista Derecho' ? 'selected' : '' ?>>Centrocampista Derecho</option>
-                <option value="Centrocampista Izquierdo" <?= $posicion_secundaria === 'Centrocampista Izquierdo' ? 'selected' : '' ?>>Centrocampista Izquierdo</option>
-                <option value="Centrocampista Central" <?= $posicion_secundaria === 'Centrocampista Central' ? 'selected' : '' ?>>Centrocampista Central</option>
-                <option value="Mediapunta" <?= $posicion_secundaria === 'Mediapunta' ? 'selected' : '' ?>>Mediapunta</option>
-                <option value="Extremo Derecho" <?= $posicion_secundaria === 'Extremo Derecho' ? 'selected' : '' ?>>Extremo Derecho</option>
-                <option value="Extremo Izquierdo" <?= $posicion_secundaria === 'Extremo Izquierdo' ? 'selected' : '' ?>>Extremo Izquierdo</option>
-                <option value="Delantero Centro" <?= $posicion_secundaria === 'Delantero Centro' ? 'selected' : '' ?>>Delantero Centro</option>
-                <option value="Segundo Delantero" <?= $posicion_secundaria === 'Segundo Delantero' ? 'selected' : '' ?>>Segundo Delantero</option>
-            </select>
-
-            <label for="estilo_de_juego">Estilo de Juego:</label>
-            <select id="estilo_de_juego" name="estilo_de_juego">
-                <option value="">Ninguna</option>
-                <option value="Defensivo" <?= $estilo_de_juego === 'Defensivo' ? 'selected' : '' ?>>Defensivo</option>
-                <option value="Equilibrado" <?= $estilo_de_juego === 'Equilibrado' ? 'selected' : '' ?>>Equilibrado</option>
-                <option value="Ofensivo" <?= $estilo_de_juego === 'Ofensivo' ? 'selected' : '' ?>>Ofensivo</option>
-            </select>
-
-            <label for="pases">Pases Mínimos:</label>
-            <input type="range" id="pases" name="pases" min="1" max="5" value="<?= htmlspecialchars($pases) ?>">
-            <span id="pases_value"><?= htmlspecialchars($pases) ?></span>
-
-            <label for="tiros">Tiros Mínimos:</label>
-            <input type="range" id="tiros" name="tiros" min="1" max="5" value="<?= htmlspecialchars($tiros) ?>">
-            <span id="tiros_value"><?= htmlspecialchars($tiros) ?></span>
-
-            <label for="velocidad">Velocidad Mínima:</label>
-            <input type="range" id="velocidad" name="velocidad" min="1" max="5" value="<?= htmlspecialchars($velocidad) ?>">
-            <span id="velocidad_value"><?= htmlspecialchars($velocidad) ?></span>
-
-            <label for="regate">Regate Mínimo:</label>
-            <input type="range" id="regate" name="regate" min="1" max="5" value="<?= htmlspecialchars($regate) ?>">
-            <span id="regate_value"><?= htmlspecialchars($regate) ?></span>
-
-            <label for="defensa">Defensa Mínima:</label>
-            <input type="range" id="defensa" name="defensa" min="1" max="5" value="<?= htmlspecialchars($defensa) ?>">
-            <span id="defensa_value"><?= htmlspecialchars($defensa) ?></span>
-
-            <button type="submit" class="primary-button">Filtrar</button>
+            <div class="filtro-seccion">
+                <button type="submit" class="primary-button">Filtrar</button>
+            </div>
         </form>
     </div>
 
+    <h2 id="resultados">Resultados</h2>
     <div class='tablon'>
         <div class="card-container" id="result-container">
-            <?php foreach ($anuncios as $anuncio): ?>
+            <?php foreach ($anuncios as $anuncio) : ?>
                 <div class="anuncio-card">
                     <div class="perfil-info">
-                        <img src="<?= !empty($anuncio['perfil_url']) ? $anuncio['perfil_url'] : '../../img/imagenPerfilPredeterminada.jpg' ?>"
-                            alt="perfil" class="perfil-imagen">
+                        <img src="<?= !empty($anuncio['perfil_url']) ? $anuncio['perfil_url'] : '../../img/imagenPerfilPredeterminada.jpg' ?>" alt="perfil" class="perfil-imagen">
                         <div class="info-texto">
                             <h2><?= $anuncio['nombre'] ?> <?= $anuncio['apellidos'] ?></h2>
                             <p><?= $anuncio['edad'] ?> años - <?= $anuncio['ciudad'] ?></p>
@@ -257,21 +283,22 @@ if ($result->num_rows > 0) {
         var span = document.getElementsByClassName("close")[0];
 
         // When the user clicks on the button, open the modal
-        btn.onclick = function () {
+        btn.onclick = function() {
             modal.style.display = "block";
         }
 
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
+        span.onclick = function() {
             modal.style.display = "none";
         }
 
         // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
+        window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         }
     </script>
 </body>
+
 </html>
