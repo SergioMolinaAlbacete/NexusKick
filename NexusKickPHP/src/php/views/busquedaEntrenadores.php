@@ -23,10 +23,10 @@ if ($ciudad != '') {
     $sql .= " AND usuarios.ciudad LIKE '%$ciudad%'";
 }
 if ($experiencia != '') {
-    $sql .= " AND ficha_tecnica.experiencia >= $experiencia";
+    $sql .= " AND usuarios.experiencia >= $experiencia";
 }
 if ($especialidad != '') {
-    $sql .= " AND ficha_tecnica.especialidad = '$especialidad'";
+    $sql .= " AND usuarios.especialidad = '$especialidad'";
 }
 
 $sql .= " ORDER BY anuncios.fecha_publicacion DESC";
@@ -89,10 +89,10 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
                     <label for="especialidad">Especialidad:</label>
                     <select id="especialidad" name="especialidad">
                         <option value="">Ninguna</option>
+                        <option value="Entrenador Principal" <?= $especialidad === 'Entrenador Principal' ? 'selected' : '' ?>>Entrenador Principal</option>
                         <option value="Preparador Físico" <?= $especialidad === 'Preparador Físico' ? 'selected' : '' ?>>Preparador Físico</option>
                         <option value="Entrenador de Porteros" <?= $especialidad === 'Entrenador de Porteros' ? 'selected' : '' ?>>Entrenador de Porteros</option>
-                        <option value="Analista" <?= $especialidad === 'Analista' ? 'selected' : '' ?>>Analista</option>
-                        <option value="Táctico" <?= $especialidad === 'Táctico' ? 'selected' : '' ?>>Táctico</option>
+                        <option value="Segundo Entrenador" <?= $especialidad === 'Segundo Entrenador' ? 'selected' : '' ?>>Segundo Entrenador</option>
                         <option value="Psicólogo Deportivo" <?= $especialidad === 'Psicólogo Deportivo' ? 'selected' : '' ?>>Psicólogo Deportivo</option>
                     </select>
                 </div>
@@ -154,7 +154,7 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
             $('#filtro-form').on('submit', function(event) {
                 event.preventDefault();
                 $.ajax({
-                    url: '../controllers/filtros_anuncios_equipo.php',
+                    url: '../controllers/filtros_anuncios_entrenador.php',
                     method: 'POST',
                     data: $(this).serialize(),
                     success: function(response) {

@@ -103,7 +103,7 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
             <?php foreach ($anuncios as $anuncio) : ?>
                 <div class="anuncio-card">
                     <div class="perfil-info">
-                        <img src="<?= !empty($anuncio['perfil_url']) ? $anuncio['perfil_url'] : '../../img/imagenPerfilPredeterminada.jpg' ?>" alt="perfil" class="perfil-imagen">
+                        <img src="<?= !empty($anuncio['perfil_url']) ? $anuncio['perfil_url'] : '../../img/escudoPredeterminado.jpg' ?>" alt="perfil" class="perfil-imagen">
                         <div class="info-texto">
                             <h2><?= $anuncio['nombre'] ?></h2>
                             <p><?= $anuncio['ciudad'] ?> - <?= $anuncio['estadio'] ?></p>

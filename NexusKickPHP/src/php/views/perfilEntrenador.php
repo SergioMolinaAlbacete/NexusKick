@@ -52,7 +52,7 @@
             <p><span class="info-label">Fecha de Nacimiento:</span> <?= $entrenador['fnacimiento'] ?></p>
             <p><span class="info-label">Edad:</span> <?= $entrenador['edad'] ?> años</p>
             <p><span class="info-label">Experiencia:</span> <?= $entrenador['experiencia'] ?> años</p>
-            <p><span class="info-label">Especialidad:</span> <?= $entrenador['especialidad'] ?> años</p>
+            <p><span class="info-label">Especialidad:</span> <?= $entrenador['especialidad'] ?></p>
             <p><span class="info-label">Talla de Ropa:</span> <?= $entrenador['tallaRopa'] ?></p>
             <p><span class="info-label">Talla de Calzado:</span> <?= $entrenador['tallaCalzado'] ?></p>
 
