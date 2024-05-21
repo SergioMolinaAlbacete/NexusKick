@@ -12,7 +12,7 @@ $especialidad = isset($_POST['especialidad']) ? $_POST['especialidad'] : '';
 $sql = "SELECT * 
         FROM anuncios 
         JOIN usuarios ON anuncios.usuario_id = usuarios.id
-        JOIN ficha_tecnica ON usuarios.id = ficha_tecnica.usuario_id
+        LEFT JOIN ficha_tecnica ON usuarios.id = ficha_tecnica.usuario_id
         WHERE usuarios.tipo_usuario = 'entrenador'";
 
 // Añadir filtros si están presentes

@@ -51,6 +51,11 @@
             <p><span class="info-label">Estadio:</span> <?= $club['estadio'] ?></p>
             <p><span class="info-label">Fecha de Fundación:</span> <?= $club['fnacimiento'] ?></p>
             <p><span class="info-label">Antigüedad:</span> <?= $club['edad'] ?> años</p>
+            <!-- Nombre del Presidente: El nombre de la persona que dirige el club.
+Director Técnico: El nombre del entrenador principal del equipo.
+Palmarés: Un resumen de los títulos y trofeos ganados por el club.
+Colores del Equipo: Los colores oficiales del equipo.
+ -->
         </div>
     </div>
 
@@ -185,7 +190,7 @@
 <div id="modalEditarPerfil" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <form action="../controllers/guardar_cambios_infoPersonal_club.php" method="POST">
+        <form action="../controllers/guardar_cambios_infoPersonal_equipo.php" method="POST">
             <h2>Editar Perfil del Club</h2>
             <label for="nombre">Nombre del Club:</label>
             <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($club['nombre']) ?>">

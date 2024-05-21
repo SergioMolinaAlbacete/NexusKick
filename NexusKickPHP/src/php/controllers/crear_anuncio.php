@@ -22,7 +22,8 @@ if (isset($_POST['titulo'], $_POST['descripcion'])) {
     if ($stmt) {
         $stmt->bind_param("iss", $usuario_id, $titulo, $descripcion);
         if ($stmt->execute()) {
-            header("Location: ../views/busquedaJugadores.php"); // Redireccionar después de insertar
+            $redirect_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '../views/busquedaJugadores.php';
+            header("Location: " . $redirect_url); // Redireccionar a la URL anterior
         } else {
             echo "Error: " . $stmt->error;
         }

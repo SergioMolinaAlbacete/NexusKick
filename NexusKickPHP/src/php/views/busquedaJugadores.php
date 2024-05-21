@@ -239,6 +239,23 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
         </div>
     </div>
 
+    <!-- Modal para crear anuncio -->
+    <div id="modalCrearAnuncio" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form action="../controllers/crear_anuncio.php" method="POST">
+                <h2>Crear Anuncio</h2>
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo" required>
+
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" name="descripcion" required></textarea>
+
+                <input type="submit" value="Crear Anuncio">
+            </form>
+        </div>
+    </div>
+
     <script>
         $(document).ready(function() {
             $('#filtro-form').on('submit', function(event) {
@@ -257,46 +274,31 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
                 const id = $(this).attr('id');
                 $(`#${id}_value`).text($(this).val());
             });
-        });
 
-        // Modal logic
-        var modal = document.getElementById("modalCrearAnuncio");
-        var btn = document.getElementById("btnCrearAnuncio");
-        var span = document.getElementsByClassName("close")[0];
+            // Modal logic
+            var modal = document.getElementById("modalCrearAnuncio");
+            var btn = document.getElementById("btnCrearAnuncio");
+            var span = document.getElementsByClassName("close")[0];
 
-        if (btn) {
-            btn.onclick = function() {
-                modal.style.display = "block";
-            }
+            if (btn && modal && span) {
+                btn.onclick = function() {
+                    modal.style.display = "block";
+                }
 
-            span.onclick = function() {
-                modal.style.display = "none";
-            }
-
-            window.onclick = function(event) {
-                if (event.target == modal) {
+                span.onclick = function() {
                     modal.style.display = "none";
                 }
+
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+            } else {
+                console.error("Modal elements not found.");
             }
-        }
+        });
     </script>
-
-    <!-- Modal para crear anuncio -->
-    <div id="modalCrearAnuncio" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <form action="../controllers/crear_anuncio.php" method="POST">
-                <h2>Crear Anuncio</h2>
-                <label for="titulo">Título:</label>
-                <input type="text" id="titulo" name="titulo" required>
-
-                <label for="descripcion">Descripción:</label>
-                <textarea id="descripcion" name="descripcion" required></textarea>
-
-                <input type="submit" value="Crear Anuncio">
-            </form>
-        </div>
-    </div>
 </body>
 
 </html>
