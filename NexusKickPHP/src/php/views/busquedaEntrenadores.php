@@ -132,50 +132,8 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
         </div>
     </div>
 
-    <script>
-        $(document).ready(function() {
-            $('#filtro-form').on('submit', function(event) {
-                event.preventDefault();
-                $.ajax({
-                    url: '../controllers/filtros_anuncios_entrenador.php',
-                    method: 'POST',
-                    data: $(this).serialize(),
-                    success: function(response) {
-                        $('#result-container').html(response);
-                    }
-                });
-            });
-
-            $('input[type="range"]').on('input', function() {
-                const id = $(this).attr('id');
-                $(`#${id}_value`).text($(this).val());
-            });
-        });
-
-        // Modal logic
-        var modal = document.getElementById("modalCrearAnuncio");
-        var btn = document.getElementById("btnCrearAnuncio");
-        var span = document.getElementsByClassName("close")[0];
-
-        if (btn) {
-            btn.onclick = function() {
-                modal.style.display = "block";
-            }
-
-            span.onclick = function() {
-                modal.style.display = "none";
-            }
-
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-        }
-    </script>
-
-    <!-- Modal para crear anuncio -->
-    <div id="modalCrearAnuncio" class="modal">
+      <!-- Modal para crear anuncio -->
+      <div id="modalCrearAnuncio" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <form action="../controllers/crear_anuncio.php" method="POST">
@@ -190,6 +148,50 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
             </form>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#filtro-form').on('submit', function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url: '../controllers/filtros_anuncios_equipo.php',
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        $('#result-container').html(response);
+                    }
+                });
+            });
+
+            $('input[type="range"]').on('input', function() {
+                const id = $(this).attr('id');
+                $(`#${id}_value`).text($(this).val());
+            });
+
+            // Modal logic
+            var modal = document.getElementById("modalCrearAnuncio");
+            var btn = document.getElementById("btnCrearAnuncio");
+            var span = document.getElementsByClassName("close")[0];
+
+            if (btn && modal && span) {
+                btn.onclick = function() {
+                    modal.style.display = "block";
+                }
+
+                span.onclick = function() {
+                    modal.style.display = "none";
+                }
+
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+            } else {
+                console.error("Modal elements not found.");
+            }
+        });
+    </script>
 </body>
 
 </html>
