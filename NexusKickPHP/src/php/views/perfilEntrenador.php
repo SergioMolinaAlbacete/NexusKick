@@ -14,7 +14,7 @@
     <?php
     include './componentes/header.php';
     include '../config/db.php'; // Asegúrate de que la ruta es correcta
-    
+
     //Comprobar si el usuario ha iniciado sesión
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         header('Location: login.php');
@@ -22,7 +22,7 @@
     }
 
     $usuario_id = $_SESSION['id_usuario'];  // Aquí accedes al ID del usuario desde la sesión
-    
+
 
     // Consulta para obtener la información del jugador
     $sql = "SELECT * FROM usuarios WHERE id = ?";
@@ -30,34 +30,32 @@
     $stmt->bind_param("i", $usuario_id);
     $stmt->execute();
     $resultado = $stmt->get_result();
-    $player = $resultado->fetch_assoc();
+    $entrenador = $resultado->fetch_assoc();
     ?>
 
 
 
     <div class="titulo-container">
-        <h1>Perfil de <?= $player['nombre'] ?> <?= $player['apellidos'] ?></h1>
+        <h1>Perfil de <?= $entrenador['nombre'] ?> <?= $entrenador['apellidos'] ?></h1>
     </div>
     <!-- Bloque información personal -->
     <div class="player-profile">
         <div class="player-profile-column">
-            <img src="<?= !empty($player['perfil_url']) ? $player['perfil_url'] : '../../img/imagenPerfilPredeterminada.jpg' ?>"
-                alt="<?= htmlspecialchars($player['nombre']) ?>" class="player-image" />
-            <h2 class="player-nickname"><?= $player['apodo'] ?></h2>
+            <img src="<?= !empty($entrenador['perfil_url']) ? $entrenador['perfil_url'] : '../../img/imagenPerfilPredeterminada.jpg' ?>" alt="<?= htmlspecialchars($entrenador['nombre']) ?>" class="player-image" />
+            <h2 class="player-nickname"><?= $entrenador['apodo'] ?></h2>
         </div>
         <div class="player-info">
             <h2>Información Personal<button id="editarInfoPersonal">Editar</button></h2>
-            <p><span class="info-label">Nombre Completo:</span> <?= $player['nombre'] ?> <?= $player['apellidos'] ?></p>
-            <p><span class="info-label">País de Nacimiento:</span> <?= $player['pais'] ?></p>
-            <p><span class="info-label">Lugar de Nacimiento:</span> <?= $player['ciudad'] ?></p>
-            <p><span class="info-label">Fecha de Nacimiento:</span> <?= $player['fnacimiento'] ?></p>
-            <p><span class="info-label">Edad:</span> <?= $player['edad'] ?> años</p>
-            <p><span class="info-label">Altura:</span> <?= $player['altura'] ?> cm</p>
-            <p><span class="info-label">Peso:</span> <?= $player['peso'] ?> Kg</p>
-            <p><span class="info-label">Pierna Buena:</span> <?= $player['piernaBuena'] ?></p>
-            <p><span class="info-label">Talla de Ropa:</span> <?= $player['tallaRopa'] ?></p>
-            <p><span class="info-label">Talla de Calzado:</span> <?= $player['tallaCalzado'] ?></p>
-            <p><span class="info-label">Número Preferido:</span> <?= $player['numeroPreferido'] ?></p>
+            <p><span class="info-label">Nombre Completo:</span> <?= $entrenador['nombre'] ?> <?= $entrenador['apellidos'] ?></p>
+            <p><span class="info-label">País de Nacimiento:</span> <?= $entrenador['pais'] ?></p>
+            <p><span class="info-label">Lugar de Nacimiento:</span> <?= $entrenador['ciudad'] ?></p>
+            <p><span class="info-label">Fecha de Nacimiento:</span> <?= $entrenador['fnacimiento'] ?></p>
+            <p><span class="info-label">Edad:</span> <?= $entrenador['edad'] ?> años</p>
+            <p><span class="info-label">Experiencia:</span> <?= $entrenador['experiencia'] ?> años</p>
+            <p><span class="info-label">Especialidad:</span> <?= $entrenador['especialidad'] ?> años</p>
+            <p><span class="info-label">Talla de Ropa:</span> <?= $entrenador['tallaRopa'] ?></p>
+            <p><span class="info-label">Talla de Calzado:</span> <?= $entrenador['tallaCalzado'] ?></p>
+
         </div>
     </div>
 
@@ -87,10 +85,9 @@
                 <img src="../../img/flechaIzquierda.png" alt="Anterior" />
             </button>
 
-            <?php foreach ($historiales as $item): ?>
+            <?php foreach ($historiales as $item) : ?>
                 <div class="history-card">
-                    <img src="<?= htmlspecialchars($item['imagenEscudo']) ?>"
-                        alt="Escudo del equipo <?= htmlspecialchars($item['equipo']) ?>" class="team-shield" />
+                    <img src="<?= htmlspecialchars($item['imagenEscudo']) ?>" alt="Escudo del equipo <?= htmlspecialchars($item['equipo']) ?>" class="team-shield" />
                     <h3><?= htmlspecialchars($item['equipo']) ?></h3>
                     <p>Temporada: <?= htmlspecialchars($item['temporada']) ?></p>
                     <p>Resultado: <?= htmlspecialchars($item['resultado']) ?></p>
@@ -110,49 +107,6 @@
 
 
 
-    <?php
-    // Consulta para obtener la ficha técnica del jugador
-    $sqlFichaTecnica = "SELECT * FROM ficha_tecnica WHERE usuario_id = ?";
-    $stmtFichaTecnica = $conn->prepare($sqlFichaTecnica);
-    $stmtFichaTecnica->bind_param("i", $usuario_id);
-    $stmtFichaTecnica->execute();
-    $resultadoFichaTecnica = $stmtFichaTecnica->get_result();
-    $fichaTecnica = $resultadoFichaTecnica->fetch_assoc();
-
-    ?>
-
-    <!-- Bloque Ficha Técnica -->
-    <div class="player-technical-info">
-        <h2>Ficha Técnica<button id="editarFichaTecnica">Editar</button></h2>
-        <div class="technical-details">
-            <div class="column">
-                <p>Posición Habitual: <?= htmlspecialchars($fichaTecnica['posicion_habitual']) ?> | Posición Secundaria:
-                    <?= htmlspecialchars($fichaTecnica['posicion_secundaria']) ?>)</p>
-                <p>Estilo de Juego: <?= htmlspecialchars($fichaTecnica['estilo_de_juego']) ?></p>
-            </div>
-            <div class="column">
-                <div class="skills">
-                    <h3>Habilidades Técnicas</h3>
-                    <p>Pases:
-                        <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['pases']) ?>
-                    </p>
-                    <p>Tiros:
-                        <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['tiros']) ?>
-                    </p>
-                    <p>Velocidad:
-                        <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['velocidad']) ?>
-                    </p>
-                    <p>Regate:
-                        <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['regate']) ?>
-                    </p>
-                    <p>Defensa:
-                        <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['defensa']) ?>
-                    </p>
-                </div>
-                <p>Puntos fuertes: <?= htmlspecialchars($fichaTecnica['notas_adicionales']) ?></p>
-            </div>
-        </div>
-    </div>
 
 
 
@@ -183,7 +137,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($situaciones as $situacion): ?>
+                    <?php foreach ($situaciones as $situacion) : ?>
                         <tr>
                             <td><?= htmlspecialchars($situacion['actividad']) ?></td>
                             <td><?= htmlspecialchars($situacion['lugar']) ?></td>
@@ -216,11 +170,10 @@
         <!-- Bloque Reseñas -->
         <div class="reviews">
             <h2>Reseñas</h2>
-            <?php foreach ($reseñas as $reseña): ?>
+            <?php foreach ($reseñas as $reseña) : ?>
                 <div class="review">
                     <!-- Mostrar la foto de perfil si está disponible, de lo contrario mostrar una imagen por defecto -->
-                    <img src="<?= $reseña['perfil_url'] ?: '../img/imagenPerfilPredeterminada.jpg' ?>" alt="Foto de perfil"
-                        style="width: 50px; height: 50px; border-radius: 50%;">
+                    <img src="<?= $reseña['perfil_url'] ?: '../img/imagenPerfilPredeterminada.jpg' ?>" alt="Foto de perfil" style="width: 50px; height: 50px; border-radius: 50%;">
                     <p><?= htmlspecialchars($reseña['reseña']) ?></p>
                     <p><?= str_repeat("⭐", intval($reseña['puntuacion'])) ?></p>
                     <small><?= date("d/m/Y", strtotime($reseña['fecha'])) ?></small>
@@ -236,111 +189,105 @@
         <div id="modalEditarPerfil" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <form action="../controllers/guardar_cambios_infoPersonal_jugador.php" method="POST">
+                <form action="../controllers/guardar_cambios_infoPersonal_entrenador.php" method="POST">
                     <h2>Editar Perfil</h2>
                     <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($player['nombre']) ?>">
+                    <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($entrenador['nombre']) ?>">
                     <label for="apellidos">Apellidos:</label>
-                    <input type="text" id="apellidos" name="apellidos"
-                        value="<?= htmlspecialchars($player['apellidos']) ?>">
+                    <input type="text" id="apellidos" name="apellidos" value="<?= htmlspecialchars($entrenador['apellidos']) ?>">
                     <label for="apodo">Apodo Futbolístico:</label>
-                    <input type="text" id="apodo" name="apodo" value="<?= htmlspecialchars($player['apodo']) ?>">
+                    <input type="text" id="apodo" name="apodo" value="<?= htmlspecialchars($entrenador['apodo']) ?>">
                     <label for="perfil_url">Foto de Perfil:</label>
-                    <input type="text" id="perfil_url" name="perfil_url"
-                        value="<?= htmlspecialchars($player['perfil_url']) ?>">
+                    <input type="text" id="perfil_url" name="perfil_url" value="<?= htmlspecialchars($entrenador['perfil_url']) ?>">
                     <label for="pais">País de Nacimiento:</label>
                     <select id="pais" name="pais">
                         <option value="">Seleccionar país</option>
-                        <option value="albania" <?= $player['pais'] === 'albania' ? 'selected' : '' ?>>Albania</option>
-                        <option value="alemania" <?= $player['pais'] === 'alemania' ? 'selected' : '' ?>>Alemania</option>
-                        <option value="andorra" <?= $player['pais'] === 'andorra' ? 'selected' : '' ?>>Andorra</option>
-                        <option value="austria" <?= $player['pais'] === 'austria' ? 'selected' : '' ?>>Austria</option>
-                        <option value="bélgica" <?= $player['pais'] === 'bélgica' ? 'selected' : '' ?>>Bélgica</option>
-                        <option value="bielorrusia" <?= $player['pais'] === 'bielorrusia' ? 'selected' : '' ?>>Bielorrusia
+                        <option value="albania" <?= $entrenador['pais'] === 'albania' ? 'selected' : '' ?>>Albania</option>
+                        <option value="alemania" <?= $entrenador['pais'] === 'alemania' ? 'selected' : '' ?>>Alemania</option>
+                        <option value="andorra" <?= $entrenador['pais'] === 'andorra' ? 'selected' : '' ?>>Andorra</option>
+                        <option value="austria" <?= $entrenador['pais'] === 'austria' ? 'selected' : '' ?>>Austria</option>
+                        <option value="bélgica" <?= $entrenador['pais'] === 'bélgica' ? 'selected' : '' ?>>Bélgica</option>
+                        <option value="bielorrusia" <?= $entrenador['pais'] === 'bielorrusia' ? 'selected' : '' ?>>Bielorrusia
                         </option>
-                        <option value="bosnia" <?= $player['pais'] === 'bosnia' ? 'selected' : '' ?>>Bosnia y Herzegovina
+                        <option value="bosnia" <?= $entrenador['pais'] === 'bosnia' ? 'selected' : '' ?>>Bosnia y Herzegovina
                         </option>
-                        <option value="bulgaria" <?= $player['pais'] === 'bulgaria' ? 'selected' : '' ?>>Bulgaria</option>
-                        <option value="croacia" <?= $player['pais'] === 'croacia' ? 'selected' : '' ?>>Croacia</option>
-                        <option value="dinamarca" <?= $player['pais'] === 'dinamarca' ? 'selected' : '' ?>>Dinamarca
+                        <option value="bulgaria" <?= $entrenador['pais'] === 'bulgaria' ? 'selected' : '' ?>>Bulgaria</option>
+                        <option value="croacia" <?= $entrenador['pais'] === 'croacia' ? 'selected' : '' ?>>Croacia</option>
+                        <option value="dinamarca" <?= $entrenador['pais'] === 'dinamarca' ? 'selected' : '' ?>>Dinamarca
                         </option>
-                        <option value="eslovaquia" <?= $player['pais'] === 'eslovaquia' ? 'selected' : '' ?>>Eslovaquia
+                        <option value="eslovaquia" <?= $entrenador['pais'] === 'eslovaquia' ? 'selected' : '' ?>>Eslovaquia
                         </option>
-                        <option value="eslovenia" <?= $player['pais'] === 'eslovenia' ? 'selected' : '' ?>>Eslovenia
+                        <option value="eslovenia" <?= $entrenador['pais'] === 'eslovenia' ? 'selected' : '' ?>>Eslovenia
                         </option>
-                        <option value="españa" <?= $player['pais'] === 'españa' ? 'selected' : '' ?>>España</option>
-                        <option value="estonia" <?= $player['pais'] === 'estonia' ? 'selected' : '' ?>>Estonia</option>
-                        <option value="finlandia" <?= $player['pais'] === 'finlandia' ? 'selected' : '' ?>>Finlandia
+                        <option value="españa" <?= $entrenador['pais'] === 'españa' ? 'selected' : '' ?>>España</option>
+                        <option value="estonia" <?= $entrenador['pais'] === 'estonia' ? 'selected' : '' ?>>Estonia</option>
+                        <option value="finlandia" <?= $entrenador['pais'] === 'finlandia' ? 'selected' : '' ?>>Finlandia
                         </option>
-                        <option value="francia" <?= $player['pais'] === 'francia' ? 'selected' : '' ?>>Francia</option>
-                        <option value="grecia" <?= $player['pais'] === 'grecia' ? 'selected' : '' ?>>Grecia</option>
-                        <option value="hungría" <?= $player['pais'] === 'hungría' ? 'selected' : '' ?>>Hungría</option>
-                        <option value="irlanda" <?= $player['pais'] === 'irlanda' ? 'selected' : '' ?>>Irlanda</option>
-                        <option value="islandia" <?= $player['pais'] === 'islandia' ? 'selected' : '' ?>>Islandia</option>
-                        <option value="italia" <?= $player['pais'] === 'italia' ? 'selected' : '' ?>>Italia</option>
-                        <option value="letonia" <?= $player['pais'] === 'letonia' ? 'selected' : '' ?>>Letonia</option>
-                        <option value="liechtenstein" <?= $player['pais'] === 'liechtenstein' ? 'selected' : '' ?>>
+                        <option value="francia" <?= $entrenador['pais'] === 'francia' ? 'selected' : '' ?>>Francia</option>
+                        <option value="grecia" <?= $entrenador['pais'] === 'grecia' ? 'selected' : '' ?>>Grecia</option>
+                        <option value="hungría" <?= $entrenador['pais'] === 'hungría' ? 'selected' : '' ?>>Hungría</option>
+                        <option value="irlanda" <?= $entrenador['pais'] === 'irlanda' ? 'selected' : '' ?>>Irlanda</option>
+                        <option value="islandia" <?= $entrenador['pais'] === 'islandia' ? 'selected' : '' ?>>Islandia</option>
+                        <option value="italia" <?= $entrenador['pais'] === 'italia' ? 'selected' : '' ?>>Italia</option>
+                        <option value="letonia" <?= $entrenador['pais'] === 'letonia' ? 'selected' : '' ?>>Letonia</option>
+                        <option value="liechtenstein" <?= $entrenador['pais'] === 'liechtenstein' ? 'selected' : '' ?>>
                             Liechtenstein</option>
-                        <option value="lituania" <?= $player['pais'] === 'lituania' ? 'selected' : '' ?>>Lituania</option>
-                        <option value="luxemburgo" <?= $player['pais'] === 'luxemburgo' ? 'selected' : '' ?>>Luxemburgo
+                        <option value="lituania" <?= $entrenador['pais'] === 'lituania' ? 'selected' : '' ?>>Lituania</option>
+                        <option value="luxemburgo" <?= $entrenador['pais'] === 'luxemburgo' ? 'selected' : '' ?>>Luxemburgo
                         </option>
-                        <option value="malta" <?= $player['pais'] === 'malta' ? 'selected' : '' ?>>Malta</option>
-                        <option value="moldavia" <?= $player['pais'] === 'moldavia' ? 'selected' : '' ?>>Moldavia</option>
-                        <option value="mónaco" <?= $player['pais'] === 'mónaco' ? 'selected' : '' ?>>Mónaco</option>
-                        <option value="montenegro" <?= $player['pais'] === 'montenegro' ? 'selected' : '' ?>>Montenegro
+                        <option value="malta" <?= $entrenador['pais'] === 'malta' ? 'selected' : '' ?>>Malta</option>
+                        <option value="moldavia" <?= $entrenador['pais'] === 'moldavia' ? 'selected' : '' ?>>Moldavia</option>
+                        <option value="mónaco" <?= $entrenador['pais'] === 'mónaco' ? 'selected' : '' ?>>Mónaco</option>
+                        <option value="montenegro" <?= $entrenador['pais'] === 'montenegro' ? 'selected' : '' ?>>Montenegro
                         </option>
-                        <option value="noruega" <?= $player['pais'] === 'noruega' ? 'selected' : '' ?>>Noruega</option>
-                        <option value="países-bajos" <?= $player['pais'] === 'países-bajos' ? 'selected' : '' ?>>Países
+                        <option value="noruega" <?= $entrenador['pais'] === 'noruega' ? 'selected' : '' ?>>Noruega</option>
+                        <option value="países-bajos" <?= $entrenador['pais'] === 'países-bajos' ? 'selected' : '' ?>>Países
                             Bajos</option>
-                        <option value="polonia" <?= $player['pais'] === 'polonia' ? 'selected' : '' ?>>Polonia</option>
-                        <option value="portugal" <?= $player['pais'] === 'portugal' ? 'selected' : '' ?>>Portugal</option>
-                        <option value="reino-unido" <?= $player['pais'] === 'reino-unido' ? 'selected' : '' ?>>Reino Unido
+                        <option value="polonia" <?= $entrenador['pais'] === 'polonia' ? 'selected' : '' ?>>Polonia</option>
+                        <option value="portugal" <?= $entrenador['pais'] === 'portugal' ? 'selected' : '' ?>>Portugal</option>
+                        <option value="reino-unido" <?= $entrenador['pais'] === 'reino-unido' ? 'selected' : '' ?>>Reino Unido
                         </option>
-                        <option value="república-checa" <?= $player['pais'] === 'república-checa' ? 'selected' : '' ?>>
+                        <option value="república-checa" <?= $entrenador['pais'] === 'república-checa' ? 'selected' : '' ?>>
                             República Checa</option>
-                        <option value="rumanía" <?= $player['pais'] === 'rumanía' ? 'selected' : '' ?>>Rumanía</option>
-                        <option value="rusia" <?= $player['pais'] === 'rusia' ? 'selected' : '' ?>>Rusia</option>
-                        <option value="san-marino" <?= $player['pais'] === 'san-marino' ? 'selected' : '' ?>>San Marino
+                        <option value="rumanía" <?= $entrenador['pais'] === 'rumanía' ? 'selected' : '' ?>>Rumanía</option>
+                        <option value="rusia" <?= $entrenador['pais'] === 'rusia' ? 'selected' : '' ?>>Rusia</option>
+                        <option value="san-marino" <?= $entrenador['pais'] === 'san-marino' ? 'selected' : '' ?>>San Marino
                         </option>
-                        <option value="serbia" <?= $player['pais'] === 'serbia' ? 'selected' : '' ?>>Serbia</option>
-                        <option value="suecia" <?= $player['pais'] === 'suecia' ? 'selected' : '' ?>>Suecia</option>
-                        <option value="suiza" <?= $player['pais'] === 'suiza' ? 'selected' : '' ?>>Suiza</option>
-                        <option value="ucrania" <?= $player['pais'] === 'ucrania' ? 'selected' : '' ?>>Ucrania</option>
+                        <option value="serbia" <?= $entrenador['pais'] === 'serbia' ? 'selected' : '' ?>>Serbia</option>
+                        <option value="suecia" <?= $entrenador['pais'] === 'suecia' ? 'selected' : '' ?>>Suecia</option>
+                        <option value="suiza" <?= $entrenador['pais'] === 'suiza' ? 'selected' : '' ?>>Suiza</option>
+                        <option value="ucrania" <?= $entrenador['pais'] === 'ucrania' ? 'selected' : '' ?>>Ucrania</option>
                     </select>
 
                     <label for="ciudad">Ciudad de Nacimiento:</label>
-                    <input type="text" id="ciudad" name="ciudad" value="<?= htmlspecialchars($player['ciudad']) ?>">
+                    <input type="text" id="ciudad" name="ciudad" value="<?= htmlspecialchars($entrenador['ciudad']) ?>">
                     <label for="edad">Edad:</label>
-                    <input type="number" id="edad" name="edad" value="<?= htmlspecialchars($player['edad']) ?>">
-                    <label for="altura">Altura (cm):</label>
-                    <input type="number" id="altura" name="altura" value="<?= htmlspecialchars($player['altura']) ?>">
-                    <label for="peso">Peso (kg):</label>
-                    <input type="text" id="peso" name="peso" value="<?= htmlspecialchars($player['peso']) ?>">
-                    <label for="piernaBuena">Pierna buena:</label>
-                    <select id="piernaBuena" name="piernaBuena">
+                    <input type="number" id="edad" name="edad" value="<?= htmlspecialchars($entrenador['edad']) ?>">
+                    <label for="experiencia">Experiencia:</label>
+                    <input type="number" id="experiencia" name="experiencia" value="<?= htmlspecialchars($entrenador['experiencia']) ?>">
+
+                    <label for="especialidad">Especialidad:</label>
+                    <select id="especialidad" name="especialidad">
                         <option value="">Seleccionar</option>
-                        <option value="Derecha" <?= $player['piernaBuena'] === 'Derecha' ? 'selected' : '' ?>>Derecha
-                        </option>
-                        <option value="Izquierda" <?= $player['piernaBuena'] === 'Izquierda' ? 'selected' : '' ?>>Izquierda
-                        </option>
-                        <option value="Ambas" <?= $player['piernaBuena'] === 'Ambas' ? 'selected' : '' ?>>Ambas</option>
+                        <option value="Entrenador Principal" <?= $entrenador['especialidad'] === 'Entrenador Principal' ? 'selected' : '' ?>>Entrenador Principal</option>
+                        <option value="Preparador Físico" <?= $entrenador['especialidad'] === 'Preparador Físico' ? 'selected' : '' ?>>Preparador Físico</option>
+                        <option value="Entrenador de Porteros" <?= $entrenador['especialidad'] === 'Entrenador de Porteros' ? 'selected' : '' ?>>Entrenador de Porteros</option>
+                        <option value="Segundo Entrenador" <?= $entrenador['especialidad'] === 'Segundo Entrenador' ? 'selected' : '' ?>>Segundo Entrenador</option>
+                        <option value="Psicólogo Deportivo" <?= $entrenador['especialidad'] === 'Psicólogo Deportivo' ? 'selected' : '' ?>>Psicólogo Deportivo</option>
                     </select>
                     <label for="tallaRopa">Talla de Ropa:</label>
                     <select id="tallaRopa" name="tallaRopa">
                         <option value="">Seleccionar</option>
-                        <option value="XS" <?= $player['tallaRopa'] === 'XS' ? 'selected' : '' ?>>XS</option>
-                        <option value="S" <?= $player['tallaRopa'] === 'S' ? 'selected' : '' ?>>S</option>
-                        <option value="M" <?= $player['tallaRopa'] === 'M' ? 'selected' : '' ?>>M</option>
-                        <option value="L" <?= $player['tallaRopa'] === 'L' ? 'selected' : '' ?>>L</option>
-                        <option value="XL" <?= $player['tallaRopa'] === 'XL' ? 'selected' : '' ?>>XL</option>
-                        <option value="XXL" <?= $player['tallaRopa'] === 'XXL' ? 'selected' : '' ?>>XXL</option>
+                        <option value="XS" <?= $entrenador['tallaRopa'] === 'XS' ? 'selected' : '' ?>>XS</option>
+                        <option value="S" <?= $entrenador['tallaRopa'] === 'S' ? 'selected' : '' ?>>S</option>
+                        <option value="M" <?= $entrenador['tallaRopa'] === 'M' ? 'selected' : '' ?>>M</option>
+                        <option value="L" <?= $entrenador['tallaRopa'] === 'L' ? 'selected' : '' ?>>L</option>
+                        <option value="XL" <?= $entrenador['tallaRopa'] === 'XL' ? 'selected' : '' ?>>XL</option>
+                        <option value="XXL" <?= $entrenador['tallaRopa'] === 'XXL' ? 'selected' : '' ?>>XXL</option>
                     </select>
                     <label for="tallaCalzado">Talla de Calzado:</label>
-                    <input type="number" id="tallaCalzado" name="tallaCalzado"
-                        value="<?= htmlspecialchars($player['tallaCalzado']) ?>">
-                    <label for="numeroPreferido">Número preferido:</label>
-                    <input type="number" min="1" max="99" id="numeroPreferido" name="numeroPreferido"
-                        value="<?= htmlspecialchars($player['numeroPreferido']) ?>">
+                    <input type="number" id="tallaCalzado" name="tallaCalzado" value="<?= htmlspecialchars($entrenador['tallaCalzado']) ?>">
+
 
                     <input type="submit" value="Guardar Cambios">
 
@@ -361,17 +308,17 @@
             var span = document.getElementsByClassName("close")[0];
 
             // Cuando el usuario hace clic en el botón, abre el modal 
-            btn.onclick = function () {
+            btn.onclick = function() {
                 modal.style.display = "block";
             }
 
             // Cuando el usuario hace clic en <span> (x), cierra el modal
-            span.onclick = function () {
+            span.onclick = function() {
                 modal.style.display = "none";
             }
 
             // Cuando el usuario hace clic fuera del modal, cierra el modal
-            window.onclick = function (event) {
+            window.onclick = function(event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
                 }
@@ -403,7 +350,7 @@
                 <hr>
                 <!-- Listado de historiales existentes para editar o eliminar -->
                 <h3>Editar o eliminar historial existente</h3>
-                <?php foreach ($historiales as $item): ?>
+                <?php foreach ($historiales as $item) : ?>
                     <div class="historial-item">
                         <form action="../controllers/editar_historial.php" method="POST">
                             <input type="hidden" name="historial_id" value="<?= $item['id'] ?>">
@@ -439,133 +386,22 @@
             // Asumiendo que cada modal tiene su propio botón de cierre y no comparten el primer índice
             var spanHistorial = document.querySelector("#modalEditarHistorial .close");
 
-            btnHistorial.onclick = function () {
+            btnHistorial.onclick = function() {
                 modalHistorial.style.display = "block";
             }
 
-            spanHistorial.onclick = function () {
+            spanHistorial.onclick = function() {
                 modalHistorial.style.display = "none";
             }
 
             // Evento para cerrar el modal si el usuario hace clic fuera de él
-            window.onclick = function (event) {
+            window.onclick = function(event) {
                 if (event.target == modalHistorial) {
                     modalHistorial.style.display = "none";
                 }
             }
         </script>
 
-
-
-
-
-
-
-        <!-- Modal para editar ficha técnica del jugador -->
-        <div id="modalEditarFichaTecnica" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <form action="../controllers/guardar_cambios_fichaTecnica.php" method="POST">
-                    <h2>Editar Ficha Técnica</h2>
-                    <!-- Posición Habitual -->
-                    <label for="posicionHabitual">Posición Habitual:</label>
-                    <select id="posicionHabitual" name="posicion_habitual">
-                        <?php
-                        $positions = [
-                            'Portero',
-                            'Lateral Derecho',
-                            'Lateral Izquierdo',
-                            'Central Derecho',
-                            'Central Izquierdo',
-                            'Pivote Defensivo',
-                            'Centrocampista Derecho',
-                            'Centrocampista Izquierdo',
-                            'Centrocampista Central',
-                            'Mediapunta',
-                            'Extremo Derecho',
-                            'Extremo Izquierdo',
-                            'Delantero Centro',
-                            'Segundo Delantero'
-                        ];
-                        foreach ($positions as $position) {
-                            $selected = ($position === ($fichaTecnica['posicion_habitual'] ?? '')) ? ' selected' : '';
-                            echo "<option value='$position'$selected>$position</option>";
-                        }
-                        ?>
-                    </select>
-                    <!-- Posición Secundaria -->
-                    <label for="posicionSecundaria">Posición Secundaria:</label>
-                    <select id="posicionSecundaria" name="posicion_secundaria">
-                        <?php
-                        foreach ($positions as $position) {
-                            $selected = ($position === ($fichaTecnica['posicion_secundaria'] ?? '')) ? ' selected' : '';
-                            echo "<option value='$position'$selected>$position</option>";
-                        }
-                        ?>
-                    </select>
-                    <!-- Estilo de Juego -->
-                    <label for="estiloDeJuego">Estilo de Juego:</label>
-                    <select id="estiloDeJuego" name="estilo_de_juego">
-                        <?php
-                        $styles = ['Defensivo', 'Equilibrado', 'Ofensivo'];
-                        foreach ($styles as $style) {
-                            $selected = ($style === ($fichaTecnica['estilo_de_juego'] ?? '')) ? ' selected' : '';
-                            echo "<option value='$style'$selected>$style</option>";
-                        }
-                        ?>
-                    </select>
-                    <!-- Campos de habilidades -->
-                    <?php $skills = ['pases', 'tiros', 'velocidad', 'regate', 'defensa']; ?>
-                    <?php foreach ($skills as $skill): ?>
-                        <label for="<?= $skill ?>"><?= ucfirst($skill) ?>:</label>
-                        <select id="<?= $skill ?>" name="<?= $skill ?>">
-                            <?php
-                            $skillValue = $fichaTecnica[$skill] ?? '';
-                            for ($i = 1; $i <= 5; $i++) {
-                                $selected = ($i == $skillValue) ? ' selected' : '';
-                                echo "<option value='$i'$selected>$i</option>";
-                            }
-                            ?>
-                        </select>
-                    <?php endforeach; ?>
-                    <!-- Notas Adicionales -->
-                    <label for="notasAdicionales">Describe tus puntos fuertes:</label>
-                    <textarea id="notasAdicionales"
-                        name="notas_adicionales"><?= htmlspecialchars($fichaTecnica['notas_adicionales'] ?? '') ?></textarea>
-                    <input type="submit" value="Guardar Cambios">
-                </form>
-            </div>
-        </div>
-
-
-
-        <script>
-            // Obtener el modal
-            var modalFT = document.getElementById("modalEditarFichaTecnica");
-
-            // Obtener el botón que abre el modal
-            var btnFT = document.getElementById("editarFichaTecnica");
-
-            // Obtener el elemento que cierra el modal
-            var spanFT = document.querySelector("#modalEditarFichaTecnica .close");
-
-            // Cuando el usuario hace clic en el botón, abre el modal 
-            btnFT.onclick = function () {
-                modalFT.style.display = "block";
-            }
-
-            // Cuando el usuario hace clic en <span> (x), cierra el modal
-            spanFT.onclick = function () {
-                modalFT.style.display = "none";
-            }
-
-            // Cuando el usuario hace clic fuera del modal, cierra el modal
-            window.onclick = function (event) {
-                if (event.target == modalFT) {
-                    modalFT.style.display = "none";
-                }
-            }
-        </script>
 
 
 
@@ -590,7 +426,7 @@
                 </form>
                 <hr>
                 <!-- Formularios para editar o eliminar situaciones existentes -->
-                <?php foreach ($situaciones as $situacion): ?>
+                <?php foreach ($situaciones as $situacion) : ?>
                     <form action="../controllers/guardar_cambios_situacion.php" method="POST">
                         <input type="hidden" name="action" value="update">
                         <input type="hidden" name="situacion_id" value="<?= htmlspecialchars($situacion['id']) ?>">
@@ -624,17 +460,17 @@
             var spanSituacion = document.querySelector("#modalEditarSituacion .close");
 
             // Cuando el usuario hace clic en el botón, abre el modal 
-            btnSituacion.onclick = function () {
+            btnSituacion.onclick = function() {
                 modalSituacion.style.display = "block";
             }
 
             // Cuando el usuario hace clic en <span> (x), cierra el modal
-            spanSituacion.onclick = function () {
+            spanSituacion.onclick = function() {
                 modalSituacion.style.display = "none";
             }
 
             // Cuando el usuario hace clic fuera del modal, cierra el modal
-            window.onclick = function (event) {
+            window.onclick = function(event) {
                 if (event.target == modalSituacion) {
                     modalSituacion.style.display = "none";
                 }
