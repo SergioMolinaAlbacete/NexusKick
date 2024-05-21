@@ -3,6 +3,7 @@ include '../config/db.php';  // Asegúrate de que este archivo contiene la conex
 
 session_start();
 $usuario_id = $_SESSION['id_usuario'];
+$tipo_usuario = $_SESSION['tipo_usuario'];
 
 // Asegurarse de que se recibió una acción a través del método POST
 if (!isset($_POST['action'])) {
@@ -25,7 +26,8 @@ switch ($action) {
         if ($stmt = $conn->prepare($sql)) {
             $stmt->bind_param("isss", $usuario_id, $actividad, $lugar, $horario);
             if ($stmt->execute()) {
-                header("Location: ../views/perfilJugador.php");
+                // Redireccionar según el tipo de usuario
+                redirectBasedOnUserType($tipo_usuario, $usuario_id);
             } else {
                 // Manejar el error de ejecución aquí
                 header("Location: ../views/error.php");
@@ -49,7 +51,8 @@ switch ($action) {
         if ($stmt = $conn->prepare($sql)) {
             $stmt->bind_param("sssi", $actividad, $lugar, $horario, $situacion_id);
             if ($stmt->execute()) {
-                header("Location: ../views/perfilJugador.php");
+                // Redireccionar según el tipo de usuario
+                redirectBasedOnUserType($tipo_usuario, $usuario_id);
             } else {
                 // Manejar el error de ejecución aquí
                 header("Location: ../views/error.php");
@@ -70,7 +73,8 @@ switch ($action) {
         if ($stmt = $conn->prepare($sql)) {
             $stmt->bind_param("i", $situacion_id);
             if ($stmt->execute()) {
-                header("Location: ../views/perfilJugador.php");
+                // Redireccionar según el tipo de usuario
+                redirectBasedOnUserType($tipo_usuario, $usuario_id);
             } else {
                 // Manejar el error de ejecución aquí
                 header("Location: ../views/error.php");
@@ -84,4 +88,22 @@ switch ($action) {
 }
 
 $conn->close();
+
+function redirectBasedOnUserType($tipo_usuario, $usuario_id) {
+    switch ($tipo_usuario) {
+        case 'jugador':
+            header("Location: ../views/perfilJugador.php?id=$usuario_id");
+            break;
+        case 'entrenador':
+            header("Location: ../views/perfilEntrenador.php?id=$usuario_id");
+            break;
+        case 'equipo':
+            header("Location: ../views/perfilEquipo.php?id=$usuario_id");
+            break;
+        default:
+            header("Location: ../index.php");
+            break;
+    }
+    exit;
+}
 ?>

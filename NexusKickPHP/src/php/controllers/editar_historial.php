@@ -3,6 +3,8 @@ include '../config/db.php';
 
 session_start();
 $usuario_id = $_SESSION['id_usuario'];
+$tipo_usuario = $_SESSION['tipo_usuario'];
+
 
 $action = $_POST['action'];
 
@@ -50,5 +52,20 @@ switch ($action) {
 
 $stmt->close();
 $conn->close();
-header("Location: ../views/perfilJugador.php"); // Redirecciona de nuevo al perfil, asegúrate de pasar el `usuario_id` correctamente
+// Redireccionar según el tipo de usuario
+switch ($tipo_usuario) {
+    case 'jugador':
+        header("Location: ../views/perfilJugador.php?id=$usuario_id");
+        break;
+    case 'entrenador':
+        header("Location: ../views/perfilEntrenador.php?id=$usuario_id");
+        break;
+    case 'equipo':
+        header("Location: ../views/perfilEquipo.php?id=$usuario_id");
+        break;
+    default:
+        header("Location: ../index.php");
+        break;
+}
+exit;
 ?>
