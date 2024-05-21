@@ -14,13 +14,13 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6, a {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700; /* Utiliza un peso más bold para los encabezados */
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 700 !important; /* Utiliza un peso más bold para los encabezados */
 }
 
 p {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400; /* Peso normal para texto */
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 400 !important; /* Peso normal para texto */
 }
 
 .titulo-container{
