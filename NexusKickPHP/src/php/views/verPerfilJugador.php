@@ -12,7 +12,6 @@
 
 <body>
     <?php
-    session_start();
     include './componentes/header.php';
     include '../config/db.php'; // Asegúrate de que la ruta es correcta
 

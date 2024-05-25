@@ -115,7 +115,8 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
             <div class="filtro-seccion">
                 <div class="filtro-item">
                     <label for="altura">Altura mínima (cm):</label>
-                    <input type="number" id="altura" name="altura" min="100" max="250" value="<?= htmlspecialchars($altura) ?>">
+                    <input type="number" id="altura" name="altura" min="100" max="250"
+                        value="<?= htmlspecialchars($altura) ?>">
                 </div>
                 <div class="filtro-item">
                     <label for="pierna_buena">Pierna buena:</label>
@@ -131,16 +132,20 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
                     <select id="posicion_habitual" name="posicion_habitual">
                         <option value="">Ninguna</option>
                         <option value="Portero" <?= $posicion_habitual === 'Portero' ? 'selected' : '' ?>>Portero</option>
-                        <option value="Lateral Derecho" <?= $posicion_habitual === 'Lateral Derecho' ? 'selected' : '' ?>>Lateral Derecho</option>
+                        <option value="Lateral Derecho" <?= $posicion_habitual === 'Lateral Derecho' ? 'selected' : '' ?>>
+                            Lateral Derecho</option>
                         <option value="Lateral Izquierdo" <?= $posicion_habitual === 'Lateral Izquierdo' ? 'selected' : '' ?>>Lateral Izquierdo</option>
-                        <option value="Central Derecho" <?= $posicion_habitual === 'Central Derecho' ? 'selected' : '' ?>>Central Derecho</option>
+                        <option value="Central Derecho" <?= $posicion_habitual === 'Central Derecho' ? 'selected' : '' ?>>
+                            Central Derecho</option>
                         <option value="Central Izquierdo" <?= $posicion_habitual === 'Central Izquierdo' ? 'selected' : '' ?>>Central Izquierdo</option>
                         <option value="Pivote Defensivo" <?= $posicion_habitual === 'Pivote Defensivo' ? 'selected' : '' ?>>Pivote Defensivo</option>
                         <option value="Centrocampista Derecho" <?= $posicion_habitual === 'Centrocampista Derecho' ? 'selected' : '' ?>>Centrocampista Derecho</option>
                         <option value="Centrocampista Izquierdo" <?= $posicion_habitual === 'Centrocampista Izquierdo' ? 'selected' : '' ?>>Centrocampista Izquierdo</option>
                         <option value="Centrocampista Central" <?= $posicion_habitual === 'Centrocampista Central' ? 'selected' : '' ?>>Centrocampista Central</option>
-                        <option value="Mediapunta" <?= $posicion_habitual === 'Mediapunta' ? 'selected' : '' ?>>Mediapunta</option>
-                        <option value="Extremo Derecho" <?= $posicion_habitual === 'Extremo Derecho' ? 'selected' : '' ?>>Extremo Derecho</option>
+                        <option value="Mediapunta" <?= $posicion_habitual === 'Mediapunta' ? 'selected' : '' ?>>Mediapunta
+                        </option>
+                        <option value="Extremo Derecho" <?= $posicion_habitual === 'Extremo Derecho' ? 'selected' : '' ?>>
+                            Extremo Derecho</option>
                         <option value="Extremo Izquierdo" <?= $posicion_habitual === 'Extremo Izquierdo' ? 'selected' : '' ?>>Extremo Izquierdo</option>
                         <option value="Delantero Centro" <?= $posicion_habitual === 'Delantero Centro' ? 'selected' : '' ?>>Delantero Centro</option>
                         <option value="Segundo Delantero" <?= $posicion_habitual === 'Segundo Delantero' ? 'selected' : '' ?>>Segundo Delantero</option>
@@ -150,7 +155,8 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
                     <label for="posicion_secundaria">Posición Secundaria:</label>
                     <select id="posicion_secundaria" name="posicion_secundaria">
                         <option value="">Ninguna</option>
-                        <option value="Portero" <?= $posicion_secundaria === 'Portero' ? 'selected' : '' ?>>Portero</option>
+                        <option value="Portero" <?= $posicion_secundaria === 'Portero' ? 'selected' : '' ?>>Portero
+                        </option>
                         <option value="Lateral Derecho" <?= $posicion_secundaria === 'Lateral Derecho' ? 'selected' : '' ?>>Lateral Derecho</option>
                         <option value="Lateral Izquierdo" <?= $posicion_secundaria === 'Lateral Izquierdo' ? 'selected' : '' ?>>Lateral Izquierdo</option>
                         <option value="Central Derecho" <?= $posicion_secundaria === 'Central Derecho' ? 'selected' : '' ?>>Central Derecho</option>
@@ -159,7 +165,8 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
                         <option value="Centrocampista Derecho" <?= $posicion_secundaria === 'Centrocampista Derecho' ? 'selected' : '' ?>>Centrocampista Derecho</option>
                         <option value="Centrocampista Izquierdo" <?= $posicion_secundaria === 'Centrocampista Izquierdo' ? 'selected' : '' ?>>Centrocampista Izquierdo</option>
                         <option value="Centrocampista Central" <?= $posicion_secundaria === 'Centrocampista Central' ? 'selected' : '' ?>>Centrocampista Central</option>
-                        <option value="Mediapunta" <?= $posicion_secundaria === 'Mediapunta' ? 'selected' : '' ?>>Mediapunta</option>
+                        <option value="Mediapunta" <?= $posicion_secundaria === 'Mediapunta' ? 'selected' : '' ?>>
+                            Mediapunta</option>
                         <option value="Extremo Derecho" <?= $posicion_secundaria === 'Extremo Derecho' ? 'selected' : '' ?>>Extremo Derecho</option>
                         <option value="Extremo Izquierdo" <?= $posicion_secundaria === 'Extremo Izquierdo' ? 'selected' : '' ?>>Extremo Izquierdo</option>
                         <option value="Delantero Centro" <?= $posicion_secundaria === 'Delantero Centro' ? 'selected' : '' ?>>Delantero Centro</option>
@@ -170,8 +177,10 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
                     <label for="estilo_de_juego">Estilo de Juego:</label>
                     <select id="estilo_de_juego" name="estilo_de_juego">
                         <option value="">Ninguna</option>
-                        <option value="Defensivo" <?= $estilo_de_juego === 'Defensivo' ? 'selected' : '' ?>>Defensivo</option>
-                        <option value="Equilibrado" <?= $estilo_de_juego === 'Equilibrado' ? 'selected' : '' ?>>Equilibrado</option>
+                        <option value="Defensivo" <?= $estilo_de_juego === 'Defensivo' ? 'selected' : '' ?>>Defensivo
+                        </option>
+                        <option value="Equilibrado" <?= $estilo_de_juego === 'Equilibrado' ? 'selected' : '' ?>>Equilibrado
+                        </option>
                         <option value="Ofensivo" <?= $estilo_de_juego === 'Ofensivo' ? 'selected' : '' ?>>Ofensivo</option>
                     </select>
                 </div>
@@ -190,17 +199,20 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
                 </div>
                 <div class="filtro-item">
                     <label for="velocidad">Velocidad Mínima:</label>
-                    <input type="range" id="velocidad" name="velocidad" min="1" max="5" value="<?= htmlspecialchars($velocidad) ?>">
+                    <input type="range" id="velocidad" name="velocidad" min="1" max="5"
+                        value="<?= htmlspecialchars($velocidad) ?>">
                     <span id="velocidad_value"><?= htmlspecialchars($velocidad) ?></span>
                 </div>
                 <div class="filtro-item">
                     <label for="regate">Regate Mínimo:</label>
-                    <input type="range" id="regate" name="regate" min="1" max="5" value="<?= htmlspecialchars($regate) ?>">
+                    <input type="range" id="regate" name="regate" min="1" max="5"
+                        value="<?= htmlspecialchars($regate) ?>">
                     <span id="regate_value"><?= htmlspecialchars($regate) ?></span>
                 </div>
                 <div class="filtro-item">
                     <label for="defensa">Defensa Mínima:</label>
-                    <input type="range" id="defensa" name="defensa" min="1" max="5" value="<?= htmlspecialchars($defensa) ?>">
+                    <input type="range" id="defensa" name="defensa" min="1" max="5"
+                        value="<?= htmlspecialchars($defensa) ?>">
                     <span id="defensa_value"><?= htmlspecialchars($defensa) ?></span>
                 </div>
             </div>
@@ -214,12 +226,13 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
     <h2 id="resultados">Resultados</h2>
     <div class='tablon'>
         <div class="card-container" id="result-container">
-            <?php foreach ($anuncios as $anuncio) : ?>
+            <?php foreach ($anuncios as $anuncio): ?>
                 <div class="anuncio-card">
                     <div class="perfil-info">
-                        <img src="<?= !empty($anuncio['perfil_url']) ? $anuncio['perfil_url'] : '../../img/imagenPerfilPredeterminada.jpg' ?>" alt="perfil" class="perfil-imagen">
+                        <img src="<?= !empty($anuncio['perfil_url']) ? $anuncio['perfil_url'] : '../../img/imagenPerfilPredeterminada.jpg' ?>"
+                            alt="perfil" class="perfil-imagen">
                         <div class="info-texto">
-                            <h2><?= $anuncio['nombre'] ?> <?= $anuncio['apellidos'] ?></h2>
+                            <h2><?= $anuncio['nombre'] ?>     <?= $anuncio['apellidos'] ?></h2>
                             <p><?= $anuncio['edad'] ?> años - <?= $anuncio['ciudad'] ?></p>
                         </div>
                     </div>
@@ -229,8 +242,9 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
                     </div>
                     <div class="anuncio-botones">
                         <div class="button-borders">
-                            <a class="primary-button">Contactar</a>
-                            <a href="./verPerfilJugador.php?id=<?= $anuncio['usuario_id'] ?>" class="primary-button">Ver Perfil</a>
+                        <button class="primary-button" onclick="createConversation(<?= $usuario_logueado_id ?>, <?= $anuncio['usuario_id'] ?>)">Contactar</button>
+                            <a href="./verPerfilJugador.php?id=<?= $anuncio['usuario_id'] ?>" class="primary-button">Ver
+                                Perfil</a>
                         </div>
                     </div>
                     <p><?= $anuncio['fecha_publicacion'] ?></p>
@@ -257,20 +271,20 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
     </div>
 
     <script>
-        $(document).ready(function() {
-            $('#filtro-form').on('submit', function(event) {
+        $(document).ready(function () {
+            $('#filtro-form').on('submit', function (event) {
                 event.preventDefault();
                 $.ajax({
                     url: '../controllers/filtros_anuncios_jugador.php',
                     method: 'POST',
                     data: $(this).serialize(),
-                    success: function(response) {
+                    success: function (response) {
                         $('#result-container').html(response);
                     }
                 });
             });
 
-            $('input[type="range"]').on('input', function() {
+            $('input[type="range"]').on('input', function () {
                 const id = $(this).attr('id');
                 $(`#${id}_value`).text($(this).val());
             });
@@ -281,15 +295,15 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
             var span = document.getElementsByClassName("close")[0];
 
             if (btn && modal && span) {
-                btn.onclick = function() {
+                btn.onclick = function () {
                     modal.style.display = "block";
                 }
 
-                span.onclick = function() {
+                span.onclick = function () {
                     modal.style.display = "none";
                 }
 
-                window.onclick = function(event) {
+                window.onclick = function (event) {
                     if (event.target == modal) {
                         modal.style.display = "none";
                     }
@@ -298,6 +312,67 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
                 console.error("Modal elements not found.");
             }
         });
+    </script>
+
+    <script>
+        function createConversation(usuario1_id, usuario2_id) {
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "../controllers/crear_conversacion.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    const response = JSON.parse(this.responseText);
+                    if (response.conversacion_id) {
+                        openConversation(response.conversacion_id);
+                    } else {
+                        console.error(response.error);
+                    }
+                }
+            };
+            xhr.send("usuario1_id=" + usuario1_id + "&usuario2_id=" + usuario2_id);
+        }
+
+        function openConversation(conversacionId) {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "../controllers/obtener_mensaje_conversacion.php?conversacion_id=" + conversacionId, true);
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    const chatBox = document.getElementById("chat-box");
+                    chatBox.innerHTML = "";
+                    const messages = JSON.parse(this.responseText);
+                    messages.forEach(message => {
+                        const div = document.createElement("div");
+                        div.innerHTML = `<strong>${message.de_usuario}:</strong> ${message.mensaje} <small>${message.fecha_envio}</small>`;
+                        chatBox.appendChild(div);
+                    });
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                    document.querySelector(".chat-container").style.display = "block";
+                    document.querySelector(".chat-container").dataset.conversacionId = conversacionId;
+                }
+            };
+            xhr.send();
+        }
+
+        document.querySelector(".chat-input button").addEventListener("click", sendMessage);
+
+        function sendMessage() {
+            const message = document.getElementById("message").value;
+            if (message.trim() === "") return;
+
+            const conversacionId = document.querySelector(".chat-container").dataset.conversacionId;
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "../controllers/enviar_mensajes.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    console.log(this.responseText);
+                    document.getElementById("message").value = "";
+                    openConversation(conversacionId); // Recargar los mensajes de la conversación actual
+                }
+            };
+            xhr.send("mensaje=" + encodeURIComponent(message) + "&conversacion_id=" + conversacionId);
+        }
     </script>
 </body>
 

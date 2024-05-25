@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NexusKick - Conexión y Colaboración en Fútbol</title>
+    <link rel="stylesheet" href="./../../css/inicio.css">
     <link rel="stylesheet" href="./../../css/general.css">
     <link rel="stylesheet" href="./../../css/header.css">
-    <link rel="stylesheet" href="./../../css/inicio.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -16,13 +17,13 @@
         <div class="container">
             <h1>Conecta, Colabora, Compite</h1>
             <p>Un lugar donde entrenadores, jugadores y equipos se encuentran.</p>
-            <a href="#steps" class="cta-button">Empieza Ahora</a>
+            <a href="#steps" class="cta-button">Pasos recomendados</a>
         </div>
     </section>
 
     <section id="features" class="features-section">
         <div class="container">
-            <h2>¿Por qué NexusKick?</h2>
+            <h2>¿Qué te ofrece NexusKick?</h2>
             <div class="features">
                 <div class="feature">
                     <i class="fas fa-users"></i>

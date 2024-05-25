@@ -154,6 +154,8 @@ $conn->close();
 <body id="body">
 
     <form action="register.php" method="POST">
+    <img src="../../img/LogitipoParaTFC2.png" alt="Logotipo de NexusKick" style="max-width: 100px; margin: 0 auto 20px; display: block;">
+
         <h2>Crear una nueva cuenta</h2>
         <div class="input-group">
             <label for="name">Nombre / Nombre del Club</label>

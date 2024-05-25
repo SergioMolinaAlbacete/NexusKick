@@ -62,11 +62,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body id="body">
 
-    <header>
-        <!-- Tu código de cabecera aquí -->
-    </header>
+    
     <div class="container">
         <div class="form-container">
+        <img src="../../img/LogitipoParaTFC2.png" alt="Logotipo de NexusKick" style="max-width: 150px; margin: 0 auto 20px; display: block;">
             <form action="login.php" method="POST">
                 <h2>Iniciar sesión</h2>
                 <div class="input-group">
