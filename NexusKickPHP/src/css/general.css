@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap');
 
-
-html,body{
+html, body {
     margin: 0;
     padding: 0;
 }
-h1{
+
+h1 {
     text-align: center;
 }
 
@@ -23,16 +23,17 @@ p {
     font-weight: 400 !important; /* Peso normal para texto */
 }
 
-.titulo-container{
+.titulo-container {
     display: flex;
     justify-content: center;
-  }
-  .titulo-container button{
+}
+
+.titulo-container button {
     margin-left: 20px;
     margin-top: 20px;
     max-height: 50px;
-  }
-  
+}
+
 /* Estilos para el modal */
 .modal {
     display: none; /* Oculto por defecto */
@@ -43,8 +44,7 @@ p {
     width: 100%; /* Ancho completo */
     height: 100%; /* Alto completo */
     overflow: auto; /* Habilita scroll si es necesario */
-    background-color: rgb(0,0,0); /* Fondo negro */
-    background-color: rgba(0,0,0,0.4); /* Negro con opacidad */
+    background-color: rgba(0, 0, 0, 0.4); /* Negro con opacidad */
 }
 
 .modal-content {
@@ -54,7 +54,7 @@ p {
     border: 1px solid #888;
     width: 80%; /* Ancho del contenido del modal */
     max-width: 600px; /* Máximo ancho del modal */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Sombra para darle profundidad */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra para darle profundidad */
     border-radius: 8px; /* Bordes redondeados */
 }
 
@@ -116,10 +116,6 @@ p {
     resize: vertical; /* Permite solo el cambio de tamaño vertical */
 }
 
-
-
-
-
 .primary-button {
     font-family: 'Ropa Sans', sans-serif;
     color: white;
@@ -169,7 +165,7 @@ button:hover {
 }
 
 button:active {
-    background-color: #166c43; /* Color más oscuro para el click */
+    background-color: #00755c; /* Color más oscuro para el click */
     transform: scale(0.95); /* Pequeña reducción de tamaño al hacer clic */
 }
 

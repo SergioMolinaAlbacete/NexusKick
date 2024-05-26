@@ -29,6 +29,13 @@
   
 }
 
+svg:hover {
+  
+  background-color: #b2dfdb;
+  
+}
+
+
 .nav-menu {
   list-style-type: none;
   display: flex;

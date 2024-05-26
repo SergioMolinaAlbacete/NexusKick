@@ -1,101 +1,50 @@
+<?php
+session_start();
+if (!isset($_SESSION['id_usuario'])) {
+    header('Location: login.php');
+    exit();
+}
+
+include '../config/db.php';
+
+$id_usuario = $_SESSION['id_usuario'];
+
+// Obtener conversaciones del usuario
+$stmt = $conn->prepare("
+    SELECT c.id, u1.nombre AS usuario1, u2.nombre AS usuario2, c.ultima_actividad 
+    FROM conversaciones c
+    JOIN usuarios u1 ON c.usuario1_id = u1.id
+    JOIN usuarios u2 ON c.usuario2_id = u2.id
+    WHERE c.usuario1_id = ? OR c.usuario2_id = ?
+    ORDER BY c.ultima_actividad DESC
+");
+$stmt->bind_param("ii", $id_usuario, $id_usuario);
+$stmt->execute();
+$conversaciones = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-    <title>Chat en Vivo - NexusKick</title>
-    <style>
-        /* Estilos existentes */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0;
-        }
-
-        header {
-            width: 100%;
-            padding: 10px;
-            background-color: #198754;
-            color: white;
-            text-align: center;
-        }
-
-        .conversations-container,
-        .chat-container {
-            width: 80%;
-            max-width: 600px;
-            margin-top: 20px;
-        }
-
-        .conversation {
-            padding: 10px;
-            border-bottom: 1px solid #dee2e6;
-            cursor: pointer;
-        }
-
-        .chat-container {
-            background: #ffffff;
-            border: 1px solid #dee2e6;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .chat-box {
-            flex: 1;
-            padding: 15px;
-            border-bottom: 1px solid #dee2e6;
-            overflow-y: scroll;
-            height: 400px;
-        }
-
-        .chat-input {
-            display: flex;
-        }
-
-        .chat-input input {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            border-top: 1px solid #dee2e6;
-            border-bottom-left-radius: 5px;
-            outline: none;
-        }
-
-        .chat-input button {
-            background-color: #198754;
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            cursor: pointer;
-            border-bottom-right-radius: 5px;
-        }
-
-        .chat-input button:hover {
-            background-color: #157a47;
-        }
-    </style>
+    <title>Conversaciones</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <header>
-        <button id="open-conversations">Mis Conversaciones</button>
-    </header>
-    <div class="conversations-container" id="conversations-container" style="display: none;">
-        <!-- Aquí se cargan las conversaciones -->
+    <h1>Tus Conversaciones</h1>
+    <div class="conversations">
+        <?php foreach ($conversaciones as $conversacion): ?>
+            <div class="conversation">
+                <a href="conversacion.php?id=<?= $conversacion['id'] ?>">
+                    <?php
+                    $contact_name = ($conversacion['usuario1'] === $_SESSION['nombre_usuario']) ? $conversacion['usuario2'] : $conversacion['usuario1'];
+                    echo htmlspecialchars($contact_name);
+                    ?>
+                </a>
+                <span><?= $conversacion['ultima_actividad'] ?></span>
+            </div>
+        <?php endforeach; ?>
     </div>
-    <div class="chat-container" style="display: none;">
-        <div class="chat-box" id="chat-box"></div>
-        <div class="chat-input">
-            <input type="text" id="message" placeholder="Escribe tu mensaje...">
-            <button onclick="sendMessage()">Enviar</button>
-        </div>
-    </div>
-    <script src="js/chat.js"></script>
 </body>
-
 </html>

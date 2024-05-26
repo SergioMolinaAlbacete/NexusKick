@@ -1,5 +1,4 @@
-
-
+/* Contenedor principal del tablón */
 .tablon {
   display: flex;
   justify-content: center; /* Centra el contenedor de tarjetas */
@@ -7,20 +6,23 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  flex-wrap: wrap;
 }
 
+/* Estilos de tarjeta para diferentes tamaños de pantalla */
 @media (max-width: 1200px) {
   .tablon {
-    grid-template-columns: repeat(2, 1fr); /* Dos columnas en pantallas medianas */
+      grid-template-columns: repeat(2, 1fr); /* Dos columnas en pantallas medianas */
   }
 }
 
 @media (max-width: 768px) {
   .tablon {
-    grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+      grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
   }
 }
 
+/* Contenedor de las tarjetas */
 .card-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -28,6 +30,7 @@
   max-width: 1920px; /* Ajusta este valor basado en el tamaño deseado de las tarjetas */
 }
 
+/* Estilos de las tarjetas de anuncio */
 .anuncio-card {
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -35,59 +38,60 @@
   display: flex;
   flex-direction: column;
   max-width: 500px; /* Ancho máximo de cada tarjeta */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  background-color: #00755c ;
+  background-color: #00755c;
+  color: white;
 }
 
-  
-  .perfil-info {
-    display: flex;
-    align-items: center;
-  }
-  
-  .perfil-imagen {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
-  
-  .info-texto h2, .info-texto p {
-    margin: 0;
-    padding-left: 10px;
-  }
-  
-  .anuncio-detalle h3, .anuncio-detalle p {
-    margin: 10px 0;
-  }
-  
-  .anuncio-botones button {
-    margin-right: 10px;
-  }
+/* Información del perfil dentro de la tarjeta */
+.perfil-info {
+  display: flex;
+  align-items: center;
+}
 
+.perfil-imagen {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
 
-  
-  .button-container {
-    display: flex;
-    justify-content: center; /* Centra los botones horizontalmente */
-    align-items: center;     /* Centra los botones verticalmente */
+.info-texto h2, .info-texto p {
+  margin: 0;
+  padding-left: 10px;
+}
+
+/* Estilos para el detalle del anuncio */
+.anuncio-detalle h3, .anuncio-detalle p {
+  margin: 10px 0;
+}
+
+.anuncio-detalle h3, .anuncio-detalle .fecha {
+  color: white; /* Color blanco para el título y la fecha del anuncio */
+}
+
+/* Centra los botones dentro de la tarjeta */
+.anuncio-botones {
+  display: flex;
+  justify-content: center; /* Centra los botones horizontalmente */
+  gap: 10px; /* Espaciado entre los botones */
+  margin-top: 20px;
 }
 
 
 
-
-
-
-
+/* Contenedor del filtro */
 .filtro-container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background: linear-gradient(to right, #002e34, #00c16c);  border-radius: 10px;
+  background: linear-gradient(to right, #002e34, #00c16c);
+  border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Secciones del filtro */
 .filtro-seccion {
   display: flex;
   flex-wrap: wrap;
@@ -100,7 +104,6 @@
   flex: 1 1 45%; /* Hace que los elementos en la primera fila sean más estrechos */
 }
 
-
 .filtro-item {
   flex: 1 1 200px;
   display: flex;
@@ -108,6 +111,7 @@
   align-items: center; /* Centra los elementos dentro del filtro-item */
 }
 
+/* Estilos de los elementos del filtro */
 label {
   margin-bottom: 5px;
   font-weight: bold;
@@ -154,12 +158,19 @@ input[type=range]::-moz-range-thumb {
   cursor: pointer; /* Cambiar el cursor al pasar sobre el pulgar */
 }
 
-span{
+/* Espaciado adicional */
+span {
   margin-top: 10px;
 }
 
-#resultados{
+/* Resultados centrados */
+#resultados {
   margin-top: 30px;
   margin-bottom: 0;
   text-align: center;
+}
+
+
+a{
+  border-radius: 5px;
 }

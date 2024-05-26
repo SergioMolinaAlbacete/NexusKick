@@ -82,9 +82,9 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
 <head>
     <meta charset="UTF-8">
     <title>Anuncios Jugadores | NexusKick</title>
+    <link rel="stylesheet" href="./../../css/header.css">
     <link rel="stylesheet" href="./../../css/general.css">
     <link rel="stylesheet" href="./../../css/Anuncio.css">
-    <link rel="stylesheet" href="./../../css/header.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
