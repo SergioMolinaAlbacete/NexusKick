@@ -36,9 +36,9 @@
                     <p>Crea y busca anuncios para oportunidades de juego y entrenamiento.</p>
                 </div>
                 <div class="feature">
-                    <i class="fas fa-calendar-alt"></i>
-                    <h3>Eventos</h3>
-                    <p>Organiza y participa en eventos y partidos de fútbol.</p>
+                    <i class="fas fa-comment-alt"></i>
+                    <h3>Chat</h3>
+                    <p>Conecta con otras personas a través del chat.</p>
                 </div>
             </div>
         </div>
