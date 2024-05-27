@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Mi Perfil | NexusKick</title>
+    <title>Perfil | NexusKick</title>
     <link rel="stylesheet" href="./../../css/general.css">
     <link rel="stylesheet" href="./../../css/header.css">
     <link rel="stylesheet" href="./../../css/perfil.css">
@@ -14,7 +14,8 @@
     <?php
     include './componentes/header.php';
     include '../config/db.php'; // Asegúrate de que la ruta es correcta
-
+    
+    //Obtener el usuario que estoy visitando
     $usuario_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
     if ($usuario_id == 0) {
         echo "Usuario no válido";
@@ -40,7 +41,8 @@
     <!-- Bloque información personal -->
     <div class="player-profile">
         <div class="player-profile-column">
-            <img src="<?= !empty($player['perfil_url']) ? $player['perfil_url'] : '../../img/imagenPerfilPredeterminada.jpg' ?>" alt="<?= htmlspecialchars($player['nombre']) ?>" class="player-image" />
+            <img src="<?= !empty($player['perfil_url']) ? $player['perfil_url'] : '../../img/imagenPerfilPredeterminada.jpg' ?>"
+                alt="<?= htmlspecialchars($player['nombre']) ?>" class="player-image" />
             <h2 class="player-nickname"><?= $player['apodo'] ?></h2>
         </div>
         <div class="player-info">
@@ -85,9 +87,10 @@
                 <img src="../../img/flechaIzquierda.png" alt="Anterior" />
             </button>
 
-            <?php foreach ($historiales as $item) : ?>
+            <?php foreach ($historiales as $item): ?>
                 <div class="history-card">
-                    <img src="<?= htmlspecialchars($item['imagenEscudo']) ?>" alt="Escudo del equipo <?= htmlspecialchars($item['equipo']) ?>" class="team-shield" />
+                    <img src="<?= htmlspecialchars($item['imagenEscudo']) ?>"
+                        alt="Escudo del equipo <?= htmlspecialchars($item['equipo']) ?>" class="team-shield" />
                     <h3><?= htmlspecialchars($item['equipo']) ?></h3>
                     <p>Temporada: <?= htmlspecialchars($item['temporada']) ?></p>
                     <p>Resultado: <?= htmlspecialchars($item['resultado']) ?></p>
@@ -123,17 +126,28 @@
         <h2>Ficha Técnica</h2>
         <div class="technical-details">
             <div class="column">
-                <p>Posición Habitual: <?= htmlspecialchars($fichaTecnica['posicion_habitual']) ?> | Posición Secundaria: <?= htmlspecialchars($fichaTecnica['posicion_secundaria']) ?>)</p>
+                <p>Posición Habitual: <?= htmlspecialchars($fichaTecnica['posicion_habitual']) ?> | Posición Secundaria:
+                    <?= htmlspecialchars($fichaTecnica['posicion_secundaria']) ?>)</p>
                 <p>Estilo de Juego: <?= htmlspecialchars($fichaTecnica['estilo_de_juego']) ?></p>
             </div>
             <div class="column">
                 <div class="skills">
                     <h3>Habilidades Técnicas</h3>
-                    <p>Pases: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['pases']) ?></p>
-                    <p>Tiros: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['tiros']) ?></p>
-                    <p>Velocidad: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['velocidad']) ?></p>
-                    <p>Regate: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['regate']) ?></p>
-                    <p>Defensa: <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['defensa']) ?></p>
+                    <p>Pases:
+                        <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['pases']) ?>
+                    </p>
+                    <p>Tiros:
+                        <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['tiros']) ?>
+                    </p>
+                    <p>Velocidad:
+                        <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['velocidad']) ?>
+                    </p>
+                    <p>Regate:
+                        <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['regate']) ?>
+                    </p>
+                    <p>Defensa:
+                        <?= str_repeat('<img src="../../img/balon.png" alt="Balón" style="width:30px; height:30px;position:relative;top:6px;">', $fichaTecnica['defensa']) ?>
+                    </p>
                 </div>
                 <p>Describe tu estilo de juego: <?= htmlspecialchars($fichaTecnica['notas_adicionales']) ?></p>
             </div>
@@ -169,7 +183,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($situaciones as $situacion) : ?>
+                    <?php foreach ($situaciones as $situacion): ?>
                         <tr>
                             <td><?= htmlspecialchars($situacion['actividad']) ?></td>
                             <td><?= htmlspecialchars($situacion['lugar']) ?></td>
@@ -201,11 +215,12 @@
 
         <!-- Bloque Reseñas -->
         <div class="reviews">
-            <h2>Reseñas</h2>
-            <?php foreach ($reseñas as $reseña) : ?>
+            <h2>Reseñas<button id="añadirReseñas">Añadir Reseña</button></h2>
+            <?php foreach ($reseñas as $reseña): ?>
                 <div class="review">
                     <!-- Mostrar la foto de perfil si está disponible, de lo contrario mostrar una imagen por defecto -->
-                    <img src="<?= $reseña['perfil_url'] ?: '../img/imagenPerfilPredeterminada.jpg' ?>" alt="Foto de perfil" style="width: 50px; height: 50px; border-radius: 50%;">
+                    <img src="<?= $reseña['perfil_url'] ?: '../../img/imagenPerfilPredeterminada.jpg' ?>"
+                        alt="Foto de perfil" style="width: 50px; height: 50px; border-radius: 50%;">
                     <p><?= htmlspecialchars($reseña['reseña']) ?></p>
                     <p><?= str_repeat("⭐", intval($reseña['puntuacion'])) ?></p>
                     <small><?= date("d/m/Y", strtotime($reseña['fecha'])) ?></small>
@@ -214,8 +229,54 @@
         </div>
 
 
+        <!-- Modal para añadir reseña -->
+        <div id="modalAñadirReseña" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Añadir Reseña</h2>
+                <form action="../controllers/añadir_reseña.php" method="POST">
+                    <input type="hidden" name="de_usuario_id" value="<?= $_SESSION['id_usuario'] ?>">
+                    <input type="hidden" name="para_usuario_id" value="<?= $usuario_id ?>">
+                    <label>Reseña:</label>
+                    <textarea name="reseña" placeholder="Escribe tu reseña aquí"></textarea>
+                    <label>Puntuación:</label>
+                    <select name="puntuacion">
+                        <option value="1"> ⭐</option>
+                        <option value="2"> ⭐⭐</option>
+                        <option value="3"> ⭐⭐⭐</option>
+                        <option value="4"> ⭐⭐⭐⭐</option>
+                        <option value="5"> ⭐⭐⭐⭐⭐</option>
+                    </select>
+                    <button type="submit">Añadir Reseña</button>
+                </form>
+            </div>
+        </div>
 
+        <script>
+            // Modal para añadir reseña
+            var modalReseña = document.getElementById("modalAñadirReseña");
 
+            // Botón que abre el modal de añadir reseña
+            var btnReseña = document.getElementById("añadirReseñas");
+
+            // Botón de cierre en el modal de añadir reseña
+            var spanReseña = document.querySelector("#modalAñadirReseña .close");
+
+            btnReseña.onclick = function () {
+                modalReseña.style.display = "block";
+            }
+
+            spanReseña.onclick = function () {
+                modalReseña.style.display = "none";
+            }
+
+            // Evento para cerrar el modal si el usuario hace clic fuera de él
+            window.onclick = function (event) {
+                if (event.target == modalReseña) {
+                    modalReseña.style.display = "none";
+                }
+            }
+        </script>
 
 
 

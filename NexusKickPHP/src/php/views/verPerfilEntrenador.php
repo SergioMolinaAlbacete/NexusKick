@@ -21,7 +21,12 @@
         exit;
     }
 
-    $usuario_id = $_SESSION['id_usuario'];  // Aquí accedes al ID del usuario desde la sesión
+    //Obtener el usuario que estoy visitando
+    $usuario_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+    if ($usuario_id == 0) {
+        echo "Usuario no válido";
+        exit;
+    }
 
 
     // Consulta para obtener la información del jugador
