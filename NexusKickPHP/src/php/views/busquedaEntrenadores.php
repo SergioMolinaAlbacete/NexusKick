@@ -59,7 +59,7 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
 <body>
     <?php include './componentes/header.php'; ?>
     <div class="titulo-container">
-        <h1>Búsqueda Entrenadores</h1>
+        <h1>Búsqueda de Entrenadores</h1>
         <?php if ($tipo_usuario === 'entrenador'): ?>
             <button id="btnCrearAnuncio">Crear Anuncio</button>
         <?php endif; ?>
@@ -104,7 +104,7 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
         </form>
     </div>
 
-    <h2 id="resultados">Resultados</h2>
+    <h2 id="resultados">Resultados de la búsqueda</h2>
     <div class='tablon'>
         <div class="card-container" id="result-container">
             <?php foreach ($anuncios as $anuncio) : ?>

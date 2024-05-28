@@ -9,7 +9,7 @@ $estadio = isset($_POST['estadio']) ? $_POST['estadio'] : '';
 $fundacion = isset($_POST['fundacion']) ? $_POST['fundacion'] : '';
 
 // Construir la consulta SQL básica
-$sql = "SELECT * 
+$sql = "SELECT anuncios.*, usuarios.*, ficha_tecnica.*
         FROM anuncios 
         JOIN usuarios ON anuncios.usuario_id = usuarios.id
         LEFT JOIN ficha_tecnica ON usuarios.id = ficha_tecnica.usuario_id
@@ -23,10 +23,10 @@ if ($ciudad != '') {
     $sql .= " AND usuarios.ciudad LIKE '%$ciudad%'";
 }
 if ($estadio != '') {
-    $sql .= " AND ficha_tecnica.estadio LIKE '%$estadio%'";
+    $sql .= " AND usuarios.estadio LIKE '%$estadio%'";
 }
 if ($fundacion != '') {
-    $sql .= " AND ficha_tecnica.fnacimiento >= '$fundacion'";
+    $sql .= " AND usuarios.fnacimiento >= '$fundacion'";
 }
 
 $sql .= " ORDER BY anuncios.fecha_publicacion DESC";
@@ -59,7 +59,7 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
 <body>
     <?php include './componentes/header.php'; ?>
     <div class="titulo-container">
-        <h1>Búsqueda Equipos</h1>
+        <h1>Búsqueda de Equipos</h1>
         <?php if ($tipo_usuario === 'equipo'): ?>
             <button id="btnCrearAnuncio">Crear Anuncio</button>
         <?php endif; ?>
@@ -81,10 +81,10 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
             </div>
 
             <div class="filtro-seccion">
-                <div class="filtro-item">
+                <!-- <div class="filtro-item">
                     <label for="estadio">Estadio:</label>
                     <input type="text" id="estadio" name="estadio" value="<?= htmlspecialchars($estadio) ?>">
-                </div>
+                </div> -->
                 <div class="filtro-item">
                     <label for="fundacion">Año de Fundación:</label>
                     <input type="number" id="fundacion" name="fundacion" min="1800" max="<?= date('Y') ?>" value="<?= htmlspecialchars($fundacion) ?>">
@@ -97,7 +97,7 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
         </form>
     </div>
 
-    <h2 id="resultados">Resultados</h2>
+    <h2 id="resultados">Resultados de la búsqueda</h2>
     <div class='tablon'>
         <div class="card-container" id="result-container">
             <?php foreach ($anuncios as $anuncio) : ?>
@@ -106,7 +106,7 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
                         <img src="<?= !empty($anuncio['perfil_url']) ? $anuncio['perfil_url'] : '../../img/escudoPredeterminado.jpg' ?>" alt="perfil" class="perfil-imagen">
                         <div class="info-texto">
                             <h2><?= $anuncio['nombre'] ?></h2>
-                            <p><?= $anuncio['ciudad'] ?> - <?= $anuncio['estadio'] ?></p>
+                            <p><?= $anuncio['ciudad'] ?> </p>
                         </div>
                     </div>
                     <div class="anuncio-detalle">

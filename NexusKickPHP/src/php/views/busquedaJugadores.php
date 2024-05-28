@@ -20,7 +20,7 @@ $defensa = isset($_POST['defensa']) ? $_POST['defensa'] : '1';
 $sql = "SELECT * 
         FROM anuncios 
         JOIN usuarios ON anuncios.usuario_id = usuarios.id
-        JOIN ficha_tecnica ON usuarios.id = ficha_tecnica.usuario_id
+        LEFT JOIN ficha_tecnica ON usuarios.id = ficha_tecnica.usuario_id
         WHERE usuarios.tipo_usuario = 'jugador'";
 
 // Añadir filtros si están presentes
@@ -91,7 +91,7 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
 <body>
     <?php include './componentes/header.php'; ?>
     <div class="titulo-container">
-        <h1>Búsqueda Jugadores</h1>
+        <h1>Búsqueda de Jugadores</h1>
         <?php if ($tipo_usuario === 'jugador'): ?>
             <button id="btnCrearAnuncio">Crear Anuncio</button>
         <?php endif; ?>
@@ -223,7 +223,7 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
         </form>
     </div>
 
-    <h2 id="resultados">Resultados</h2>
+    <h2 id="resultados">Resultados de la búsqueda</h2>
     <div class='tablon'>
         <div class="card-container" id="result-container">
             <?php foreach ($anuncios as $anuncio): ?>

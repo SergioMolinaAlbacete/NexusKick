@@ -29,9 +29,9 @@
   
 }
 
-svg:hover {
+svg:hover, path:hover {
   
-  background-color: #b2dfdb;
+  color: #b2dfdb;
   
 }
 

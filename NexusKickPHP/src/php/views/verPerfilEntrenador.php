@@ -14,7 +14,7 @@
     <?php
     include './componentes/header.php';
     include '../config/db.php'; // Asegúrate de que la ruta es correcta
-
+    
     //Comprobar si el usuario ha iniciado sesión
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         header('Location: login.php');
@@ -46,12 +46,14 @@
     <!-- Bloque información personal -->
     <div class="player-profile">
         <div class="player-profile-column">
-            <img src="<?= !empty($entrenador['perfil_url']) ? $entrenador['perfil_url'] : '../../img/imagenPerfilPredeterminada.jpg' ?>" alt="<?= htmlspecialchars($entrenador['nombre']) ?>" class="player-image" />
+            <img src="<?= !empty($entrenador['perfil_url']) ? $entrenador['perfil_url'] : '../../img/imagenPerfilPredeterminada.jpg' ?>"
+                alt="<?= htmlspecialchars($entrenador['nombre']) ?>" class="player-image" />
             <h2 class="player-nickname"><?= $entrenador['apodo'] ?></h2>
         </div>
         <div class="player-info">
             <h2>Información Personal</h2>
-            <p><span class="info-label">Nombre Completo:</span> <?= $entrenador['nombre'] ?> <?= $entrenador['apellidos'] ?></p>
+            <p><span class="info-label">Nombre Completo:</span> <?= $entrenador['nombre'] ?>
+                <?= $entrenador['apellidos'] ?></p>
             <p><span class="info-label">País de Nacimiento:</span> <?= $entrenador['pais'] ?></p>
             <p><span class="info-label">Lugar de Nacimiento:</span> <?= $entrenador['ciudad'] ?></p>
             <p><span class="info-label">Fecha de Nacimiento:</span> <?= $entrenador['fnacimiento'] ?></p>
@@ -90,9 +92,10 @@
                 <img src="../../img/flechaIzquierda.png" alt="Anterior" />
             </button>
 
-            <?php foreach ($historiales as $item) : ?>
+            <?php foreach ($historiales as $item): ?>
                 <div class="history-card">
-                    <img src="<?= htmlspecialchars($item['imagenEscudo']) ?>" alt="Escudo del equipo <?= htmlspecialchars($item['equipo']) ?>" class="team-shield" />
+                    <img src="<?= htmlspecialchars($item['imagenEscudo']) ?>"
+                        alt="Escudo del equipo <?= htmlspecialchars($item['equipo']) ?>" class="team-shield" />
                     <h3><?= htmlspecialchars($item['equipo']) ?></h3>
                     <p>Temporada: <?= htmlspecialchars($item['temporada']) ?></p>
                     <p>Resultado: <?= htmlspecialchars($item['resultado']) ?></p>
@@ -142,7 +145,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($situaciones as $situacion) : ?>
+                    <?php foreach ($situaciones as $situacion): ?>
                         <tr>
                             <td><?= htmlspecialchars($situacion['actividad']) ?></td>
                             <td><?= htmlspecialchars($situacion['lugar']) ?></td>
@@ -174,11 +177,12 @@
 
         <!-- Bloque Reseñas -->
         <div class="reviews">
-            <h2>Reseñas<button id="añadirReseña">Añadir reseña</button></h2>
-            <?php foreach ($reseñas as $reseña) : ?>
+            <h2>Reseñas<button id="añadirReseñas">Añadir reseña</button></h2>
+            <?php foreach ($reseñas as $reseña): ?>
                 <div class="review">
                     <!-- Mostrar la foto de perfil si está disponible, de lo contrario mostrar una imagen por defecto -->
-                    <img src="<?= $reseña['perfil_url'] ?: '../img/imagenPerfilPredeterminada.jpg' ?>" alt="Foto de perfil" style="width: 50px; height: 50px; border-radius: 50%;">
+                    <img src="<?= $reseña['perfil_url'] ?: '../img/imagenPerfilPredeterminada.jpg' ?>" alt="Foto de perfil"
+                        style="width: 50px; height: 50px; border-radius: 50%;">
                     <p><?= htmlspecialchars($reseña['reseña']) ?></p>
                     <p><?= str_repeat("⭐", intval($reseña['puntuacion'])) ?></p>
                     <small><?= date("d/m/Y", strtotime($reseña['fecha'])) ?></small>
@@ -187,8 +191,56 @@
         </div>
 
 
+        <!-- Modal para añadir reseña -->
+        <div id="modalAñadirReseña" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Añadir Reseña</h2>
+                <form action="../controllers/añadir_reseña.php" method="POST">
+                    <input type="hidden" name="de_usuario_id" value="<?= $_SESSION['id_usuario'] ?>">
+                    <input type="hidden" name="para_usuario_id" value="<?= $usuario_id ?>">
+                    <label>Reseña:</label>
+                    <textarea name="reseña" placeholder="Escribe tu reseña aquí"></textarea>
+                    <label>Puntuación:</label>
+                    <select name="puntuacion">
+                        <option value="1"> ⭐</option>
+                        <option value="2"> ⭐⭐</option>
+                        <option value="3"> ⭐⭐⭐</option>
+                        <option value="4"> ⭐⭐⭐⭐</option>
+                        <option value="5"> ⭐⭐⭐⭐⭐</option>
+                    </select>
+                    <button type="submit">Añadir Reseña</button>
+                </form>
+            </div>
+        </div>
 
- 
+        <script>
+            // Modal para añadir reseña
+            var modalReseña = document.getElementById("modalAñadirReseña");
+
+            // Botón que abre el modal de añadir reseña
+            var btnReseña = document.getElementById("añadirReseñas");
+
+            // Botón de cierre en el modal de añadir reseña
+            var spanReseña = document.querySelector("#modalAñadirReseña .close");
+
+            btnReseña.onclick = function () {
+                modalReseña.style.display = "block";
+            }
+
+            spanReseña.onclick = function () {
+                modalReseña.style.display = "none";
+            }
+
+            // Evento para cerrar el modal si el usuario hace clic fuera de él
+            window.onclick = function (event) {
+                if (event.target == modalReseña) {
+                    modalReseña.style.display = "none";
+                }
+            }
+        </script>
+
+
 
 </body>
 
