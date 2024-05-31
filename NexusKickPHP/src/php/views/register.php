@@ -186,7 +186,7 @@ $conn->close();
             <input type="submit" value="REGISTRARSE" class="google-login-button" />
         </div>
         <div class="input-group">
-            <p>Si ya tienes una cuenta <a href="login.php" class="google-login-button">INICIAR SESIÓN </a></p>
+            <p>Si ya tienes una cuenta <a href="login.php" style="text-decoration: none;" class="google-login-button">INICIAR SESIÓN </a></p>
 
         </div>
     </form>

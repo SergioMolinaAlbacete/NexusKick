@@ -17,7 +17,7 @@ $regate = isset($_POST['regate']) ? $_POST['regate'] : '1';
 $defensa = isset($_POST['defensa']) ? $_POST['defensa'] : '1';
 
 // Construir la consulta SQL básica
-$sql = "SELECT * 
+$sql = "SELECT * ,anuncios.usuario_id AS usuarioAnuncio
         FROM anuncios 
         JOIN usuarios ON anuncios.usuario_id = usuarios.id
         LEFT JOIN ficha_tecnica ON usuarios.id = ficha_tecnica.usuario_id

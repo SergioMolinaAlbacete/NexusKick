@@ -9,7 +9,7 @@ $estadio = isset($_POST['estadio']) ? $_POST['estadio'] : '';
 $fundacion = isset($_POST['fundacion']) ? $_POST['fundacion'] : '';
 
 // Construir la consulta SQL básica
-$sql = "SELECT anuncios.*, usuarios.*, ficha_tecnica.*
+$sql = "SELECT anuncios.*, anuncios.usuario_id AS usuarioAnuncio ,usuarios.id AS usuario_id, usuarios.nombre, usuarios.apellidos, usuarios.edad, usuarios.ciudad, usuarios.perfil_url, usuarios.especialidad, ficha_tecnica.* 
         FROM anuncios 
         JOIN usuarios ON anuncios.usuario_id = usuarios.id
         LEFT JOIN ficha_tecnica ON usuarios.id = ficha_tecnica.usuario_id
@@ -116,7 +116,7 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
                     <div class="anuncio-botones">
                         <div class="button-borders">
                             <a class="primary-button">Contactar</a>
-                            <a href="./verPerfilEquipo.php?id=<?= $anuncio['usuario_id'] ?>" class="primary-button">Ver Perfil</a>
+                            <a href="./verPerfilEquipo.php?id=<?= $anuncio['usuarioAnuncio'] ?>" class="primary-button">Ver Perfil</a>
                         </div>
                     </div>
                     <p><?= $anuncio['fecha_publicacion'] ?></p>

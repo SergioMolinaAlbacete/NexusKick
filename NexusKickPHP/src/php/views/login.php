@@ -80,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="submit" value="ENTRAR" class="google-login-button" />
                 </div>
                 <div class="input-group">
-                    <p>Si no tienes una cuenta <a href="register.php" class="google-login-button">REGISTRATE </a></p>
+                    <p>Si no tienes una cuenta <a href="register.php" style="text-decoration: none;" class="google-login-button">REGISTRATE </a></p>
                 </div>
             </form>
         </div>

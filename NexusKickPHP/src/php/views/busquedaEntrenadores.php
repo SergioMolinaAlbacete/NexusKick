@@ -9,7 +9,7 @@ $experiencia = isset($_POST['experiencia']) ? $_POST['experiencia'] : '';
 $especialidad = isset($_POST['especialidad']) ? $_POST['especialidad'] : '';
 
 // Construir la consulta SQL básica
-$sql = "SELECT * 
+$sql = "SELECT anuncios.*, anuncios.usuario_id AS usuarioAnuncio ,usuarios.id AS usuario_id, usuarios.nombre, usuarios.apellidos, usuarios.edad, usuarios.ciudad, usuarios.perfil_url, usuarios.especialidad, ficha_tecnica.* 
         FROM anuncios 
         JOIN usuarios ON anuncios.usuario_id = usuarios.id
         LEFT JOIN ficha_tecnica ON usuarios.id = ficha_tecnica.usuario_id
@@ -50,8 +50,8 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
 <head>
     <meta charset="UTF-8">
     <title>Anuncios Entrenadores | NexusKick</title>
-    <link rel="stylesheet" href="./../../css/general.css">
     <link rel="stylesheet" href="./../../css/Anuncio.css">
+    <link rel="stylesheet" href="./../../css/general.css">
     <link rel="stylesheet" href="./../../css/header.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -83,16 +83,19 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
             <div class="filtro-seccion">
                 <div class="filtro-item">
                     <label for="experiencia">Experiencia mínima (años):</label>
-                    <input type="number" id="experiencia" name="experiencia" min="0" max="50" value="<?= htmlspecialchars($experiencia) ?>">
+                    <input type="number" id="experiencia" name="experiencia" min="0" max="50"
+                        value="<?= htmlspecialchars($experiencia) ?>">
                 </div>
                 <div class="filtro-item">
                     <label for="especialidad">Especialidad:</label>
                     <select id="especialidad" name="especialidad">
                         <option value="">Ninguna</option>
                         <option value="Entrenador Principal" <?= $especialidad === 'Entrenador Principal' ? 'selected' : '' ?>>Entrenador Principal</option>
-                        <option value="Preparador Físico" <?= $especialidad === 'Preparador Físico' ? 'selected' : '' ?>>Preparador Físico</option>
+                        <option value="Preparador Físico" <?= $especialidad === 'Preparador Físico' ? 'selected' : '' ?>>
+                            Preparador Físico</option>
                         <option value="Entrenador de Porteros" <?= $especialidad === 'Entrenador de Porteros' ? 'selected' : '' ?>>Entrenador de Porteros</option>
-                        <option value="Segundo Entrenador" <?= $especialidad === 'Segundo Entrenador' ? 'selected' : '' ?>>Segundo Entrenador</option>
+                        <option value="Segundo Entrenador" <?= $especialidad === 'Segundo Entrenador' ? 'selected' : '' ?>>
+                            Segundo Entrenador</option>
                         <option value="Psicólogo Deportivo" <?= $especialidad === 'Psicólogo Deportivo' ? 'selected' : '' ?>>Psicólogo Deportivo</option>
                     </select>
                 </div>
@@ -107,12 +110,13 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
     <h2 id="resultados">Resultados de la búsqueda</h2>
     <div class='tablon'>
         <div class="card-container" id="result-container">
-            <?php foreach ($anuncios as $anuncio) : ?>
+            <?php foreach ($anuncios as $anuncio): ?>
                 <div class="anuncio-card">
                     <div class="perfil-info">
-                        <img src="<?= !empty($anuncio['perfil_url']) ? $anuncio['perfil_url'] : '../../img/imagenPerfilPredeterminada.jpg' ?>" alt="perfil" class="perfil-imagen">
+                        <img src="<?= !empty($anuncio['perfil_url']) ? $anuncio['perfil_url'] : '../../img/imagenPerfilPredeterminada.jpg' ?>"
+                            alt="perfil" class="perfil-imagen">
                         <div class="info-texto">
-                            <h2><?= $anuncio['nombre'] ?> <?= $anuncio['apellidos'] ?></h2>
+                            <h2><?= $anuncio['nombre'] ?>     <?= $anuncio['apellidos'] ?></h2>
                             <p><?= $anuncio['edad'] ?> años - <?= $anuncio['ciudad'] ?></p>
                         </div>
                     </div>
@@ -123,7 +127,8 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
                     <div class="anuncio-botones">
                         <div class="button-borders">
                             <a class="primary-button">Contactar</a>
-                            <a href="./verPerfilEntrenador.php?id=<?= $anuncio['usuario_id'] ?>" class="primary-button">Ver Perfil</a>
+                            <a href="./verPerfilEntrenador.php?id=<?= $anuncio['usuarioAnuncio'] ?>" class="primary-button">Ver
+                                Perfil</a>
                         </div>
                     </div>
                     <p><?= $anuncio['fecha_publicacion'] ?></p>
@@ -132,8 +137,8 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
         </div>
     </div>
 
-      <!-- Modal para crear anuncio -->
-      <div id="modalCrearAnuncio" class="modal">
+    <!-- Modal para crear anuncio -->
+    <div id="modalCrearAnuncio" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <form action="../controllers/crear_anuncio.php" method="POST">
@@ -150,20 +155,20 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
     </div>
 
     <script>
-        $(document).ready(function() {
-            $('#filtro-form').on('submit', function(event) {
+        $(document).ready(function () {
+            $('#filtro-form').on('submit', function (event) {
                 event.preventDefault();
                 $.ajax({
                     url: '../controllers/filtros_anuncios_entrenador.php',
                     method: 'POST',
                     data: $(this).serialize(),
-                    success: function(response) {
+                    success: function (response) {
                         $('#result-container').html(response);
                     }
                 });
             });
 
-            $('input[type="range"]').on('input', function() {
+            $('input[type="range"]').on('input', function () {
                 const id = $(this).attr('id');
                 $(`#${id}_value`).text($(this).val());
             });
@@ -174,15 +179,15 @@ $tipo_usuario = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : '
             var span = document.getElementsByClassName("close")[0];
 
             if (btn && modal && span) {
-                btn.onclick = function() {
+                btn.onclick = function () {
                     modal.style.display = "block";
                 }
 
-                span.onclick = function() {
+                span.onclick = function () {
                     modal.style.display = "none";
                 }
 
-                window.onclick = function(event) {
+                window.onclick = function (event) {
                     if (event.target == modal) {
                         modal.style.display = "none";
                     }
