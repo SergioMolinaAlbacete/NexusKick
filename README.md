@@ -41,7 +41,7 @@
 
 ---
 
-## <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f3af.png" width="30"/> Casos de Uso  
+## 📌 Casos de Uso  
 
 👟 <b>Jugador:</b> Quiere encontrar un equipo para jugar.  
 🎩 <b>Entrenador:</b> Necesita un delantero para reforzar su equipo.  
