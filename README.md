@@ -9,7 +9,7 @@
 
 ---
 
-## <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f525.png" width="30"/> Características Principales  
+## 🔥 Características Principales  
 
 ✅ <b>Creación de Perfiles</b> (Entrenadores, Jugadores y Equipos)  
 ✅ <b>Anuncios de Búsqueda</b> (para equipos, jugadores y entrenadores)  
@@ -23,7 +23,7 @@
 
 ---
 
-## <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f6e0.png" width="30"/> Tecnologías Utilizadas  
+## 🛠️ Tecnologías Utilizadas  
 
 ### 🎨 <b>Frontend</b>  
 - 🖥️ <b>HTML5</b> - Estructura del sitio  
