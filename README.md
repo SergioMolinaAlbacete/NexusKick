@@ -1,51 +1,68 @@
-TFC FINAL
+<h1 align="center">
+  <img src="https://twemoji.maxcdn.com/v/latest/72x72/26bd.png" width="50"/> 
+  NexusKick | Conectando el Fútbol  
+</h1>
 
-Paleta colores a utilizar:
-.color1 { #002e34 };
-.color2 { #004443 };
-.color3 { #00755c };
-.color4 { #00c16c };
-.color5 { #90ff17 };
+<p align="center">
+  🚀 Plataforma para conectar jugadores, entrenadores y equipos de fútbol.  
+</p>
+
+---
+
+## <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f525.png" width="30"/> Características Principales  
+
+✅ <b>Creación de Perfiles</b> (Entrenadores, Jugadores y Equipos)  
+✅ <b>Anuncios de Búsqueda</b> (para equipos, jugadores y entrenadores)  
+✅ <b>Doble Enfoque</b> (Profesional y Amateur)  
+✅ <b>Sistema de Evaluación y Estadísticas</b> 📊  
+✅ <b>Mensajería Instantánea</b> 💬  
+✅ <b>Puntuación y Reseñas</b> ⭐⭐⭐⭐⭐  
+✅ <b>Seguimiento de Lesiones y Salud</b> 🏥  
+✅ <b>Encuestas y Retroalimentación</b> 📋  
+✅ <b>Notificaciones Personalizadas</b> 🔔  
+
+---
+
+## <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f6e0.png" width="30"/> Tecnologías Utilizadas  
+
+### 🎨 <b>Frontend</b>  
+- 🖥️ <b>HTML5</b> - Estructura del sitio  
+- 🎨 <b>CSS3</b> (Color principal: `#198754`) - Estilos y diseño  
+- ⚡ <b>JavaScript</b> - Funcionalidad interactiva  
+
+### ⚙️ <b>Backend</b>  
+- 🐘 <b>PHP</b> - Lógica del servidor y conexión con la base de datos  
+- 🗄️ <b>MySQL</b> - Base de datos para almacenar la información  
+
+### 📦 <b>Dependencias y Librerías</b>  
+- 🎭 <b>Bootstrap</b> - Estilos responsivos (opcional)  
+- 🔄 <b>AJAX</b> - Para peticiones asíncronas  
+- 📧 <b>PHP Mailer</b> - Para envíos de correo (si se incluye esta funcionalidad)  
+
+---
+
+## <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f3af.png" width="30"/> Casos de Uso  
+
+👟 <b>Jugador:</b> Quiere encontrar un equipo para jugar.  
+🎩 <b>Entrenador:</b> Necesita un delantero para reforzar su equipo.  
+⚽ <b>Equipo:</b> Busca organizar partidos amistosos.  
+🏥 <b>Jugador lesionado:</b> Registra su progreso y recibe recomendaciones.  
+
+---
+
+## 📜 Licencia  
+
+© 2024 NexusKick. Todos los derechos reservados.  
+
+Este software es de código abierto, pero **solo puede usarse para fines no lucrativos**.  
+
+### **Términos de uso:**  
+- ✅ Puedes **usar, modificar y compartir** el código para proyectos personales o educativos.  
+- ❌ **No está permitido** el uso con fines comerciales o lucrativos.  
+- ❌ No puedes redistribuirlo como un producto comercial propio.  
+
+Si deseas un **permiso especial** para uso comercial, **contáctame**.  
+
+📧 **sergioma.informatica@gmail.com**  
 
 
-COSAS QUE HACER:
-
-CREAR EL verPerfilEquipo (Da error al enviar el ID)
-AÑADIR LAS DIFERENCIAS EN EQUIPOS Y EN LA TABLA USUARIOS AÑADIR LOS CAMPOS PARA EQUIPOS Y ENTRENADORES (ENTRENADORES HECHO)
-HACER QUE LOS USUARIOS PUEDAN PONERLE RESEÑAS A OTROS (Solo falta copiar y pegar en  verPerfilEquipo)
-PONER CAMPO DE FUTBOL CON LAS POSICIONES
-MENSAJES DE ÉXITO A LA HORA DE REALIZAR ACCIONES ( COMO REGISTRARSE, INICIAR SESION INCORRECTAMENTE, ETC)
-ARREGLAR EL ERROR QUE HACE QUE SI ACTUALIZO UN CAMPO SOLO LOS DEMAS SE PONEN A 0 (ME PASA EN LA INFO PERSONAL)
-AÑADIR AJAX(añadido en los filtros)
-LA ALTURA MINIMA NO FUNCIONA
-HACER CHAT (DIFICIL, ME HE QUEDADO ATASCADO)
-AÑADIR NUMERO DE TELEFONO A LOS USUARIOS
-PODER VER TUS ANUNCIOS ACTUALES Y ELIMINARLOS
-MAYUSCULA A LOS PAISES
-LAS FLECHAS LE SALE UN HOVER FEO
-ARREGLAR LOS TITULOS DE LAS PAGINAS CUANDO VISITAS UN USUARIO
-CREAR EL FILTROS ANUNCIOS EQUIPOS
-MEJORAR EL FORMATO DE LA FECHA DE LOS ANUNCIOS 
-
-
-
-
-HECHAS:
-HACER EL PERFIL RELLENABLE 
-AÑADIR FECHA PUBLICACION A LOS ANUNCIOS Y ORDENARLOS DE MAS NUEVO A MAS ANTIGUO
-CREAR FILTRO DE ANUNCIOS(Funciona pero queda css)
-HACER QUE TE GENERE PERFIL DE JUGADOR ENTRENADOR O EQUIPO EN FUNCION
-COMPLETAR PERFIL DE USUARIOS
-CUANDO ACTUALIZO HISTORIAL DE EQUIPOS, SITUACION LABORAL,ETC A UN ENTRENADOR O EQUIPO, SE VA A PERFIL DE JUGADOR
-HACER PAGINA INICIO
-METERLE LOGO AL LOGIN Y REGISTRO
-ARREGLAR LOS EN POR ES ( IDIOMA )
-
-
-
-
-
-MEJORAR:
-CSS PARA LOS MODALES DE LA APLICACION Y CSS BOTONES (PUEDE MEJORARSE)
-HACER PAGINA INICIO
-BARRA DE BÚSQUEDA DE PERSONAS, SE ME OCURRE HACERLO CON UNA NUEVA VIEW QUE CARGUE TODOS LOS USUARIOS CON X NOMBRE,LOS MUESTRE Y HAGAS CLICK Y PUEDAS IR A SU PERFIL.
