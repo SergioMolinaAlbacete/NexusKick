@@ -1,0 +1,11 @@
+Copyright © 2024 NexusKick  
+
+Este software se proporciona bajo los siguientes términos y condiciones:  
+
+1. Se permite el **uso, modificación y distribución** del código **únicamente para fines personales, académicos o de investigación**.  
+2. **Queda estrictamente prohibido** el uso del software para **fines comerciales o lucrativos** sin autorización expresa del titular de los derechos.  
+3. No se permite redistribuir el código como un producto comercial propio ni venderlo en ninguna forma.  
+4. Este software se proporciona "tal cual", sin garantía de ningún tipo.  
+
+Si tienes dudas o deseas solicitar una licencia especial para uso comercial, contacta a:  
+📧 sergioma.informatica@gmail.com  
